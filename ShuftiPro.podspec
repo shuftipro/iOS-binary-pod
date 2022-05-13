@@ -16,7 +16,7 @@ Pod::Spec.new do |spec|
 #
 
 spec.name         = "ShuftiPro"
-spec.version      = "2.0.0"
+spec.version      = "2.0.1"
 spec.summary      = "Shufti Pro is designed to verify documents in realtime."
 
 # This description is used to generate tags and improve search results.
