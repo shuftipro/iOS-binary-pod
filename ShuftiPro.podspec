@@ -68,7 +68,7 @@ spec.platform     = :ios, "11.0"
 #  Supports git, hg, bzr, svn and HTTP.
 #
 
-spec.source       = { :git => "https://github.com/shuftipro/iOS-binary-pod", :tag => "#{spec.version}" }
+spec.source       = { :git => "https://github.com/shuftipro/iOS-binary-pod.git", :tag => "#{spec.version}" }
 
 
 # ――― Source Code ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
