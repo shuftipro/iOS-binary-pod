@@ -199,6 +199,7 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 #endif
 @import AVFoundation;
 @import CoreGraphics;
+@import CoreMedia;
 @import Foundation;
 @import MessageUI;
 @import ObjectiveC;
@@ -259,20 +260,65 @@ SWIFT_CLASS("_TtC9ShuftiPro7CallApi")
 @end
 
 @class UILabel;
-@class UIImageView;
 @class UIButton;
-@class UISwipeGestureRecognizer;
+@class UIImageView;
+@class AVCaptureFileOutput;
+@class NSURL;
+@class AVCaptureConnection;
 @class NSString;
 @class NSBundle;
+
+SWIFT_CLASS("_TtC9ShuftiPro8CameraVc")
+@interface CameraVc : UIViewController <AVCaptureFileOutputRecordingDelegate, NSURLSessionTaskDelegate>
+@property (nonatomic, weak) IBOutlet UIView * _Null_unspecified cameraView;
+@property (nonatomic, weak) IBOutlet UIView * _Null_unspecified titleView;
+@property (nonatomic, weak) IBOutlet UIView * _Null_unspecified recordingView;
+@property (nonatomic, weak) IBOutlet UILabel * _Null_unspecified countDownLabel;
+@property (nonatomic, weak) IBOutlet UILabel * _Null_unspecified titleOnCamera;
+@property (nonatomic, weak) IBOutlet UIButton * _Null_unspecified recordButton;
+@property (nonatomic, weak) IBOutlet UIButton * _Null_unspecified backButton;
+@property (nonatomic, weak) IBOutlet UIButton * _Null_unspecified switchCameraBtn;
+@property (nonatomic, weak) IBOutlet UIButton * _Null_unspecified flashBtn;
+@property (nonatomic, weak) IBOutlet UIImageView * _Null_unspecified flashImg;
+@property (nonatomic, weak) IBOutlet UIImageView * _Null_unspecified backBtnImg;
+- (void)viewWillAppear:(BOOL)animated;
+- (void)viewDidLoad;
+- (void)viewWillDisappear:(BOOL)animated;
+- (void)viewDidDisappear:(BOOL)animated;
+- (IBAction)capture:(UIButton * _Nonnull)sender;
+- (IBAction)switchCameraBtnPressed:(id _Nonnull)sender;
+- (IBAction)backBtnPressedOnCamera:(id _Nonnull)sender;
+- (IBAction)torchSwitch:(id _Nonnull)sender;
+- (void)switchCamera;
+- (void)captureOutput:(AVCaptureFileOutput * _Nonnull)output didFinishRecordingToOutputFileAtURL:(NSURL * _Nonnull)outputFileURL fromConnections:(NSArray<AVCaptureConnection *> * _Nonnull)connections error:(NSError * _Nullable)error;
+- (void)cameraErrorMessageWithCamErrMsg:(NSString * _Nonnull)camErrMsg;
+- (void)zoomIn;
+- (void)zoomOut;
+- (nonnull instancetype)initWithNibName:(NSString * _Nullable)nibNameOrNil bundle:(NSBundle * _Nullable)nibBundleOrNil OBJC_DESIGNATED_INITIALIZER;
+- (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder OBJC_DESIGNATED_INITIALIZER;
+@end
+
+@class AVCapturePhotoOutput;
+@class AVCaptureResolvedPhotoSettings;
+@class AVCaptureBracketedStillImageSettings;
+
+@interface CameraVc (SWIFT_EXTENSION(ShuftiPro)) <AVCapturePhotoCaptureDelegate>
+- (void)captureOutput:(AVCapturePhotoOutput * _Nonnull)captureOutput didFinishProcessingPhotoSampleBuffer:(CMSampleBufferRef _Nullable)photoSampleBuffer previewPhotoSampleBuffer:(CMSampleBufferRef _Nullable)previewPhotoSampleBuffer resolvedSettings:(AVCaptureResolvedPhotoSettings * _Nonnull)resolvedSettings bracketSettings:(AVCaptureBracketedStillImageSettings * _Nullable)bracketSettings error:(NSError * _Nullable)error;
+@end
+
+
+@class UISwipeGestureRecognizer;
 
 SWIFT_CLASS("_TtC9ShuftiPro9CameraVc2")
 @interface CameraVc2 : UIViewController <AVCaptureFileOutputRecordingDelegate>
 @property (nonatomic, weak) IBOutlet UIView * _Null_unspecified errorView;
+@property (nonatomic, weak) IBOutlet UIImageView * _Null_unspecified errorImageView;
 @property (nonatomic, weak) IBOutlet UIView * _Null_unspecified guideLblView;
 @property (nonatomic, weak) IBOutlet UIView * _Null_unspecified titleView;
 @property (nonatomic, weak) IBOutlet UIView * _Null_unspecified recordingView;
 @property (nonatomic, weak) IBOutlet UIView * _Null_unspecified bottomView;
 @property (nonatomic, weak) IBOutlet UILabel * _Null_unspecified captureFrontSideLbl;
+@property (nonatomic, weak) IBOutlet UILabel * _Null_unspecified recordingLbl;
 @property (nonatomic, weak) IBOutlet UIView * _Null_unspecified previewView;
 @property (nonatomic, weak) IBOutlet UIImageView * _Null_unspecified flashImg;
 @property (nonatomic, weak) IBOutlet UIButton * _Null_unspecified flashBtn;
@@ -301,23 +347,15 @@ SWIFT_CLASS("_TtC9ShuftiPro9CameraVc2")
 - (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder OBJC_DESIGNATED_INITIALIZER;
 @end
 
-
-@interface CameraVc2 (SWIFT_EXTENSION(ShuftiPro)) <UIGestureRecognizerDelegate>
-@end
-
 @class AVCaptureMetadataOutput;
 @class AVMetadataObject;
-@class AVCaptureConnection;
 
 @interface CameraVc2 (SWIFT_EXTENSION(ShuftiPro)) <AVCaptureMetadataOutputObjectsDelegate>
 - (void)captureOutput:(AVCaptureMetadataOutput * _Nonnull)captureOutput didOutputMetadataObjects:(NSArray<AVMetadataObject *> * _Nonnull)metadataObjects fromConnection:(AVCaptureConnection * _Nonnull)connection;
 @end
 
 
-@class AVCapturePhotoOutput;
 @class AVCapturePhoto;
-@class AVCaptureFileOutput;
-@class NSURL;
 
 @interface CameraVc2 (SWIFT_EXTENSION(ShuftiPro)) <AVCapturePhotoCaptureDelegate>
 - (void)captureOutput:(AVCapturePhotoOutput * _Nonnull)output didFinishProcessingPhoto:(AVCapturePhoto * _Nonnull)photo error:(NSError * _Nullable)error;
@@ -338,8 +376,10 @@ SWIFT_CLASS("_TtC9ShuftiPro14ConfirmPhotoVc")
 @property (nonatomic, weak) IBOutlet UIView * _Null_unspecified playVideoView;
 @property (nonatomic, weak) IBOutlet UIButton * _Null_unspecified retakeBtn;
 @property (nonatomic, weak) IBOutlet UIButton * _Null_unspecified yesContinueBtn;
-@property (nonatomic, weak) IBOutlet UILabel * _Null_unspecified powerdByLbl;
 @property (nonatomic, weak) IBOutlet UIStackView * _Null_unspecified bottomButtonsStackView;
+@property (nonatomic, weak) IBOutlet UIImageView * _Null_unspecified backBtnImg;
+@property (nonatomic, weak) IBOutlet UIImageView * _Null_unspecified footerImage;
+@property (nonatomic, weak) IBOutlet UILabel * _Null_unspecified footerLabel;
 - (void)viewDidLoad;
 - (void)viewWillAppear:(BOOL)animated;
 - (void)viewDidDisappear:(BOOL)animated;
@@ -359,10 +399,12 @@ SWIFT_CLASS("_TtC9ShuftiPro18CountrySelectionVc")
 @interface CountrySelectionVc : UIViewController
 @property (nonatomic, weak) IBOutlet UISearchBar * _Null_unspecified searchBar;
 @property (nonatomic, weak) IBOutlet UITableView * _Null_unspecified tableView;
-@property (nonatomic, weak) IBOutlet UILabel * _Null_unspecified powerdByLbl;
 @property (nonatomic, weak) IBOutlet UILabel * _Null_unspecified supportedTypeSubHeading;
-@property (nonatomic, weak) IBOutlet UIView * _Null_unspecified supportedTypesUIView;
+@property (nonatomic, weak) IBOutlet UIView * _Null_unspecified countryUIView;
 @property (nonatomic, weak) IBOutlet UILabel * _Null_unspecified titleLbl;
+@property (nonatomic, weak) IBOutlet UIImageView * _Null_unspecified backBtnImg;
+@property (nonatomic, weak) IBOutlet UIImageView * _Null_unspecified footerImage;
+@property (nonatomic, weak) IBOutlet UILabel * _Null_unspecified footerLabel;
 - (void)viewDidLoad;
 - (void)viewWillAppear:(BOOL)animated;
 - (IBAction)backBtnPreesed:(id _Nonnull)sender;
@@ -414,6 +456,7 @@ SWIFT_CLASS("_TtC9ShuftiPro14DesignableView")
 
 @class WKWebView;
 @class UITextView;
+@class UIScrollView;
 
 SWIFT_CLASS("_TtC9ShuftiPro14InstructionsVc")
 @interface InstructionsVc : UIViewController <UIGestureRecognizerDelegate, UITextViewDelegate>
@@ -421,6 +464,10 @@ SWIFT_CLASS("_TtC9ShuftiPro14InstructionsVc")
 @property (nonatomic, copy) IBOutletCollection(UILabel) NSArray<UILabel *> * _Null_unspecified setLineSpaceLbl;
 @property (nonatomic, weak) IBOutlet UIView * _Null_unspecified instructionsView;
 @property (nonatomic, weak) IBOutlet UIImageView * _Null_unspecified bckBtnImage;
+@property (nonatomic, weak) IBOutlet UIImageView * _Null_unspecified footerImageConsent;
+@property (nonatomic, weak) IBOutlet UILabel * _Null_unspecified footerLabelConsent;
+@property (nonatomic, weak) IBOutlet UIImageView * _Null_unspecified footerImageInstructions;
+@property (nonatomic, weak) IBOutlet UILabel * _Null_unspecified footerLabelInstructions;
 @property (nonatomic, weak) IBOutlet WKWebView * _Null_unspecified instructionsImgWebview;
 @property (nonatomic, weak) IBOutlet UILabel * _Null_unspecified instructionsLbl;
 @property (nonatomic, weak) IBOutlet UILabel * _Null_unspecified serviceInstructionsLabel1;
@@ -433,18 +480,30 @@ SWIFT_CLASS("_TtC9ShuftiPro14InstructionsVc")
 @property (nonatomic, weak) IBOutlet UIView * _Null_unspecified instructionsText3;
 @property (nonatomic, weak) IBOutlet UIView * _Null_unspecified instructionsText4;
 @property (nonatomic, weak) IBOutlet UIView * _Null_unspecified instructionsText5;
+@property (nonatomic, weak) IBOutlet UIImageView * _Null_unspecified instructionsImage1;
+@property (nonatomic, weak) IBOutlet UIImageView * _Null_unspecified instructionsImage2;
+@property (nonatomic, weak) IBOutlet UIImageView * _Null_unspecified instructionsImage3;
+@property (nonatomic, weak) IBOutlet UIImageView * _Null_unspecified instructionsImage4;
+@property (nonatomic, weak) IBOutlet UIImageView * _Null_unspecified instructionsImage5;
+@property (nonatomic, weak) IBOutlet UIButton * _Null_unspecified proceedBtn;
+@property (nonatomic, weak) IBOutlet UILabel * _Null_unspecified proceedLbl;
 @property (nonatomic, weak) IBOutlet UIView * _Null_unspecified declarationOfConsentUIView;
 @property (nonatomic, weak) IBOutlet UIButton * _Null_unspecified agreeToPrivacyBtn;
 @property (nonatomic, weak) IBOutlet UIButton * _Null_unspecified continueBtn;
 @property (nonatomic, weak) IBOutlet UIButton * _Null_unspecified cancelBtn;
 @property (nonatomic, weak) IBOutlet UIImageView * _Null_unspecified aggreeToPrivacyPolicyImageview;
 @property (nonatomic, weak) IBOutlet UITextView * _Null_unspecified lblTermsAndConditions;
+@property (nonatomic, weak) IBOutlet UILabel * _Null_unspecified consentTitleLbl;
+@property (nonatomic, weak) IBOutlet UILabel * _Null_unspecified consentHeadingLbl;
+@property (nonatomic, weak) IBOutlet UILabel * _Null_unspecified consentLowerHeadingLbl;
+@property (nonatomic, weak) IBOutlet UILabel * _Null_unspecified consentLbl;
 - (void)viewDidLoad;
 - (void)viewWillAppear:(BOOL)animated;
 - (void)viewDidDisappear:(BOOL)animated;
 - (IBAction)proceedBtnPressed:(id _Nonnull)sender;
 - (IBAction)cancelInstructionBtnPressed:(id _Nonnull)sender;
 - (void)handleGestureWithGesture:(UISwipeGestureRecognizer * _Nonnull)gesture;
+- (void)scrollViewWillBeginZooming:(UIScrollView * _Nonnull)scrollView withView:(UIView * _Nullable)view;
 - (nonnull instancetype)initWithNibName:(NSString * _Nullable)nibNameOrNil bundle:(NSBundle * _Nullable)nibBundleOrNil OBJC_DESIGNATED_INITIALIZER;
 - (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder OBJC_DESIGNATED_INITIALIZER;
 @end
@@ -467,6 +526,50 @@ SWIFT_CLASS("_TtC9ShuftiPro18LocalizationSystem")
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
 
+@protocol UIViewControllerTransitionCoordinator;
+
+SWIFT_CLASS("_TtC9ShuftiPro11NFCCameraVc")
+@interface NFCCameraVc : UIViewController
+@property (nonatomic, weak) IBOutlet UIView * _Null_unspecified errorView;
+@property (nonatomic, weak) IBOutlet UIView * _Null_unspecified previewView;
+@property (nonatomic, weak) IBOutlet UILabel * _Null_unspecified titleOnCamera;
+@property (nonatomic, weak) IBOutlet UILabel * _Null_unspecified captureGuideLbl;
+@property (nonatomic, weak) IBOutlet UILabel * _Null_unspecified captureGuideTopLbl;
+@property (nonatomic, weak) IBOutlet UIImageView * _Null_unspecified backBtnImg;
+@property (nonatomic, weak) IBOutlet UIView * _Null_unspecified innerCameraView;
+@property (nonatomic, weak) IBOutlet UIView * _Null_unspecified captureGuideLblView;
+@property (nonatomic, weak) IBOutlet UIImageView * _Null_unspecified footerImage;
+@property (nonatomic, weak) IBOutlet UILabel * _Null_unspecified footerLabel;
+- (void)viewDidLoad;
+- (void)viewWillAppear:(BOOL)animated;
+- (void)viewWillDisappear:(BOOL)animated;
+- (void)viewDidLayoutSubviews;
+- (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id <UIViewControllerTransitionCoordinator> _Nonnull)coordinator;
+- (void)didReceiveMemoryWarning;
+- (IBAction)backBtnPressedOnCamera:(id _Nonnull)sender;
+- (void)handleGestureWithGesture:(UISwipeGestureRecognizer * _Nonnull)gesture;
+- (void)switchCamera;
+- (nonnull instancetype)initWithNibName:(NSString * _Nullable)nibNameOrNil bundle:(NSBundle * _Nullable)nibBundleOrNil OBJC_DESIGNATED_INITIALIZER;
+- (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder OBJC_DESIGNATED_INITIALIZER;
+@end
+
+@class AVCaptureOutput;
+
+@interface NFCCameraVc (SWIFT_EXTENSION(ShuftiPro)) <AVCaptureVideoDataOutputSampleBufferDelegate>
+- (void)captureOutput:(AVCaptureOutput * _Nonnull)output didOutputSampleBuffer:(CMSampleBufferRef _Nonnull)sampleBuffer fromConnection:(AVCaptureConnection * _Nonnull)connection;
+@end
+
+
+SWIFT_CLASS("_TtC9ShuftiPro7NFCCell")
+@interface NFCCell : UITableViewCell
+@property (nonatomic, weak) IBOutlet UILabel * _Null_unspecified tileLbl;
+@property (nonatomic, weak) IBOutlet UILabel * _Null_unspecified nfcDetailLbl;
+- (void)awakeFromNib;
+- (void)setSelected:(BOOL)selected animated:(BOOL)animated;
+- (nonnull instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString * _Nullable)reuseIdentifier OBJC_DESIGNATED_INITIALIZER SWIFT_AVAILABILITY(ios,introduced=3.0);
+- (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder OBJC_DESIGNATED_INITIALIZER;
+@end
+
 
 @class UIActivityIndicatorView;
 @class WKNavigation;
@@ -475,6 +578,7 @@ SWIFT_CLASS("_TtC9ShuftiPro22PrivacyPolicyWebviewVc")
 @interface PrivacyPolicyWebviewVc : UIViewController <UIScrollViewDelegate, UIWebViewDelegate, WKNavigationDelegate, WKUIDelegate>
 @property (nonatomic, weak) IBOutlet UIActivityIndicatorView * _Null_unspecified activity;
 @property (nonatomic, weak) IBOutlet UIView * _Null_unspecified privacyPolicyView;
+@property (nonatomic, weak) IBOutlet UIButton * _Null_unspecified cancelBtn;
 - (void)viewDidLoad;
 - (IBAction)cancelWebViewBtnWithSender:(id _Null_unspecified)sender;
 - (void)handleGestureWithGesture:(UISwipeGestureRecognizer * _Nonnull)gesture;
@@ -485,11 +589,10 @@ SWIFT_CLASS("_TtC9ShuftiPro22PrivacyPolicyWebviewVc")
 - (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder OBJC_DESIGNATED_INITIALIZER;
 @end
 
-@class UIVisualEffectView;
 
 SWIFT_CLASS("_TtC9ShuftiPro8ResultVc")
 @interface ResultVc : UIViewController <NSURLSessionTaskDelegate, MFMailComposeViewControllerDelegate>
-@property (nonatomic, weak) IBOutlet UIVisualEffectView * _Null_unspecified loadingView;
+@property (nonatomic, weak) IBOutlet UIView * _Null_unspecified loadingView;
 @property (nonatomic, weak) IBOutlet WKWebView * _Null_unspecified loadingIndicatorImageView;
 @property (nonatomic, weak) IBOutlet UILabel * _Null_unspecified waitingMessageLabel;
 @property (nonatomic, weak) IBOutlet UIView * _Null_unspecified resultsView;
@@ -498,6 +601,13 @@ SWIFT_CLASS("_TtC9ShuftiPro8ResultVc")
 @property (nonatomic, weak) IBOutlet UILabel * _Null_unspecified verifiedDescLbl;
 @property (nonatomic, weak) IBOutlet WKWebView * _Null_unspecified verifiedImageWebView;
 @property (nonatomic, weak) IBOutlet UILabel * _Null_unspecified lblTermsAndConditions;
+@property (nonatomic, weak) IBOutlet UILabel * _Null_unspecified titleOnLoadingLbl;
+@property (nonatomic, weak) IBOutlet UILabel * _Null_unspecified pleaseWaitLbl;
+@property (nonatomic, weak) IBOutlet UIButton * _Null_unspecified proceedBtn;
+@property (nonatomic, weak) IBOutlet UIImageView * _Null_unspecified footerImage;
+@property (nonatomic, weak) IBOutlet UILabel * _Null_unspecified footerLabel;
+@property (nonatomic, weak) IBOutlet UIImageView * _Null_unspecified footerImageOnLoading;
+@property (nonatomic, weak) IBOutlet UILabel * _Null_unspecified footerLabelOnLoading;
 - (void)viewDidLoad;
 - (void)viewWillAppear:(BOOL)animated;
 - (void)viewDidDisappear:(BOOL)animated;
@@ -540,11 +650,14 @@ SWIFT_CLASS("_TtC9ShuftiPro9ShuftiPro")
 @end
 
 
+
 SWIFT_CLASS("_TtC9ShuftiPro18SupportedTypesCell")
 @interface SupportedTypesCell : UITableViewCell
 @property (nonatomic, weak) IBOutlet UILabel * _Null_unspecified supportedTypes;
 @property (nonatomic, weak) IBOutlet UIImageView * _Null_unspecified supportedTypesImage;
+@property (nonatomic, weak) IBOutlet UIImageView * _Null_unspecified proceedImg;
 @property (nonatomic, weak) IBOutlet UIView * _Null_unspecified containerView;
+@property (nonatomic, weak) IBOutlet UIView * _Null_unspecified proceedView;
 - (void)awakeFromNib;
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated;
 - (nonnull instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString * _Nullable)reuseIdentifier OBJC_DESIGNATED_INITIALIZER SWIFT_AVAILABILITY(ios,introduced=3.0);
@@ -556,16 +669,24 @@ SWIFT_CLASS("_TtC9ShuftiPro16SupportedTypesVc")
 @interface SupportedTypesVc : UIViewController
 @property (nonatomic, weak) IBOutlet UILabel * _Null_unspecified titleLbl;
 @property (nonatomic, weak) IBOutlet UIView * _Null_unspecified supportedTypesUIView;
+@property (nonatomic, weak) IBOutlet UIView * _Null_unspecified countryView;
 @property (nonatomic, strong) IBOutlet UITableView * _Null_unspecified supportedTypesTableview;
 @property (nonatomic, weak) IBOutlet UILabel * _Null_unspecified supportedTypeSubHeading;
+@property (nonatomic, weak) IBOutlet UIImageView * _Null_unspecified backBtnImg;
+@property (nonatomic, weak) IBOutlet UIImageView * _Null_unspecified footerImage;
+@property (nonatomic, weak) IBOutlet UILabel * _Null_unspecified footerLabel;
+@property (nonatomic, strong) IBOutlet UILabel * _Null_unspecified selectedCountryLabel;
+@property (nonatomic, strong) IBOutlet UIButton * _Null_unspecified selectedCountryBtn;
 - (void)viewDidLoad;
 - (void)viewDidDisappear:(BOOL)animated;
 - (void)viewWillAppear:(BOOL)animated;
 - (IBAction)backBtnPreesed:(id _Nonnull)sender;
+- (IBAction)countrySelectionBtnPreesed:(id _Nonnull)sender;
 - (void)handleGestureWithGesture:(UISwipeGestureRecognizer * _Nonnull)gesture;
 - (nonnull instancetype)initWithNibName:(NSString * _Nullable)nibNameOrNil bundle:(NSBundle * _Nullable)nibBundleOrNil OBJC_DESIGNATED_INITIALIZER;
 - (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder OBJC_DESIGNATED_INITIALIZER;
 @end
+
 
 
 @interface SupportedTypesVc (SWIFT_EXTENSION(ShuftiPro)) <UITableViewDataSource, UITableViewDelegate>
@@ -573,6 +694,17 @@ SWIFT_CLASS("_TtC9ShuftiPro16SupportedTypesVc")
 - (UITableViewCell * _Nonnull)tableView:(UITableView * _Nonnull)tableView cellForRowAtIndexPath:(NSIndexPath * _Nonnull)indexPath SWIFT_WARN_UNUSED_RESULT;
 - (void)tableView:(UITableView * _Nonnull)tableView didSelectRowAtIndexPath:(NSIndexPath * _Nonnull)indexPath;
 - (CGFloat)tableView:(UITableView * _Nonnull)tableView heightForRowAtIndexPath:(NSIndexPath * _Nonnull)indexPath SWIFT_WARN_UNUSED_RESULT;
+@end
+
+@class UITextPosition;
+@class NSTextContainer;
+
+SWIFT_CLASS("_TtC9ShuftiPro9TextFeild")
+@interface TextFeild : UITextView
+- (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)aDecoder OBJC_DESIGNATED_INITIALIZER;
+- (CGRect)caretRectForPosition:(UITextPosition * _Nonnull)position SWIFT_WARN_UNUSED_RESULT;
+- (BOOL)canPerformAction:(SEL _Nonnull)action withSender:(id _Nullable)sender SWIFT_WARN_UNUSED_RESULT;
+- (nonnull instancetype)initWithFrame:(CGRect)frame textContainer:(NSTextContainer * _Nullable)textContainer SWIFT_UNAVAILABLE;
 @end
 
 
@@ -594,14 +726,22 @@ SWIFT_CLASS("_TtC9ShuftiPro19UploadOrTakePhotoVc")
 @property (nonatomic, strong) IBOutlet UIImageView * _Null_unspecified uploadImg;
 @property (nonatomic, weak) IBOutlet UIImageView * _Null_unspecified cameraProceedImg;
 @property (nonatomic, weak) IBOutlet UIImageView * _Null_unspecified uploadProceedImg;
+@property (nonatomic, weak) IBOutlet UIImageView * _Null_unspecified recordImg;
 @property (nonatomic, weak) IBOutlet UILabel * _Null_unspecified takePhotoLbl;
 @property (nonatomic, weak) IBOutlet UILabel * _Null_unspecified titleLbl;
 @property (nonatomic, weak) IBOutlet UILabel * _Null_unspecified bottomHeadingLbl;
 @property (nonatomic, weak) IBOutlet UILabel * _Null_unspecified uploadPhotoLbl;
-@property (nonatomic, weak) IBOutlet UILabel * _Null_unspecified powerdByLbl;
+@property (nonatomic, weak) IBOutlet UILabel * _Null_unspecified recordVideoLbl;
 @property (nonatomic, weak) IBOutlet UIView * _Null_unspecified cameraView;
 @property (nonatomic, weak) IBOutlet UIView * _Null_unspecified uploadView;
 @property (nonatomic, weak) IBOutlet UIView * _Null_unspecified recordView;
+@property (nonatomic, weak) IBOutlet UIView * _Null_unspecified cameraProceedView;
+@property (nonatomic, weak) IBOutlet UIView * _Null_unspecified uploadProceedView;
+@property (nonatomic, weak) IBOutlet UIView * _Null_unspecified videoProceedView;
+@property (nonatomic, weak) IBOutlet UIImageView * _Null_unspecified bckBtnImage;
+@property (nonatomic, weak) IBOutlet UIImageView * _Null_unspecified videoImg;
+@property (nonatomic, weak) IBOutlet UIImageView * _Null_unspecified footerImage;
+@property (nonatomic, weak) IBOutlet UILabel * _Null_unspecified footerLabel;
 - (void)viewDidLoad;
 - (IBAction)takePhotoBtnPressed:(id _Nonnull)sender;
 - (IBAction)uploadFromGalleryBtnPressed:(id _Nonnull)sender;
@@ -630,6 +770,8 @@ SWIFT_CLASS("_TtC9ShuftiPro13UploadVideoVc")
 @property (nonatomic, weak) IBOutlet UIImageView * _Null_unspecified backBtnImg;
 @property (nonatomic, weak) IBOutlet UIView * _Null_unspecified playVideoView;
 @property (nonatomic, weak) IBOutlet UIStackView * _Null_unspecified retakeStackViewBtns;
+@property (nonatomic, weak) IBOutlet UIImageView * _Null_unspecified footerImage;
+@property (nonatomic, weak) IBOutlet UILabel * _Null_unspecified footerLabel;
 - (void)viewDidLoad;
 - (IBAction)uploadVideoBtnPressed:(id _Nonnull)sender;
 - (IBAction)retakeBtnPressed:(id _Nonnull)sender;
@@ -661,11 +803,14 @@ SWIFT_CLASS("_TtC9ShuftiPro13UploadVideoVc")
 SWIFT_CLASS("_TtC9ShuftiPro17WebViewController")
 @interface WebViewController : UIViewController <WKNavigationDelegate>
 @property (nonatomic, strong) IBOutlet UIView * _Null_unspecified containerView;
-@property (nonatomic, weak) IBOutlet UIVisualEffectView * _Null_unspecified loadingView;
+@property (nonatomic, strong) IBOutlet UILabel * _Null_unspecified pleaseWaitLbl;
+@property (nonatomic, weak) IBOutlet UIView * _Null_unspecified loadingView;
 @property (nonatomic, weak) IBOutlet UIActivityIndicatorView * _Null_unspecified activity;
 @property (nonatomic, weak) IBOutlet WKWebView * _Null_unspecified loadingIndicatorWebView;
 @property (nonatomic, weak) IBOutlet UINavigationBar * _Null_unspecified navBar;
 @property (nonatomic, weak) IBOutlet UIBarButtonItem * _Null_unspecified navBarCancelBtn;
+@property (nonatomic, weak) IBOutlet UIImageView * _Null_unspecified footerImage;
+@property (nonatomic, weak) IBOutlet UILabel * _Null_unspecified footerLabel;
 - (void)viewWillAppear:(BOOL)animated;
 - (void)viewDidLoad;
 - (void)viewDidDisappear:(BOOL)animated;
@@ -891,6 +1036,7 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 #endif
 @import AVFoundation;
 @import CoreGraphics;
+@import CoreMedia;
 @import Foundation;
 @import MessageUI;
 @import ObjectiveC;
@@ -951,20 +1097,65 @@ SWIFT_CLASS("_TtC9ShuftiPro7CallApi")
 @end
 
 @class UILabel;
-@class UIImageView;
 @class UIButton;
-@class UISwipeGestureRecognizer;
+@class UIImageView;
+@class AVCaptureFileOutput;
+@class NSURL;
+@class AVCaptureConnection;
 @class NSString;
 @class NSBundle;
+
+SWIFT_CLASS("_TtC9ShuftiPro8CameraVc")
+@interface CameraVc : UIViewController <AVCaptureFileOutputRecordingDelegate, NSURLSessionTaskDelegate>
+@property (nonatomic, weak) IBOutlet UIView * _Null_unspecified cameraView;
+@property (nonatomic, weak) IBOutlet UIView * _Null_unspecified titleView;
+@property (nonatomic, weak) IBOutlet UIView * _Null_unspecified recordingView;
+@property (nonatomic, weak) IBOutlet UILabel * _Null_unspecified countDownLabel;
+@property (nonatomic, weak) IBOutlet UILabel * _Null_unspecified titleOnCamera;
+@property (nonatomic, weak) IBOutlet UIButton * _Null_unspecified recordButton;
+@property (nonatomic, weak) IBOutlet UIButton * _Null_unspecified backButton;
+@property (nonatomic, weak) IBOutlet UIButton * _Null_unspecified switchCameraBtn;
+@property (nonatomic, weak) IBOutlet UIButton * _Null_unspecified flashBtn;
+@property (nonatomic, weak) IBOutlet UIImageView * _Null_unspecified flashImg;
+@property (nonatomic, weak) IBOutlet UIImageView * _Null_unspecified backBtnImg;
+- (void)viewWillAppear:(BOOL)animated;
+- (void)viewDidLoad;
+- (void)viewWillDisappear:(BOOL)animated;
+- (void)viewDidDisappear:(BOOL)animated;
+- (IBAction)capture:(UIButton * _Nonnull)sender;
+- (IBAction)switchCameraBtnPressed:(id _Nonnull)sender;
+- (IBAction)backBtnPressedOnCamera:(id _Nonnull)sender;
+- (IBAction)torchSwitch:(id _Nonnull)sender;
+- (void)switchCamera;
+- (void)captureOutput:(AVCaptureFileOutput * _Nonnull)output didFinishRecordingToOutputFileAtURL:(NSURL * _Nonnull)outputFileURL fromConnections:(NSArray<AVCaptureConnection *> * _Nonnull)connections error:(NSError * _Nullable)error;
+- (void)cameraErrorMessageWithCamErrMsg:(NSString * _Nonnull)camErrMsg;
+- (void)zoomIn;
+- (void)zoomOut;
+- (nonnull instancetype)initWithNibName:(NSString * _Nullable)nibNameOrNil bundle:(NSBundle * _Nullable)nibBundleOrNil OBJC_DESIGNATED_INITIALIZER;
+- (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder OBJC_DESIGNATED_INITIALIZER;
+@end
+
+@class AVCapturePhotoOutput;
+@class AVCaptureResolvedPhotoSettings;
+@class AVCaptureBracketedStillImageSettings;
+
+@interface CameraVc (SWIFT_EXTENSION(ShuftiPro)) <AVCapturePhotoCaptureDelegate>
+- (void)captureOutput:(AVCapturePhotoOutput * _Nonnull)captureOutput didFinishProcessingPhotoSampleBuffer:(CMSampleBufferRef _Nullable)photoSampleBuffer previewPhotoSampleBuffer:(CMSampleBufferRef _Nullable)previewPhotoSampleBuffer resolvedSettings:(AVCaptureResolvedPhotoSettings * _Nonnull)resolvedSettings bracketSettings:(AVCaptureBracketedStillImageSettings * _Nullable)bracketSettings error:(NSError * _Nullable)error;
+@end
+
+
+@class UISwipeGestureRecognizer;
 
 SWIFT_CLASS("_TtC9ShuftiPro9CameraVc2")
 @interface CameraVc2 : UIViewController <AVCaptureFileOutputRecordingDelegate>
 @property (nonatomic, weak) IBOutlet UIView * _Null_unspecified errorView;
+@property (nonatomic, weak) IBOutlet UIImageView * _Null_unspecified errorImageView;
 @property (nonatomic, weak) IBOutlet UIView * _Null_unspecified guideLblView;
 @property (nonatomic, weak) IBOutlet UIView * _Null_unspecified titleView;
 @property (nonatomic, weak) IBOutlet UIView * _Null_unspecified recordingView;
 @property (nonatomic, weak) IBOutlet UIView * _Null_unspecified bottomView;
 @property (nonatomic, weak) IBOutlet UILabel * _Null_unspecified captureFrontSideLbl;
+@property (nonatomic, weak) IBOutlet UILabel * _Null_unspecified recordingLbl;
 @property (nonatomic, weak) IBOutlet UIView * _Null_unspecified previewView;
 @property (nonatomic, weak) IBOutlet UIImageView * _Null_unspecified flashImg;
 @property (nonatomic, weak) IBOutlet UIButton * _Null_unspecified flashBtn;
@@ -993,23 +1184,15 @@ SWIFT_CLASS("_TtC9ShuftiPro9CameraVc2")
 - (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder OBJC_DESIGNATED_INITIALIZER;
 @end
 
-
-@interface CameraVc2 (SWIFT_EXTENSION(ShuftiPro)) <UIGestureRecognizerDelegate>
-@end
-
 @class AVCaptureMetadataOutput;
 @class AVMetadataObject;
-@class AVCaptureConnection;
 
 @interface CameraVc2 (SWIFT_EXTENSION(ShuftiPro)) <AVCaptureMetadataOutputObjectsDelegate>
 - (void)captureOutput:(AVCaptureMetadataOutput * _Nonnull)captureOutput didOutputMetadataObjects:(NSArray<AVMetadataObject *> * _Nonnull)metadataObjects fromConnection:(AVCaptureConnection * _Nonnull)connection;
 @end
 
 
-@class AVCapturePhotoOutput;
 @class AVCapturePhoto;
-@class AVCaptureFileOutput;
-@class NSURL;
 
 @interface CameraVc2 (SWIFT_EXTENSION(ShuftiPro)) <AVCapturePhotoCaptureDelegate>
 - (void)captureOutput:(AVCapturePhotoOutput * _Nonnull)output didFinishProcessingPhoto:(AVCapturePhoto * _Nonnull)photo error:(NSError * _Nullable)error;
@@ -1030,8 +1213,10 @@ SWIFT_CLASS("_TtC9ShuftiPro14ConfirmPhotoVc")
 @property (nonatomic, weak) IBOutlet UIView * _Null_unspecified playVideoView;
 @property (nonatomic, weak) IBOutlet UIButton * _Null_unspecified retakeBtn;
 @property (nonatomic, weak) IBOutlet UIButton * _Null_unspecified yesContinueBtn;
-@property (nonatomic, weak) IBOutlet UILabel * _Null_unspecified powerdByLbl;
 @property (nonatomic, weak) IBOutlet UIStackView * _Null_unspecified bottomButtonsStackView;
+@property (nonatomic, weak) IBOutlet UIImageView * _Null_unspecified backBtnImg;
+@property (nonatomic, weak) IBOutlet UIImageView * _Null_unspecified footerImage;
+@property (nonatomic, weak) IBOutlet UILabel * _Null_unspecified footerLabel;
 - (void)viewDidLoad;
 - (void)viewWillAppear:(BOOL)animated;
 - (void)viewDidDisappear:(BOOL)animated;
@@ -1051,10 +1236,12 @@ SWIFT_CLASS("_TtC9ShuftiPro18CountrySelectionVc")
 @interface CountrySelectionVc : UIViewController
 @property (nonatomic, weak) IBOutlet UISearchBar * _Null_unspecified searchBar;
 @property (nonatomic, weak) IBOutlet UITableView * _Null_unspecified tableView;
-@property (nonatomic, weak) IBOutlet UILabel * _Null_unspecified powerdByLbl;
 @property (nonatomic, weak) IBOutlet UILabel * _Null_unspecified supportedTypeSubHeading;
-@property (nonatomic, weak) IBOutlet UIView * _Null_unspecified supportedTypesUIView;
+@property (nonatomic, weak) IBOutlet UIView * _Null_unspecified countryUIView;
 @property (nonatomic, weak) IBOutlet UILabel * _Null_unspecified titleLbl;
+@property (nonatomic, weak) IBOutlet UIImageView * _Null_unspecified backBtnImg;
+@property (nonatomic, weak) IBOutlet UIImageView * _Null_unspecified footerImage;
+@property (nonatomic, weak) IBOutlet UILabel * _Null_unspecified footerLabel;
 - (void)viewDidLoad;
 - (void)viewWillAppear:(BOOL)animated;
 - (IBAction)backBtnPreesed:(id _Nonnull)sender;
@@ -1106,6 +1293,7 @@ SWIFT_CLASS("_TtC9ShuftiPro14DesignableView")
 
 @class WKWebView;
 @class UITextView;
+@class UIScrollView;
 
 SWIFT_CLASS("_TtC9ShuftiPro14InstructionsVc")
 @interface InstructionsVc : UIViewController <UIGestureRecognizerDelegate, UITextViewDelegate>
@@ -1113,6 +1301,10 @@ SWIFT_CLASS("_TtC9ShuftiPro14InstructionsVc")
 @property (nonatomic, copy) IBOutletCollection(UILabel) NSArray<UILabel *> * _Null_unspecified setLineSpaceLbl;
 @property (nonatomic, weak) IBOutlet UIView * _Null_unspecified instructionsView;
 @property (nonatomic, weak) IBOutlet UIImageView * _Null_unspecified bckBtnImage;
+@property (nonatomic, weak) IBOutlet UIImageView * _Null_unspecified footerImageConsent;
+@property (nonatomic, weak) IBOutlet UILabel * _Null_unspecified footerLabelConsent;
+@property (nonatomic, weak) IBOutlet UIImageView * _Null_unspecified footerImageInstructions;
+@property (nonatomic, weak) IBOutlet UILabel * _Null_unspecified footerLabelInstructions;
 @property (nonatomic, weak) IBOutlet WKWebView * _Null_unspecified instructionsImgWebview;
 @property (nonatomic, weak) IBOutlet UILabel * _Null_unspecified instructionsLbl;
 @property (nonatomic, weak) IBOutlet UILabel * _Null_unspecified serviceInstructionsLabel1;
@@ -1125,18 +1317,30 @@ SWIFT_CLASS("_TtC9ShuftiPro14InstructionsVc")
 @property (nonatomic, weak) IBOutlet UIView * _Null_unspecified instructionsText3;
 @property (nonatomic, weak) IBOutlet UIView * _Null_unspecified instructionsText4;
 @property (nonatomic, weak) IBOutlet UIView * _Null_unspecified instructionsText5;
+@property (nonatomic, weak) IBOutlet UIImageView * _Null_unspecified instructionsImage1;
+@property (nonatomic, weak) IBOutlet UIImageView * _Null_unspecified instructionsImage2;
+@property (nonatomic, weak) IBOutlet UIImageView * _Null_unspecified instructionsImage3;
+@property (nonatomic, weak) IBOutlet UIImageView * _Null_unspecified instructionsImage4;
+@property (nonatomic, weak) IBOutlet UIImageView * _Null_unspecified instructionsImage5;
+@property (nonatomic, weak) IBOutlet UIButton * _Null_unspecified proceedBtn;
+@property (nonatomic, weak) IBOutlet UILabel * _Null_unspecified proceedLbl;
 @property (nonatomic, weak) IBOutlet UIView * _Null_unspecified declarationOfConsentUIView;
 @property (nonatomic, weak) IBOutlet UIButton * _Null_unspecified agreeToPrivacyBtn;
 @property (nonatomic, weak) IBOutlet UIButton * _Null_unspecified continueBtn;
 @property (nonatomic, weak) IBOutlet UIButton * _Null_unspecified cancelBtn;
 @property (nonatomic, weak) IBOutlet UIImageView * _Null_unspecified aggreeToPrivacyPolicyImageview;
 @property (nonatomic, weak) IBOutlet UITextView * _Null_unspecified lblTermsAndConditions;
+@property (nonatomic, weak) IBOutlet UILabel * _Null_unspecified consentTitleLbl;
+@property (nonatomic, weak) IBOutlet UILabel * _Null_unspecified consentHeadingLbl;
+@property (nonatomic, weak) IBOutlet UILabel * _Null_unspecified consentLowerHeadingLbl;
+@property (nonatomic, weak) IBOutlet UILabel * _Null_unspecified consentLbl;
 - (void)viewDidLoad;
 - (void)viewWillAppear:(BOOL)animated;
 - (void)viewDidDisappear:(BOOL)animated;
 - (IBAction)proceedBtnPressed:(id _Nonnull)sender;
 - (IBAction)cancelInstructionBtnPressed:(id _Nonnull)sender;
 - (void)handleGestureWithGesture:(UISwipeGestureRecognizer * _Nonnull)gesture;
+- (void)scrollViewWillBeginZooming:(UIScrollView * _Nonnull)scrollView withView:(UIView * _Nullable)view;
 - (nonnull instancetype)initWithNibName:(NSString * _Nullable)nibNameOrNil bundle:(NSBundle * _Nullable)nibBundleOrNil OBJC_DESIGNATED_INITIALIZER;
 - (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder OBJC_DESIGNATED_INITIALIZER;
 @end
@@ -1159,6 +1363,50 @@ SWIFT_CLASS("_TtC9ShuftiPro18LocalizationSystem")
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
 
+@protocol UIViewControllerTransitionCoordinator;
+
+SWIFT_CLASS("_TtC9ShuftiPro11NFCCameraVc")
+@interface NFCCameraVc : UIViewController
+@property (nonatomic, weak) IBOutlet UIView * _Null_unspecified errorView;
+@property (nonatomic, weak) IBOutlet UIView * _Null_unspecified previewView;
+@property (nonatomic, weak) IBOutlet UILabel * _Null_unspecified titleOnCamera;
+@property (nonatomic, weak) IBOutlet UILabel * _Null_unspecified captureGuideLbl;
+@property (nonatomic, weak) IBOutlet UILabel * _Null_unspecified captureGuideTopLbl;
+@property (nonatomic, weak) IBOutlet UIImageView * _Null_unspecified backBtnImg;
+@property (nonatomic, weak) IBOutlet UIView * _Null_unspecified innerCameraView;
+@property (nonatomic, weak) IBOutlet UIView * _Null_unspecified captureGuideLblView;
+@property (nonatomic, weak) IBOutlet UIImageView * _Null_unspecified footerImage;
+@property (nonatomic, weak) IBOutlet UILabel * _Null_unspecified footerLabel;
+- (void)viewDidLoad;
+- (void)viewWillAppear:(BOOL)animated;
+- (void)viewWillDisappear:(BOOL)animated;
+- (void)viewDidLayoutSubviews;
+- (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id <UIViewControllerTransitionCoordinator> _Nonnull)coordinator;
+- (void)didReceiveMemoryWarning;
+- (IBAction)backBtnPressedOnCamera:(id _Nonnull)sender;
+- (void)handleGestureWithGesture:(UISwipeGestureRecognizer * _Nonnull)gesture;
+- (void)switchCamera;
+- (nonnull instancetype)initWithNibName:(NSString * _Nullable)nibNameOrNil bundle:(NSBundle * _Nullable)nibBundleOrNil OBJC_DESIGNATED_INITIALIZER;
+- (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder OBJC_DESIGNATED_INITIALIZER;
+@end
+
+@class AVCaptureOutput;
+
+@interface NFCCameraVc (SWIFT_EXTENSION(ShuftiPro)) <AVCaptureVideoDataOutputSampleBufferDelegate>
+- (void)captureOutput:(AVCaptureOutput * _Nonnull)output didOutputSampleBuffer:(CMSampleBufferRef _Nonnull)sampleBuffer fromConnection:(AVCaptureConnection * _Nonnull)connection;
+@end
+
+
+SWIFT_CLASS("_TtC9ShuftiPro7NFCCell")
+@interface NFCCell : UITableViewCell
+@property (nonatomic, weak) IBOutlet UILabel * _Null_unspecified tileLbl;
+@property (nonatomic, weak) IBOutlet UILabel * _Null_unspecified nfcDetailLbl;
+- (void)awakeFromNib;
+- (void)setSelected:(BOOL)selected animated:(BOOL)animated;
+- (nonnull instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString * _Nullable)reuseIdentifier OBJC_DESIGNATED_INITIALIZER SWIFT_AVAILABILITY(ios,introduced=3.0);
+- (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder OBJC_DESIGNATED_INITIALIZER;
+@end
+
 
 @class UIActivityIndicatorView;
 @class WKNavigation;
@@ -1167,6 +1415,7 @@ SWIFT_CLASS("_TtC9ShuftiPro22PrivacyPolicyWebviewVc")
 @interface PrivacyPolicyWebviewVc : UIViewController <UIScrollViewDelegate, UIWebViewDelegate, WKNavigationDelegate, WKUIDelegate>
 @property (nonatomic, weak) IBOutlet UIActivityIndicatorView * _Null_unspecified activity;
 @property (nonatomic, weak) IBOutlet UIView * _Null_unspecified privacyPolicyView;
+@property (nonatomic, weak) IBOutlet UIButton * _Null_unspecified cancelBtn;
 - (void)viewDidLoad;
 - (IBAction)cancelWebViewBtnWithSender:(id _Null_unspecified)sender;
 - (void)handleGestureWithGesture:(UISwipeGestureRecognizer * _Nonnull)gesture;
@@ -1177,11 +1426,10 @@ SWIFT_CLASS("_TtC9ShuftiPro22PrivacyPolicyWebviewVc")
 - (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder OBJC_DESIGNATED_INITIALIZER;
 @end
 
-@class UIVisualEffectView;
 
 SWIFT_CLASS("_TtC9ShuftiPro8ResultVc")
 @interface ResultVc : UIViewController <NSURLSessionTaskDelegate, MFMailComposeViewControllerDelegate>
-@property (nonatomic, weak) IBOutlet UIVisualEffectView * _Null_unspecified loadingView;
+@property (nonatomic, weak) IBOutlet UIView * _Null_unspecified loadingView;
 @property (nonatomic, weak) IBOutlet WKWebView * _Null_unspecified loadingIndicatorImageView;
 @property (nonatomic, weak) IBOutlet UILabel * _Null_unspecified waitingMessageLabel;
 @property (nonatomic, weak) IBOutlet UIView * _Null_unspecified resultsView;
@@ -1190,6 +1438,13 @@ SWIFT_CLASS("_TtC9ShuftiPro8ResultVc")
 @property (nonatomic, weak) IBOutlet UILabel * _Null_unspecified verifiedDescLbl;
 @property (nonatomic, weak) IBOutlet WKWebView * _Null_unspecified verifiedImageWebView;
 @property (nonatomic, weak) IBOutlet UILabel * _Null_unspecified lblTermsAndConditions;
+@property (nonatomic, weak) IBOutlet UILabel * _Null_unspecified titleOnLoadingLbl;
+@property (nonatomic, weak) IBOutlet UILabel * _Null_unspecified pleaseWaitLbl;
+@property (nonatomic, weak) IBOutlet UIButton * _Null_unspecified proceedBtn;
+@property (nonatomic, weak) IBOutlet UIImageView * _Null_unspecified footerImage;
+@property (nonatomic, weak) IBOutlet UILabel * _Null_unspecified footerLabel;
+@property (nonatomic, weak) IBOutlet UIImageView * _Null_unspecified footerImageOnLoading;
+@property (nonatomic, weak) IBOutlet UILabel * _Null_unspecified footerLabelOnLoading;
 - (void)viewDidLoad;
 - (void)viewWillAppear:(BOOL)animated;
 - (void)viewDidDisappear:(BOOL)animated;
@@ -1232,11 +1487,14 @@ SWIFT_CLASS("_TtC9ShuftiPro9ShuftiPro")
 @end
 
 
+
 SWIFT_CLASS("_TtC9ShuftiPro18SupportedTypesCell")
 @interface SupportedTypesCell : UITableViewCell
 @property (nonatomic, weak) IBOutlet UILabel * _Null_unspecified supportedTypes;
 @property (nonatomic, weak) IBOutlet UIImageView * _Null_unspecified supportedTypesImage;
+@property (nonatomic, weak) IBOutlet UIImageView * _Null_unspecified proceedImg;
 @property (nonatomic, weak) IBOutlet UIView * _Null_unspecified containerView;
+@property (nonatomic, weak) IBOutlet UIView * _Null_unspecified proceedView;
 - (void)awakeFromNib;
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated;
 - (nonnull instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString * _Nullable)reuseIdentifier OBJC_DESIGNATED_INITIALIZER SWIFT_AVAILABILITY(ios,introduced=3.0);
@@ -1248,16 +1506,24 @@ SWIFT_CLASS("_TtC9ShuftiPro16SupportedTypesVc")
 @interface SupportedTypesVc : UIViewController
 @property (nonatomic, weak) IBOutlet UILabel * _Null_unspecified titleLbl;
 @property (nonatomic, weak) IBOutlet UIView * _Null_unspecified supportedTypesUIView;
+@property (nonatomic, weak) IBOutlet UIView * _Null_unspecified countryView;
 @property (nonatomic, strong) IBOutlet UITableView * _Null_unspecified supportedTypesTableview;
 @property (nonatomic, weak) IBOutlet UILabel * _Null_unspecified supportedTypeSubHeading;
+@property (nonatomic, weak) IBOutlet UIImageView * _Null_unspecified backBtnImg;
+@property (nonatomic, weak) IBOutlet UIImageView * _Null_unspecified footerImage;
+@property (nonatomic, weak) IBOutlet UILabel * _Null_unspecified footerLabel;
+@property (nonatomic, strong) IBOutlet UILabel * _Null_unspecified selectedCountryLabel;
+@property (nonatomic, strong) IBOutlet UIButton * _Null_unspecified selectedCountryBtn;
 - (void)viewDidLoad;
 - (void)viewDidDisappear:(BOOL)animated;
 - (void)viewWillAppear:(BOOL)animated;
 - (IBAction)backBtnPreesed:(id _Nonnull)sender;
+- (IBAction)countrySelectionBtnPreesed:(id _Nonnull)sender;
 - (void)handleGestureWithGesture:(UISwipeGestureRecognizer * _Nonnull)gesture;
 - (nonnull instancetype)initWithNibName:(NSString * _Nullable)nibNameOrNil bundle:(NSBundle * _Nullable)nibBundleOrNil OBJC_DESIGNATED_INITIALIZER;
 - (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder OBJC_DESIGNATED_INITIALIZER;
 @end
+
 
 
 @interface SupportedTypesVc (SWIFT_EXTENSION(ShuftiPro)) <UITableViewDataSource, UITableViewDelegate>
@@ -1265,6 +1531,17 @@ SWIFT_CLASS("_TtC9ShuftiPro16SupportedTypesVc")
 - (UITableViewCell * _Nonnull)tableView:(UITableView * _Nonnull)tableView cellForRowAtIndexPath:(NSIndexPath * _Nonnull)indexPath SWIFT_WARN_UNUSED_RESULT;
 - (void)tableView:(UITableView * _Nonnull)tableView didSelectRowAtIndexPath:(NSIndexPath * _Nonnull)indexPath;
 - (CGFloat)tableView:(UITableView * _Nonnull)tableView heightForRowAtIndexPath:(NSIndexPath * _Nonnull)indexPath SWIFT_WARN_UNUSED_RESULT;
+@end
+
+@class UITextPosition;
+@class NSTextContainer;
+
+SWIFT_CLASS("_TtC9ShuftiPro9TextFeild")
+@interface TextFeild : UITextView
+- (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)aDecoder OBJC_DESIGNATED_INITIALIZER;
+- (CGRect)caretRectForPosition:(UITextPosition * _Nonnull)position SWIFT_WARN_UNUSED_RESULT;
+- (BOOL)canPerformAction:(SEL _Nonnull)action withSender:(id _Nullable)sender SWIFT_WARN_UNUSED_RESULT;
+- (nonnull instancetype)initWithFrame:(CGRect)frame textContainer:(NSTextContainer * _Nullable)textContainer SWIFT_UNAVAILABLE;
 @end
 
 
@@ -1286,14 +1563,22 @@ SWIFT_CLASS("_TtC9ShuftiPro19UploadOrTakePhotoVc")
 @property (nonatomic, strong) IBOutlet UIImageView * _Null_unspecified uploadImg;
 @property (nonatomic, weak) IBOutlet UIImageView * _Null_unspecified cameraProceedImg;
 @property (nonatomic, weak) IBOutlet UIImageView * _Null_unspecified uploadProceedImg;
+@property (nonatomic, weak) IBOutlet UIImageView * _Null_unspecified recordImg;
 @property (nonatomic, weak) IBOutlet UILabel * _Null_unspecified takePhotoLbl;
 @property (nonatomic, weak) IBOutlet UILabel * _Null_unspecified titleLbl;
 @property (nonatomic, weak) IBOutlet UILabel * _Null_unspecified bottomHeadingLbl;
 @property (nonatomic, weak) IBOutlet UILabel * _Null_unspecified uploadPhotoLbl;
-@property (nonatomic, weak) IBOutlet UILabel * _Null_unspecified powerdByLbl;
+@property (nonatomic, weak) IBOutlet UILabel * _Null_unspecified recordVideoLbl;
 @property (nonatomic, weak) IBOutlet UIView * _Null_unspecified cameraView;
 @property (nonatomic, weak) IBOutlet UIView * _Null_unspecified uploadView;
 @property (nonatomic, weak) IBOutlet UIView * _Null_unspecified recordView;
+@property (nonatomic, weak) IBOutlet UIView * _Null_unspecified cameraProceedView;
+@property (nonatomic, weak) IBOutlet UIView * _Null_unspecified uploadProceedView;
+@property (nonatomic, weak) IBOutlet UIView * _Null_unspecified videoProceedView;
+@property (nonatomic, weak) IBOutlet UIImageView * _Null_unspecified bckBtnImage;
+@property (nonatomic, weak) IBOutlet UIImageView * _Null_unspecified videoImg;
+@property (nonatomic, weak) IBOutlet UIImageView * _Null_unspecified footerImage;
+@property (nonatomic, weak) IBOutlet UILabel * _Null_unspecified footerLabel;
 - (void)viewDidLoad;
 - (IBAction)takePhotoBtnPressed:(id _Nonnull)sender;
 - (IBAction)uploadFromGalleryBtnPressed:(id _Nonnull)sender;
@@ -1322,6 +1607,8 @@ SWIFT_CLASS("_TtC9ShuftiPro13UploadVideoVc")
 @property (nonatomic, weak) IBOutlet UIImageView * _Null_unspecified backBtnImg;
 @property (nonatomic, weak) IBOutlet UIView * _Null_unspecified playVideoView;
 @property (nonatomic, weak) IBOutlet UIStackView * _Null_unspecified retakeStackViewBtns;
+@property (nonatomic, weak) IBOutlet UIImageView * _Null_unspecified footerImage;
+@property (nonatomic, weak) IBOutlet UILabel * _Null_unspecified footerLabel;
 - (void)viewDidLoad;
 - (IBAction)uploadVideoBtnPressed:(id _Nonnull)sender;
 - (IBAction)retakeBtnPressed:(id _Nonnull)sender;
@@ -1353,11 +1640,14 @@ SWIFT_CLASS("_TtC9ShuftiPro13UploadVideoVc")
 SWIFT_CLASS("_TtC9ShuftiPro17WebViewController")
 @interface WebViewController : UIViewController <WKNavigationDelegate>
 @property (nonatomic, strong) IBOutlet UIView * _Null_unspecified containerView;
-@property (nonatomic, weak) IBOutlet UIVisualEffectView * _Null_unspecified loadingView;
+@property (nonatomic, strong) IBOutlet UILabel * _Null_unspecified pleaseWaitLbl;
+@property (nonatomic, weak) IBOutlet UIView * _Null_unspecified loadingView;
 @property (nonatomic, weak) IBOutlet UIActivityIndicatorView * _Null_unspecified activity;
 @property (nonatomic, weak) IBOutlet WKWebView * _Null_unspecified loadingIndicatorWebView;
 @property (nonatomic, weak) IBOutlet UINavigationBar * _Null_unspecified navBar;
 @property (nonatomic, weak) IBOutlet UIBarButtonItem * _Null_unspecified navBarCancelBtn;
+@property (nonatomic, weak) IBOutlet UIImageView * _Null_unspecified footerImage;
+@property (nonatomic, weak) IBOutlet UILabel * _Null_unspecified footerLabel;
 - (void)viewWillAppear:(BOOL)animated;
 - (void)viewDidLoad;
 - (void)viewDidDisappear:(BOOL)animated;

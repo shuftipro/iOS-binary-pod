@@ -5,6 +5,7 @@ import AVFoundation
 import AVKit
 import Accelerate
 import CoreGraphics
+import CoreNFC
 import CoreVideo
 import Foundation
 import MessageUI
@@ -15,18 +16,19 @@ import Swift
 import SystemConfiguration
 import UIKit
 import VideoToolbox
-import Vision
 import WebKit
 import _Concurrency
+@_hasMissingDesignatedInitializers public class UIUtilities {
+  public static func imageOrientation(fromDevicePosition devicePosition: AVFoundation.AVCaptureDevice.Position = .back) -> UIKit.UIImage.Orientation
+  @objc deinit
+}
 @_hasMissingDesignatedInitializers public class Reachability {
   @objc deinit
 }
 @_inheritsConvenienceInitializers @objc public class ShuftiPro : ObjectiveC.NSObject {
-  public var async: Swift.String
-  public var verificationMode: Swift.String
-  public var statusBarColor: Swift.String?
-  public var topBarTintColor: Swift.String?
-  public var cancelButtonTextColor: Swift.String?
+  public var fontColor: UIKit.UIColor
+  public var buttonTextColor: UIKit.UIColor
+  public var buttonBackgroundColor: UIKit.UIColor
   public var showNavBar: Swift.Bool
   @objc public func getUniqueReference() -> Swift.String
   @objc public func shuftiProVerification(requestObject dataObjectObj: [Swift.String : Any], authKeys: [Swift.String : Swift.String], parentVC pvc: UIKit.UIViewController, configs: [Swift.String : Any]?, completion: @escaping (_ result: Any) -> ())
