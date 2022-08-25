@@ -4,6 +4,7 @@
 import AVFoundation
 import AVKit
 import Accelerate
+import CommonCrypto
 import CoreGraphics
 import CoreNFC
 import CoreVideo
@@ -43,4 +44,10 @@ public enum Constant {
 }
 extension UIKit.UIDevice {
   @_Concurrency.MainActor(unsafe) public static let modelName: Swift.String
+}
+extension Foundation.Data {
+  public func sha256() -> Swift.String
+}
+extension Swift.String {
+  public func sha256() -> Swift.String
 }
