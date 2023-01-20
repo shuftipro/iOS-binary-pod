@@ -347,6 +347,7 @@ SWIFT_CLASS("_TtC9ShuftiPro9CameraVc2")
 @property (nonatomic, weak) IBOutlet RAProgressRing * _Null_unspecified counterView;
 - (void)viewWillAppear:(BOOL)animated;
 - (void)viewDidLoad;
+- (void)viewDidAppear:(BOOL)animated;
 - (void)viewDidDisappear:(BOOL)animated;
 - (void)viewWillDisappear:(BOOL)animated;
 - (void)viewDidLayoutSubviews;
