@@ -1,24 +1,26 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.8 (swiftlang-5.8.0.124.2 clang-1403.0.22.11.100)
-// swift-module-flags: -target arm64-apple-ios11.0 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -Onone -module-name ShuftiPro
+// swift-compiler-version: Apple Swift version 5.7.2 (swiftlang-5.7.2.135.5 clang-1400.0.29.51)
+// swift-module-flags: -target arm64-apple-ios13.0 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -Onone -module-name ShuftiPro
 // swift-module-flags-ignorable: -enable-bare-slash-regex
 import AVFoundation
 import AVKit
 import Accelerate
 import CommonCrypto
+import Compression
+import CoreFoundation
 import CoreGraphics
 import CoreNFC
+import CoreText
 import CoreVideo
 import CryptoKit
+import Dispatch
 import Foundation
-import Lottie
 import MessageUI
 import MobileCoreServices
 import Network
 import PDFKit
+import QuartzCore
 @_exported import ShuftiPro
-import SocketIO
-import Starscream
 import Swift
 import SystemConfiguration
 import UIKit
@@ -26,12 +28,923 @@ import VideoToolbox
 import WebKit
 import _Concurrency
 import _StringProcessing
+import zlib
+public typealias AnimationFrameTime = CoreFoundation.CGFloat
+public typealias AnimationProgressTime = CoreFoundation.CGFloat
+public enum ConnectionState {
+  case connected
+  case waiting
+  case cancelled
+  case failed(Swift.Error?)
+  case viability(Swift.Bool)
+  case shouldReconnect(Swift.Bool)
+  case receive(Foundation.Data)
+}
+public protocol TransportEventClient : AnyObject {
+  func connectionChanged(state: ShuftiPro.ConnectionState)
+}
+public protocol Transport : AnyObject {
+  func register(delegate: ShuftiPro.TransportEventClient)
+  func connect(url: Foundation.URL, timeout: Swift.Double, certificatePinning: ShuftiPro.CertificatePinning?)
+  func disconnect()
+  func write(data: Foundation.Data, completion: @escaping ((Swift.Error?) -> ()))
+  var usingTLS: Swift.Bool { get }
+}
+@objc public enum SocketIOStatus : Swift.Int, Swift.CustomStringConvertible {
+  case notConnected
+  case disconnected
+  case connecting
+  case connected
+  public var active: Swift.Bool {
+    get
+  }
+  public var description: Swift.String {
+    get
+  }
+  public init?(rawValue: Swift.Int)
+  public typealias RawValue = Swift.Int
+  public var rawValue: Swift.Int {
+    get
+  }
+}
+public protocol SocketEngineSpec : AnyObject {
+  var client: ShuftiPro.SocketEngineClient? { get set }
+  var closed: Swift.Bool { get }
+  var compress: Swift.Bool { get }
+  var connected: Swift.Bool { get }
+  var connectParams: [Swift.String : Any]? { get set }
+  var cookies: [Foundation.HTTPCookie]? { get }
+  var engineQueue: Dispatch.DispatchQueue { get }
+  var extraHeaders: [Swift.String : Swift.String]? { get set }
+  var fastUpgrade: Swift.Bool { get }
+  var forcePolling: Swift.Bool { get }
+  var forceWebsockets: Swift.Bool { get }
+  var polling: Swift.Bool { get }
+  var probing: Swift.Bool { get }
+  var sid: Swift.String { get }
+  var socketPath: Swift.String { get }
+  var urlPolling: Foundation.URL { get }
+  var urlWebSocket: Foundation.URL { get }
+  var version: ShuftiPro.SocketIOVersion { get }
+  @available(*, deprecated, message: "No longer needed, if we're not polling, then we must be doing websockets")
+  var websocket: Swift.Bool { get }
+  var ws: ShuftiPro.WebSocket? { get }
+  init(client: ShuftiPro.SocketEngineClient, url: Foundation.URL, options: [Swift.String : Any]?)
+  func connect()
+  func didError(reason: Swift.String)
+  func disconnect(reason: Swift.String)
+  func doFastUpgrade()
+  func flushWaitingForPostToWebSocket()
+  func parseEngineData(_ data: Foundation.Data)
+  func parseEngineMessage(_ message: Swift.String)
+  func write(_ msg: Swift.String, withType type: ShuftiPro.SocketEnginePacketType, withData data: [Foundation.Data], completion: (() -> ())?)
+}
+@_hasMissingDesignatedInitializers final public class DotLottieFile {
+  @objc deinit
+}
 @_hasMissingDesignatedInitializers public class UIUtilities {
   public static func imageOrientation(fromDevicePosition devicePosition: AVFoundation.AVCaptureDevice.Position = .back) -> UIKit.UIImage.Orientation
   @objc deinit
 }
+@objc open class SocketManager : ObjectiveC.NSObject, ShuftiPro.SocketManagerSpec, ShuftiPro.SocketParsable, ShuftiPro.SocketDataBufferable, ShuftiPro.ConfigSettable {
+  public var defaultSocket: ShuftiPro.SocketIOClient {
+    get
+  }
+  final public let socketURL: Foundation.URL
+  public var config: ShuftiPro.SocketIOClientConfiguration {
+    get
+    set
+  }
+  public var engine: ShuftiPro.SocketEngineSpec?
+  public var forceNew: Swift.Bool
+  public var handleQueue: Dispatch.DispatchQueue
+  public var nsps: [Swift.String : ShuftiPro.SocketIOClient]
+  public var reconnects: Swift.Bool
+  public var reconnectWait: Swift.Int
+  public var reconnectWaitMax: Swift.Int
+  public var randomizationFactor: Swift.Double
+  public var status: ShuftiPro.SocketIOStatus {
+    get
+  }
+  public var version: ShuftiPro.SocketIOVersion {
+    get
+  }
+  public var waitingPackets: [ShuftiPro.SocketPacket]
+  public init(socketURL: Foundation.URL, config: ShuftiPro.SocketIOClientConfiguration = [])
+  @objc convenience public init(socketURL: Foundation.URL, config: [Swift.String : Any]?)
+  @objc deinit
+  open func connect()
+  open func connectSocket(_ socket: ShuftiPro.SocketIOClient, withPayload payload: [Swift.String : Any]? = nil)
+  open func didDisconnect(reason: Swift.String)
+  open func disconnect()
+  open func disconnectSocket(_ socket: ShuftiPro.SocketIOClient)
+  open func disconnectSocket(forNamespace nsp: Swift.String)
+  open func emitAll(clientEvent event: ShuftiPro.SocketClientEvent, data: [Any])
+  open func emitAll(_ event: Swift.String, _ items: ShuftiPro.SocketData...)
+  @objc open func engineDidClose(reason: Swift.String)
+  @objc open func engineDidError(reason: Swift.String)
+  @objc open func engineDidOpen(reason: Swift.String)
+  @objc open func engineDidReceivePing()
+  @objc open func engineDidSendPing()
+  @objc open func engineDidReceivePong()
+  @objc open func engineDidSendPong()
+  @objc open func engineDidWebsocketUpgrade(headers: [Swift.String : Swift.String])
+  @objc open func parseEngineMessage(_ msg: Swift.String)
+  @objc open func parseEngineBinaryData(_ data: Foundation.Data)
+  open func reconnect()
+  @discardableResult
+  open func removeSocket(_ socket: ShuftiPro.SocketIOClient) -> ShuftiPro.SocketIOClient?
+  open func setConfigs(_ config: ShuftiPro.SocketIOClientConfiguration)
+  open func socket(forNamespace nsp: Swift.String) -> ShuftiPro.SocketIOClient
+}
 @_hasMissingDesignatedInitializers public class Reachability {
   @objc deinit
+}
+public enum LayerType : Swift.Int, Swift.Codable {
+  case precomp
+  case solid
+  case image
+  case null
+  case shape
+  case text
+  public init(from decoder: Swift.Decoder) throws
+  public init?(rawValue: Swift.Int)
+  public typealias RawValue = Swift.Int
+  public var rawValue: Swift.Int {
+    get
+  }
+}
+public enum MatteType : Swift.Int, Swift.Codable {
+  case none
+  case add
+  case invert
+  case unknown
+  public init?(rawValue: Swift.Int)
+  public typealias RawValue = Swift.Int
+  public var rawValue: Swift.Int {
+    get
+  }
+}
+public enum BlendMode : Swift.Int, Swift.Codable {
+  case normal
+  case multiply
+  case screen
+  case overlay
+  case darken
+  case lighten
+  case colorDodge
+  case colorBurn
+  case hardLight
+  case softLight
+  case difference
+  case exclusion
+  case hue
+  case saturation
+  case color
+  case luminosity
+  public init?(rawValue: Swift.Int)
+  public typealias RawValue = Swift.Int
+  public var rawValue: Swift.Int {
+    get
+  }
+}
+@_hasMissingDesignatedInitializers public class FoundationHTTPServerHandler : ShuftiPro.HTTPServerHandler {
+  public func register(delegate: ShuftiPro.HTTPServerDelegate)
+  public func createResponse(headers: [Swift.String : Swift.String]) -> Foundation.Data
+  public func parse(data: Foundation.Data)
+  @objc deinit
+}
+@objc final public class CompatibleAnimation : ObjectiveC.NSObject {
+  @objc public init(name: Swift.String, subdirectory: Swift.String? = nil, bundle: Foundation.Bundle = Bundle.main)
+  @objc deinit
+}
+@objc public enum CompatibleRenderingEngineOption : Swift.Int {
+  case shared
+  case defaultEngine
+  case automatic
+  case mainThread
+  case coreAnimation
+  public static func generateLottieConfiguration(_ configuration: ShuftiPro.CompatibleRenderingEngineOption) -> ShuftiPro.LottieConfiguration
+  public init?(rawValue: Swift.Int)
+  public typealias RawValue = Swift.Int
+  public var rawValue: Swift.Int {
+    get
+  }
+}
+@_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers @objc @_Concurrency.MainActor(unsafe) final public class CompatibleAnimationView : UIKit.UIView {
+  @objc @_Concurrency.MainActor(unsafe) convenience public init(compatibleAnimation: ShuftiPro.CompatibleAnimation)
+  @objc @_Concurrency.MainActor(unsafe) public init(compatibleAnimation: ShuftiPro.CompatibleAnimation, compatibleRenderingEngineOption: ShuftiPro.CompatibleRenderingEngineOption)
+  @objc @_Concurrency.MainActor(unsafe) convenience public init(url: Foundation.URL)
+  @objc @_Concurrency.MainActor(unsafe) public init(url: Foundation.URL, compatibleRenderingEngineOption: ShuftiPro.CompatibleRenderingEngineOption)
+  @objc @_Concurrency.MainActor(unsafe) convenience public init(data: Foundation.Data)
+  @objc @_Concurrency.MainActor(unsafe) public init(data: Foundation.Data, compatibleRenderingEngineOption: ShuftiPro.CompatibleRenderingEngineOption)
+  @_Concurrency.MainActor(unsafe) @objc override dynamic public init(frame: CoreFoundation.CGRect)
+  @objc @_Concurrency.MainActor(unsafe) final public var compatibleAnimation: ShuftiPro.CompatibleAnimation? {
+    @objc get
+    @objc set
+  }
+  @objc @_Concurrency.MainActor(unsafe) final public var loopAnimationCount: CoreFoundation.CGFloat {
+    @objc get
+    @objc set
+  }
+  @objc @_Concurrency.MainActor(unsafe) final public var compatibleDictionaryTextProvider: ShuftiPro.CompatibleDictionaryTextProvider? {
+    @objc get
+    @objc set
+  }
+  @_Concurrency.MainActor(unsafe) @objc override final public var contentMode: UIKit.UIView.ContentMode {
+    @objc get
+    @objc set
+  }
+  @objc @_Concurrency.MainActor(unsafe) final public var shouldRasterizeWhenIdle: Swift.Bool {
+    @objc get
+    @objc set
+  }
+  @objc @_Concurrency.MainActor(unsafe) final public var currentProgress: CoreFoundation.CGFloat {
+    @objc get
+    @objc set
+  }
+  @objc @_Concurrency.MainActor(unsafe) final public var duration: CoreFoundation.CGFloat {
+    @objc get
+  }
+  @objc @_Concurrency.MainActor(unsafe) final public var currentTime: Foundation.TimeInterval {
+    @objc get
+    @objc set
+  }
+  @objc @_Concurrency.MainActor(unsafe) final public var currentFrame: CoreFoundation.CGFloat {
+    @objc get
+    @objc set
+  }
+  @objc @_Concurrency.MainActor(unsafe) final public var realtimeAnimationFrame: CoreFoundation.CGFloat {
+    @objc get
+  }
+  @objc @_Concurrency.MainActor(unsafe) final public var realtimeAnimationProgress: CoreFoundation.CGFloat {
+    @objc get
+  }
+  @objc @_Concurrency.MainActor(unsafe) final public var animationSpeed: CoreFoundation.CGFloat {
+    @objc get
+    @objc set
+  }
+  @objc @_Concurrency.MainActor(unsafe) final public var respectAnimationFrameRate: Swift.Bool {
+    @objc get
+    @objc set
+  }
+  @objc @_Concurrency.MainActor(unsafe) final public var isAnimationPlaying: Swift.Bool {
+    @objc get
+  }
+  @objc @_Concurrency.MainActor(unsafe) final public func play()
+  @objc @_Concurrency.MainActor(unsafe) final public func play(completion: ((Swift.Bool) -> Swift.Void)?)
+  @objc @_Concurrency.MainActor(unsafe) final public func play(fromProgress: CoreFoundation.CGFloat, toProgress: CoreFoundation.CGFloat, completion: ((Swift.Bool) -> Swift.Void)? = nil)
+  @objc @_Concurrency.MainActor(unsafe) final public func play(fromFrame: CoreFoundation.CGFloat, toFrame: CoreFoundation.CGFloat, completion: ((Swift.Bool) -> Swift.Void)? = nil)
+  @objc @_Concurrency.MainActor(unsafe) final public func play(fromMarker: Swift.String, toMarker: Swift.String, completion: ((Swift.Bool) -> Swift.Void)? = nil)
+  @objc @_Concurrency.MainActor(unsafe) final public func play(marker: Swift.String, completion: ((Swift.Bool) -> Swift.Void)? = nil)
+  @objc @_Concurrency.MainActor(unsafe) final public func stop()
+  @objc @_Concurrency.MainActor(unsafe) final public func pause()
+  @objc @_Concurrency.MainActor(unsafe) final public func reloadImages()
+  @objc @_Concurrency.MainActor(unsafe) final public func forceDisplayUpdate()
+  @objc @_Concurrency.MainActor(unsafe) final public func getValue(for keypath: ShuftiPro.CompatibleAnimationKeypath, atFrame: CoreFoundation.CGFloat) -> Any?
+  @objc @_Concurrency.MainActor(unsafe) final public func logHierarchyKeypaths()
+  @objc @_Concurrency.MainActor(unsafe) final public func setColorValue(_ color: UIKit.UIColor, forKeypath keypath: ShuftiPro.CompatibleAnimationKeypath)
+  @objc @_Concurrency.MainActor(unsafe) final public func getColorValue(for keypath: ShuftiPro.CompatibleAnimationKeypath, atFrame: CoreFoundation.CGFloat) -> UIKit.UIColor?
+  @objc @_Concurrency.MainActor(unsafe) final public func addSubview(_ subview: ShuftiPro.AnimationSubview, forLayerAt keypath: ShuftiPro.CompatibleAnimationKeypath)
+  @objc @_Concurrency.MainActor(unsafe) final public func convert(rect: CoreFoundation.CGRect, toLayerAt keypath: ShuftiPro.CompatibleAnimationKeypath?) -> CoreFoundation.CGRect
+  @objc @_Concurrency.MainActor(unsafe) final public func convert(point: CoreFoundation.CGPoint, toLayerAt keypath: ShuftiPro.CompatibleAnimationKeypath?) -> CoreFoundation.CGPoint
+  @objc @_Concurrency.MainActor(unsafe) final public func progressTime(forMarker named: Swift.String) -> CoreFoundation.CGFloat
+  @objc @_Concurrency.MainActor(unsafe) final public func frameTime(forMarker named: Swift.String) -> CoreFoundation.CGFloat
+  @objc @_Concurrency.MainActor(unsafe) final public func durationFrameTime(forMarker named: Swift.String) -> CoreFoundation.CGFloat
+  @objc deinit
+}
+@objc final public class CompatibleDictionaryTextProvider : ObjectiveC.NSObject {
+  @objc public init(values: [Swift.String : Swift.String])
+  @objc deinit
+}
+@objc @_inheritsConvenienceInitializers @_Concurrency.MainActor(unsafe) open class LottieAnimationViewBase : UIKit.UIView {
+  @_Concurrency.MainActor(unsafe) @objc override dynamic public var contentMode: UIKit.UIView.ContentMode {
+    @objc get
+    @objc set
+  }
+  @_Concurrency.MainActor(unsafe) @objc override dynamic public func didMoveToWindow()
+  @_Concurrency.MainActor(unsafe) @objc override dynamic public func layoutSubviews()
+  @_Concurrency.MainActor(unsafe) @objc override dynamic public init(frame: CoreFoundation.CGRect)
+  @_Concurrency.MainActor(unsafe) @objc required dynamic public init?(coder: Foundation.NSCoder)
+  @objc deinit
+}
+extension UIKit.UIColor {
+  public var lottieColorValue: ShuftiPro.LottieColor {
+    get
+  }
+}
+public class DefaultAnimationCache : ShuftiPro.AnimationCacheProvider {
+  public init()
+  public static let sharedCache: ShuftiPro.DefaultAnimationCache
+  public var cacheSize: Swift.Int {
+    get
+    set
+  }
+  public func clearCache()
+  public func animation(forKey key: Swift.String) -> ShuftiPro.LottieAnimation?
+  public func setAnimation(_ animation: ShuftiPro.LottieAnimation, forKey key: Swift.String)
+  @objc deinit
+}
+extension ShuftiPro.LottieAnimation {
+  public typealias DownloadClosure = (ShuftiPro.LottieAnimation?) -> Swift.Void
+  final public var duration: Foundation.TimeInterval {
+    get
+  }
+  final public var bounds: CoreFoundation.CGRect {
+    get
+  }
+  final public var size: CoreFoundation.CGSize {
+    get
+  }
+  public static func named(_ name: Swift.String, bundle: Foundation.Bundle = Bundle.main, subdirectory: Swift.String? = nil, animationCache: ShuftiPro.AnimationCacheProvider? = LottieAnimationCache.shared) -> ShuftiPro.LottieAnimation?
+  public static func filepath(_ filepath: Swift.String, animationCache: ShuftiPro.AnimationCacheProvider? = LottieAnimationCache.shared) -> ShuftiPro.LottieAnimation?
+  public static func asset(_ name: Swift.String, bundle: Foundation.Bundle = Bundle.main, animationCache: ShuftiPro.AnimationCacheProvider? = LottieAnimationCache.shared) -> ShuftiPro.LottieAnimation?
+  public static func from(data: Foundation.Data, strategy: ShuftiPro.DecodingStrategy = LottieConfiguration.shared.decodingStrategy) throws -> ShuftiPro.LottieAnimation
+  #if compiler(>=5.3) && $AsyncAwait
+  @available(iOS 13.0, macOS 10.15, tvOS 13.0, *)
+  public static func loadedFrom(url: Foundation.URL, session: Foundation.URLSession = .shared, animationCache: ShuftiPro.AnimationCacheProvider? = LottieAnimationCache.shared) async -> ShuftiPro.LottieAnimation?
+  #endif
+  public static func loadedFrom(url: Foundation.URL, session: Foundation.URLSession = .shared, closure: @escaping ShuftiPro.LottieAnimation.DownloadClosure, animationCache: ShuftiPro.AnimationCacheProvider? = LottieAnimationCache.shared)
+  final public func progressTime(forMarker named: Swift.String) -> ShuftiPro.AnimationProgressTime?
+  final public func frameTime(forMarker named: Swift.String) -> ShuftiPro.AnimationFrameTime?
+  final public func durationFrameTime(forMarker named: Swift.String) -> ShuftiPro.AnimationFrameTime?
+  final public func progressTime(forFrame frameTime: ShuftiPro.AnimationFrameTime, clamped: Swift.Bool = true) -> ShuftiPro.AnimationProgressTime
+  final public func frameTime(forProgress progressTime: ShuftiPro.AnimationProgressTime) -> ShuftiPro.AnimationFrameTime
+  final public func time(forFrame frameTime: ShuftiPro.AnimationFrameTime) -> Foundation.TimeInterval
+  final public func frameTime(forTime time: Foundation.TimeInterval) -> ShuftiPro.AnimationFrameTime
+}
+extension Foundation.Bundle : @unchecked Swift.Sendable {
+}
+public protocol AnimationTextProvider : AnyObject {
+  func textFor(keypathName: Swift.String, sourceText: Swift.String) -> Swift.String
+}
+final public class DictionaryTextProvider : ShuftiPro.AnimationTextProvider {
+  public init(_ values: [Swift.String : Swift.String])
+  final public func textFor(keypathName: Swift.String, sourceText: Swift.String) -> Swift.String
+  @objc deinit
+}
+final public class DefaultTextProvider : ShuftiPro.AnimationTextProvider {
+  public init()
+  final public func textFor(keypathName _: Swift.String, sourceText: Swift.String) -> Swift.String
+  @objc deinit
+}
+public protocol AnimationImageProvider {
+  func imageForAsset(asset: ShuftiPro.ImageAsset) -> CoreGraphics.CGImage?
+}
+public protocol CompressionHandler {
+  func load(headers: [Swift.String : Swift.String])
+  func decompress(data: Foundation.Data, isFinal: Swift.Bool) -> Foundation.Data?
+  func compress(data: Foundation.Data) -> Foundation.Data?
+}
+@objc open class SocketEngine : ObjectiveC.NSObject, ShuftiPro.WebSocketDelegate, Foundation.URLSessionDelegate, ShuftiPro.SocketEnginePollable, ShuftiPro.SocketEngineWebsocket, ShuftiPro.ConfigSettable {
+  final public let engineQueue: Dispatch.DispatchQueue
+  public var connectParams: [Swift.String : Any]? {
+    get
+    set
+  }
+  public var extraHeaders: [Swift.String : Swift.String]?
+  public var postWait: [ShuftiPro.Post]
+  public var waitingForPoll: Swift.Bool
+  public var waitingForPost: Swift.Bool
+  public var closed: Swift.Bool {
+    get
+  }
+  public var compress: Swift.Bool {
+    get
+  }
+  public var connected: Swift.Bool {
+    get
+  }
+  public var cookies: [Foundation.HTTPCookie]? {
+    get
+  }
+  public var fastUpgrade: Swift.Bool {
+    get
+  }
+  public var forcePolling: Swift.Bool {
+    get
+  }
+  public var forceWebsockets: Swift.Bool {
+    get
+  }
+  public var invalidated: Swift.Bool {
+    get
+  }
+  public var polling: Swift.Bool {
+    get
+  }
+  public var probing: Swift.Bool {
+    get
+  }
+  public var session: Foundation.URLSession? {
+    get
+  }
+  public var sid: Swift.String {
+    get
+  }
+  public var socketPath: Swift.String {
+    get
+  }
+  public var urlPolling: Foundation.URL {
+    get
+  }
+  public var urlWebSocket: Foundation.URL {
+    get
+  }
+  public var version: ShuftiPro.SocketIOVersion {
+    get
+  }
+  @available(*, deprecated, message: "No longer needed, if we're not polling, then we must be doing websockets")
+  public var websocket: Swift.Bool {
+    get
+  }
+  public var enableSOCKSProxy: Swift.Bool {
+    get
+  }
+  public var ws: ShuftiPro.WebSocket? {
+    get
+  }
+  public var wsConnected: Swift.Bool {
+    get
+  }
+  weak public var client: ShuftiPro.SocketEngineClient?
+  public init(client: ShuftiPro.SocketEngineClient, url: Foundation.URL, config: ShuftiPro.SocketIOClientConfiguration)
+  required convenience public init(client: ShuftiPro.SocketEngineClient, url: Foundation.URL, options: [Swift.String : Any]?)
+  @objc deinit
+  open func connect()
+  open func didError(reason: Swift.String)
+  open func disconnect(reason: Swift.String)
+  open func doFastUpgrade()
+  open func flushWaitingForPostToWebSocket()
+  open func parseEngineData(_ data: Foundation.Data)
+  open func parseEngineMessage(_ message: Swift.String)
+  open func setConfigs(_ config: ShuftiPro.SocketIOClientConfiguration)
+  open func write(_ msg: Swift.String, withType type: ShuftiPro.SocketEnginePacketType, withData data: [Foundation.Data], completion: (() -> ())? = nil)
+}
+extension ShuftiPro.SocketEngine {
+  public func URLSession(session: Foundation.URLSession, didBecomeInvalidWithError error: Foundation.NSError?)
+}
+extension ShuftiPro.SocketEngine {
+  public func didReceive(event: ShuftiPro.WebSocketEvent, client _: ShuftiPro.WebSocket)
+}
+public protocol Interpolatable : ShuftiPro.AnyInterpolatable {
+  func interpolate(to: Self, amount: CoreFoundation.CGFloat) -> Self
+}
+public protocol SpatialInterpolatable : ShuftiPro.AnyInterpolatable {
+  func interpolate(to: Self, amount: CoreFoundation.CGFloat, spatialOutTangent: CoreFoundation.CGPoint?, spatialInTangent: CoreFoundation.CGPoint?) -> Self
+}
+public protocol AnyInterpolatable {
+  func _interpolate(to: Self, amount: CoreFoundation.CGFloat, spatialOutTangent: CoreFoundation.CGPoint?, spatialInTangent: CoreFoundation.CGPoint?) -> Self
+}
+extension ShuftiPro.Interpolatable {
+  public func _interpolate(to: Self, amount: CoreFoundation.CGFloat, spatialOutTangent _: CoreFoundation.CGPoint?, spatialInTangent _: CoreFoundation.CGPoint?) -> Self
+}
+extension ShuftiPro.SpatialInterpolatable {
+  public func interpolate(to: Self, amount: CoreFoundation.CGFloat) -> Self
+  public func _interpolate(to: Self, amount: CoreFoundation.CGFloat, spatialOutTangent: CoreFoundation.CGPoint?, spatialInTangent: CoreFoundation.CGPoint?) -> Self
+}
+extension Swift.Double : ShuftiPro.Interpolatable {
+}
+extension CoreFoundation.CGFloat : ShuftiPro.Interpolatable {
+}
+extension Swift.Float : ShuftiPro.Interpolatable {
+}
+extension ShuftiPro.Interpolatable where Self : Swift.BinaryFloatingPoint {
+  public func interpolate(to: Self, amount: CoreFoundation.CGFloat) -> Self
+}
+extension CoreFoundation.CGRect : ShuftiPro.Interpolatable {
+  public func interpolate(to: CoreFoundation.CGRect, amount: CoreFoundation.CGFloat) -> CoreFoundation.CGRect
+}
+extension CoreFoundation.CGSize : ShuftiPro.Interpolatable {
+  public func interpolate(to: CoreFoundation.CGSize, amount: CoreFoundation.CGFloat) -> CoreFoundation.CGSize
+}
+extension CoreFoundation.CGPoint : ShuftiPro.SpatialInterpolatable {
+  public func interpolate(to: CoreFoundation.CGPoint, amount: CoreFoundation.CGFloat, spatialOutTangent: CoreFoundation.CGPoint?, spatialInTangent: CoreFoundation.CGPoint?) -> CoreFoundation.CGPoint
+}
+extension ShuftiPro.LottieColor : ShuftiPro.Interpolatable {
+  public func interpolate(to: ShuftiPro.LottieColor, amount: CoreFoundation.CGFloat) -> ShuftiPro.LottieColor
+}
+extension ShuftiPro.LottieVector1D : ShuftiPro.Interpolatable {
+  public func interpolate(to: ShuftiPro.LottieVector1D, amount: CoreFoundation.CGFloat) -> ShuftiPro.LottieVector1D
+}
+extension ShuftiPro.LottieVector2D : ShuftiPro.SpatialInterpolatable {
+  public func interpolate(to: ShuftiPro.LottieVector2D, amount: CoreFoundation.CGFloat, spatialOutTangent: CoreFoundation.CGPoint?, spatialInTangent: CoreFoundation.CGPoint?) -> ShuftiPro.LottieVector2D
+}
+extension ShuftiPro.LottieVector3D : ShuftiPro.SpatialInterpolatable {
+  public func interpolate(to: ShuftiPro.LottieVector3D, amount: CoreFoundation.CGFloat, spatialOutTangent: CoreFoundation.CGPoint?, spatialInTangent: CoreFoundation.CGPoint?) -> ShuftiPro.LottieVector3D
+}
+extension Swift.Array : ShuftiPro.Interpolatable, ShuftiPro.AnyInterpolatable where Element : ShuftiPro.Interpolatable {
+  public func interpolate(to: [Element], amount: CoreFoundation.CGFloat) -> [Element]
+}
+@objc open class SocketIOClient : ObjectiveC.NSObject, ShuftiPro.SocketIOClientSpec {
+  final public let nsp: Swift.String
+  public var anyHandler: ((ShuftiPro.SocketAnyEvent) -> ())? {
+    get
+  }
+  public var handlers: [ShuftiPro.SocketEventHandler] {
+    get
+  }
+  weak public var manager: ShuftiPro.SocketManagerSpec? {
+    get
+  }
+  public var rawEmitView: ShuftiPro.SocketRawView {
+    get
+  }
+  public var status: ShuftiPro.SocketIOStatus {
+    get
+  }
+  public var sid: Swift.String? {
+    get
+  }
+  public init(manager: ShuftiPro.SocketManagerSpec, nsp: Swift.String)
+  @objc deinit
+  open func connect(withPayload payload: [Swift.String : Any]? = nil)
+  open func connect(withPayload payload: [Swift.String : Any]? = nil, timeoutAfter: Swift.Double, withHandler handler: (() -> ())?)
+  open func didConnect(toNamespace namespace: Swift.String, payload: [Swift.String : Any]?)
+  open func didDisconnect(reason: Swift.String)
+  open func disconnect()
+  open func emit(_ event: Swift.String, _ items: ShuftiPro.SocketData..., completion: (() -> ())? = nil)
+  open func emit(_ event: Swift.String, with items: [ShuftiPro.SocketData], completion: (() -> ())?)
+  open func emitWithAck(_ event: Swift.String, _ items: ShuftiPro.SocketData...) -> ShuftiPro.OnAckCallback
+  open func emitWithAck(_ event: Swift.String, with items: [ShuftiPro.SocketData]) -> ShuftiPro.OnAckCallback
+  open func emitAck(_ ack: Swift.Int, with items: [Any])
+  open func handleAck(_ ack: Swift.Int, data: [Any])
+  open func handleClientEvent(_ event: ShuftiPro.SocketClientEvent, data: [Any])
+  open func handleEvent(_ event: Swift.String, data: [Any], isInternalMessage: Swift.Bool, withAck ack: Swift.Int = -1)
+  open func handlePacket(_ packet: ShuftiPro.SocketPacket)
+  open func leaveNamespace()
+  open func joinNamespace(withPayload payload: [Swift.String : Any]? = nil)
+  open func off(clientEvent event: ShuftiPro.SocketClientEvent)
+  open func off(_ event: Swift.String)
+  open func off(id: Foundation.UUID)
+  @discardableResult
+  open func on(_ event: Swift.String, callback: @escaping ShuftiPro.NormalCallback) -> Foundation.UUID
+  @discardableResult
+  open func on(clientEvent event: ShuftiPro.SocketClientEvent, callback: @escaping ShuftiPro.NormalCallback) -> Foundation.UUID
+  @discardableResult
+  open func once(clientEvent event: ShuftiPro.SocketClientEvent, callback: @escaping ShuftiPro.NormalCallback) -> Foundation.UUID
+  @discardableResult
+  open func once(_ event: Swift.String, callback: @escaping ShuftiPro.NormalCallback) -> Foundation.UUID
+  open func onAny(_ handler: @escaping (ShuftiPro.SocketAnyEvent) -> ())
+  @available(*, unavailable, message: "Call the manager's reconnect method")
+  open func reconnect()
+  open func removeAllHandlers()
+  open func setReconnecting(reason: Swift.String)
+}
+final public class SizeValueProvider {
+  public init(block: @escaping ShuftiPro.SizeValueProvider.SizeValueBlock)
+  public init(_ size: CoreFoundation.CGSize)
+  public typealias SizeValueBlock = (CoreFoundation.CGFloat) -> CoreFoundation.CGSize
+  final public var size: CoreFoundation.CGSize {
+    get
+    set
+  }
+  final public var valueType: Any.Type {
+    get
+  }
+  final public var storage: ShuftiPro.ValueProviderStorage<ShuftiPro.LottieVector3D> {
+    get
+  }
+  final public func hasUpdate(frame _: CoreFoundation.CGFloat) -> Swift.Bool
+  @objc deinit
+}
+@objc @_hasMissingDesignatedInitializers final public class SocketAnyEvent : ObjectiveC.NSObject {
+  @objc final public let event: Swift.String
+  @objc final public let items: [Any]?
+  @objc override final public var description: Swift.String {
+    @objc get
+  }
+  @objc deinit
+}
+public enum ErrorType : Swift.Error {
+  case compressionError
+  case securityError
+  case protocolError
+  case serverError
+  public static func == (a: ShuftiPro.ErrorType, b: ShuftiPro.ErrorType) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
+  public var hashValue: Swift.Int {
+    get
+  }
+}
+public struct WSError : Swift.Error {
+  public let type: ShuftiPro.ErrorType
+  public let message: Swift.String
+  public let code: Swift.UInt16
+  public init(type: ShuftiPro.ErrorType, message: Swift.String, code: Swift.UInt16)
+}
+public protocol WebSocketClient : AnyObject {
+  func connect()
+  func disconnect(closeCode: Swift.UInt16)
+  func write(string: Swift.String, completion: (() -> ())?)
+  func write(stringData: Foundation.Data, completion: (() -> ())?)
+  func write(data: Foundation.Data, completion: (() -> ())?)
+  func write(ping: Foundation.Data, completion: (() -> ())?)
+  func write(pong: Foundation.Data, completion: (() -> ())?)
+}
+extension ShuftiPro.WebSocketClient {
+  public func write(string: Swift.String)
+  public func write(data: Foundation.Data)
+  public func write(ping: Foundation.Data)
+  public func write(pong: Foundation.Data)
+  public func disconnect()
+}
+public enum WebSocketEvent {
+  case connected([Swift.String : Swift.String])
+  case disconnected(Swift.String, Swift.UInt16)
+  case text(Swift.String)
+  case binary(Foundation.Data)
+  case pong(Foundation.Data?)
+  case ping(Foundation.Data?)
+  case error(Swift.Error?)
+  case viabilityChanged(Swift.Bool)
+  case reconnectSuggested(Swift.Bool)
+  case cancelled
+}
+public protocol WebSocketDelegate : AnyObject {
+  func didReceive(event: ShuftiPro.WebSocketEvent, client: ShuftiPro.WebSocket)
+}
+open class WebSocket : ShuftiPro.WebSocketClient, ShuftiPro.EngineDelegate {
+  weak public var delegate: ShuftiPro.WebSocketDelegate?
+  public var onEvent: ((ShuftiPro.WebSocketEvent) -> Swift.Void)?
+  public var request: Foundation.URLRequest
+  public var callbackQueue: Dispatch.DispatchQueue
+  public var respondToPingWithPong: Swift.Bool {
+    get
+    set
+  }
+  public init(request: Foundation.URLRequest, engine: ShuftiPro.Engine)
+  convenience public init(request: Foundation.URLRequest, certPinner: ShuftiPro.CertificatePinning? = FoundationSecurity(), compressionHandler: ShuftiPro.CompressionHandler? = nil, useCustomEngine: Swift.Bool = true)
+  public func connect()
+  public func disconnect(closeCode: Swift.UInt16 = CloseCode.normal.rawValue)
+  public func forceDisconnect()
+  public func write(data: Foundation.Data, completion: (() -> ())?)
+  public func write(string: Swift.String, completion: (() -> ())?)
+  public func write(stringData: Foundation.Data, completion: (() -> ())?)
+  public func write(ping: Foundation.Data, completion: (() -> ())?)
+  public func write(pong: Foundation.Data, completion: (() -> ())?)
+  public func didReceive(event: ShuftiPro.WebSocketEvent)
+  @objc deinit
+}
+@objc final public class CompatibleAnimationKeypath : ObjectiveC.NSObject {
+  @objc public init(keypath: Swift.String)
+  @objc public init(keys: [Swift.String])
+  final public let animationKeypath: ShuftiPro.AnimationKeypath
+  @objc deinit
+}
+@objc @_Concurrency.MainActor(unsafe) open class AnimatedControl : UIKit.UIControl {
+  @_Concurrency.MainActor(unsafe) public init(animation: ShuftiPro.LottieAnimation, configuration: ShuftiPro.LottieConfiguration = .shared)
+  @_Concurrency.MainActor(unsafe) @objc dynamic public init()
+  @_Concurrency.MainActor(unsafe) @objc required dynamic public init?(coder aDecoder: Foundation.NSCoder)
+  @_Concurrency.MainActor(unsafe) @objc override dynamic open var isEnabled: Swift.Bool {
+    @objc get
+    @objc set
+  }
+  @_Concurrency.MainActor(unsafe) @objc override dynamic open var isSelected: Swift.Bool {
+    @objc get
+    @objc set
+  }
+  @_Concurrency.MainActor(unsafe) @objc override dynamic open var isHighlighted: Swift.Bool {
+    @objc get
+    @objc set
+  }
+  @_Concurrency.MainActor(unsafe) @objc override dynamic open var intrinsicContentSize: CoreFoundation.CGSize {
+    @objc get
+  }
+  @_Concurrency.MainActor(unsafe) @objc override dynamic open func beginTracking(_ touch: UIKit.UITouch, with event: UIKit.UIEvent?) -> Swift.Bool
+  @_Concurrency.MainActor(unsafe) @objc override dynamic open func continueTracking(_ touch: UIKit.UITouch, with event: UIKit.UIEvent?) -> Swift.Bool
+  @_Concurrency.MainActor(unsafe) @objc override dynamic open func endTracking(_ touch: UIKit.UITouch?, with event: UIKit.UIEvent?)
+  @_Concurrency.MainActor(unsafe) @objc override dynamic open func cancelTracking(with event: UIKit.UIEvent?)
+  @_Concurrency.MainActor(unsafe) open func animationDidSet()
+  @_Concurrency.MainActor(unsafe) final public let animationView: ShuftiPro.LottieAnimationView
+  @_Concurrency.MainActor(unsafe) public var animation: ShuftiPro.LottieAnimation? {
+    get
+    set
+  }
+  @_Concurrency.MainActor(unsafe) public var animationSpeed: CoreFoundation.CGFloat {
+    get
+    set
+  }
+  @_Concurrency.MainActor(unsafe) public func setLayer(named: Swift.String, forState: UIKit.UIControl.State)
+  @_Concurrency.MainActor(unsafe) public func setValueProvider(_ valueProvider: ShuftiPro.AnyValueProvider, keypath: ShuftiPro.AnimationKeypath)
+  @objc deinit
+}
+public enum FoundationTransportError : Swift.Error {
+  case invalidRequest
+  case invalidOutputStream
+  case timeout
+  public static func == (a: ShuftiPro.FoundationTransportError, b: ShuftiPro.FoundationTransportError) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
+  public var hashValue: Swift.Int {
+    get
+  }
+}
+@objc public class FoundationTransport : ObjectiveC.NSObject, ShuftiPro.Transport, Foundation.StreamDelegate {
+  public var usingTLS: Swift.Bool {
+    get
+  }
+  public init(streamConfiguration: ((Foundation.InputStream, Foundation.OutputStream) -> Swift.Void)? = nil)
+  @objc deinit
+  public func connect(url: Foundation.URL, timeout: Swift.Double = 10, certificatePinning: ShuftiPro.CertificatePinning? = nil)
+  public func disconnect()
+  public func register(delegate: ShuftiPro.TransportEventClient)
+  public func write(data: Foundation.Data, completion: @escaping ((Swift.Error?) -> ()))
+  @objc open func stream(_ aStream: Foundation.Stream, handle eventCode: Foundation.Stream.Event)
+}
+extension QuartzCore.CALayer {
+  @nonobjc public func logLayerTree(withIndent: Swift.Int = 0)
+}
+extension ShuftiPro.LottieAnimationView {
+  @_Concurrency.MainActor(unsafe) convenience public init(name: Swift.String, bundle: Foundation.Bundle = Bundle.main, subdirectory: Swift.String? = nil, imageProvider: ShuftiPro.AnimationImageProvider? = nil, animationCache: ShuftiPro.AnimationCacheProvider? = LottieAnimationCache.shared, configuration: ShuftiPro.LottieConfiguration = .shared)
+  @_Concurrency.MainActor(unsafe) convenience public init(filePath: Swift.String, imageProvider: ShuftiPro.AnimationImageProvider? = nil, animationCache: ShuftiPro.AnimationCacheProvider? = LottieAnimationCache.shared, configuration: ShuftiPro.LottieConfiguration = .shared)
+  @_Concurrency.MainActor(unsafe) convenience public init(url: Foundation.URL, imageProvider: ShuftiPro.AnimationImageProvider? = nil, session: Foundation.URLSession = .shared, closure: @escaping ShuftiPro.LottieAnimationView.DownloadClosure, animationCache: ShuftiPro.AnimationCacheProvider? = LottieAnimationCache.shared, configuration: ShuftiPro.LottieConfiguration = .shared)
+  @_Concurrency.MainActor(unsafe) convenience public init(asset name: Swift.String, bundle: Foundation.Bundle = Bundle.main, imageProvider: ShuftiPro.AnimationImageProvider? = nil, animationCache: ShuftiPro.AnimationCacheProvider? = LottieAnimationCache.shared, configuration: ShuftiPro.LottieConfiguration = .shared)
+  @_Concurrency.MainActor(unsafe) convenience public init(dotLottieName name: Swift.String, bundle: Foundation.Bundle = Bundle.main, subdirectory: Swift.String? = nil, animationId: Swift.String? = nil, dotLottieCache: ShuftiPro.DotLottieCacheProvider? = DotLottieCache.sharedCache, configuration: ShuftiPro.LottieConfiguration = .shared, completion: ((ShuftiPro.LottieAnimationView, Swift.Error?) -> Swift.Void)? = nil)
+  @_Concurrency.MainActor(unsafe) convenience public init(dotLottieFilePath filePath: Swift.String, animationId: Swift.String? = nil, dotLottieCache: ShuftiPro.DotLottieCacheProvider? = DotLottieCache.sharedCache, configuration: ShuftiPro.LottieConfiguration = .shared, completion: ((ShuftiPro.LottieAnimationView, Swift.Error?) -> Swift.Void)? = nil)
+  @_Concurrency.MainActor(unsafe) convenience public init(dotLottieUrl url: Foundation.URL, animationId: Swift.String? = nil, dotLottieCache: ShuftiPro.DotLottieCacheProvider? = DotLottieCache.sharedCache, configuration: ShuftiPro.LottieConfiguration = .shared, session: Foundation.URLSession = .shared, completion: ((ShuftiPro.LottieAnimationView, Swift.Error?) -> Swift.Void)? = nil)
+  @_Concurrency.MainActor(unsafe) convenience public init(dotLottieAsset name: Swift.String, bundle: Foundation.Bundle = Bundle.main, animationId: Swift.String? = nil, dotLottieCache: ShuftiPro.DotLottieCacheProvider? = DotLottieCache.sharedCache, configuration: ShuftiPro.LottieConfiguration = .shared, completion: ((ShuftiPro.LottieAnimationView, Swift.Error?) -> Swift.Void)? = nil)
+  public typealias DownloadClosure = (Swift.Error?) -> Swift.Void
+}
+@objc public enum SocketEnginePacketType : Swift.Int {
+  case open
+  case close
+  case ping
+  case pong
+  case message
+  case upgrade
+  case noop
+  public init?(rawValue: Swift.Int)
+  public typealias RawValue = Swift.Int
+  public var rawValue: Swift.Int {
+    get
+  }
+}
+@_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers final public class ImageAsset : ShuftiPro.Asset {
+  final public let name: Swift.String
+  final public let directory: Swift.String
+  final public let width: Swift.Double
+  final public let height: Swift.Double
+  override final public func encode(to encoder: Swift.Encoder) throws
+  @objc deinit
+}
+public protocol EngineDelegate : AnyObject {
+  func didReceive(event: ShuftiPro.WebSocketEvent)
+}
+public protocol Engine {
+  func register(delegate: ShuftiPro.EngineDelegate)
+  func start(request: Foundation.URLRequest)
+  func stop(closeCode: Swift.UInt16)
+  func forceStop()
+  func write(data: Foundation.Data, opcode: ShuftiPro.FrameOpCode, completion: (() -> ())?)
+  func write(string: Swift.String, completion: (() -> ())?)
+}
+public enum SocketIOVersion : Swift.Int {
+  case two
+  case three
+  public init?(rawValue: Swift.Int)
+  public typealias RawValue = Swift.Int
+  public var rawValue: Swift.Int {
+    get
+  }
+}
+public enum SocketIOClientOption {
+  case compress
+  case connectParams([Swift.String : Any])
+  case cookies([Foundation.HTTPCookie])
+  case extraHeaders([Swift.String : Swift.String])
+  case forceNew(Swift.Bool)
+  case forcePolling(Swift.Bool)
+  case forceWebsockets(Swift.Bool)
+  case enableSOCKSProxy(Swift.Bool)
+  case handleQueue(Dispatch.DispatchQueue)
+  case log(Swift.Bool)
+  case logger(ShuftiPro.SocketLogger)
+  case path(Swift.String)
+  case reconnects(Swift.Bool)
+  case reconnectAttempts(Swift.Int)
+  case reconnectWait(Swift.Int)
+  case reconnectWaitMax(Swift.Int)
+  case randomizationFactor(Swift.Double)
+  case secure(Swift.Bool)
+  case security(ShuftiPro.CertificatePinning)
+  case selfSigned(Swift.Bool)
+  case sessionDelegate(Foundation.URLSessionDelegate)
+  case version(ShuftiPro.SocketIOVersion)
+  public var description: Swift.String {
+    get
+  }
+  public static func == (lhs: ShuftiPro.SocketIOClientOption, rhs: ShuftiPro.SocketIOClientOption) -> Swift.Bool
+}
+public protocol SocketEngineWebsocket : ShuftiPro.SocketEngineSpec {
+  var wsConnected: Swift.Bool { get }
+  func sendWebSocketMessage(_ str: Swift.String, withType type: ShuftiPro.SocketEnginePacketType, withData datas: [Foundation.Data], completion: (() -> ())?)
+}
+extension ShuftiPro.SocketEngineWebsocket {
+  public func sendWebSocketMessage(_ str: Swift.String, withType type: ShuftiPro.SocketEnginePacketType, withData data: [Foundation.Data], completion: (() -> ())?)
+}
+public struct SocketIOClientConfiguration : Swift.ExpressibleByArrayLiteral, Swift.Collection, Swift.MutableCollection {
+  public typealias Element = ShuftiPro.SocketIOClientOption
+  public typealias Index = Swift.Array<ShuftiPro.SocketIOClientOption>.Index
+  public typealias Iterator = Swift.Array<ShuftiPro.SocketIOClientOption>.Iterator
+  public typealias SubSequence = Swift.Array<ShuftiPro.SocketIOClientOption>.SubSequence
+  public var startIndex: ShuftiPro.SocketIOClientConfiguration.Index {
+    get
+  }
+  public var endIndex: ShuftiPro.SocketIOClientConfiguration.Index {
+    get
+  }
+  public var isEmpty: Swift.Bool {
+    get
+  }
+  public var count: ShuftiPro.SocketIOClientConfiguration.Index.Stride {
+    get
+  }
+  public var first: ShuftiPro.SocketIOClientConfiguration.Element? {
+    get
+  }
+  public subscript(position: ShuftiPro.SocketIOClientConfiguration.Index) -> ShuftiPro.SocketIOClientConfiguration.Element {
+    get
+    set
+  }
+  public subscript(bounds: Swift.Range<ShuftiPro.SocketIOClientConfiguration.Index>) -> ShuftiPro.SocketIOClientConfiguration.SubSequence {
+    get
+    set
+  }
+  public init(arrayLiteral elements: ShuftiPro.SocketIOClientConfiguration.Element...)
+  public func makeIterator() -> ShuftiPro.SocketIOClientConfiguration.Iterator
+  public func index(after i: ShuftiPro.SocketIOClientConfiguration.Index) -> ShuftiPro.SocketIOClientConfiguration.Index
+  public mutating func insert(_ element: ShuftiPro.SocketIOClientConfiguration.Element, replacing replace: Swift.Bool = true)
+  public typealias ArrayLiteralElement = ShuftiPro.SocketIOClientConfiguration.Element
+  public typealias Indices = Swift.DefaultIndices<ShuftiPro.SocketIOClientConfiguration>
+}
+public protocol ConfigSettable {
+  mutating func setConfigs(_ config: ShuftiPro.SocketIOClientConfiguration)
+}
+extension ShuftiPro.DotLottieFile {
+  #if compiler(>=5.3) && $AsyncAwait
+  @available(iOS 13.0, macOS 10.15, tvOS 13.0, *)
+  public static func named(_ name: Swift.String, bundle: Foundation.Bundle = Bundle.main, subdirectory: Swift.String? = nil, dotLottieCache: ShuftiPro.DotLottieCacheProvider? = DotLottieCache.sharedCache) async throws -> ShuftiPro.DotLottieFile
+  #endif
+  public static func named(_ name: Swift.String, bundle: Foundation.Bundle = Bundle.main, subdirectory: Swift.String? = nil, dotLottieCache: ShuftiPro.DotLottieCacheProvider? = DotLottieCache.sharedCache, dispatchQueue: Dispatch.DispatchQueue = .global(), handleResult: @escaping (Swift.Result<ShuftiPro.DotLottieFile, Swift.Error>) -> Swift.Void)
+  #if compiler(>=5.3) && $AsyncAwait
+  @available(iOS 13.0, macOS 10.15, tvOS 13.0, *)
+  public static func loadedFrom(filepath: Swift.String, dotLottieCache: ShuftiPro.DotLottieCacheProvider? = DotLottieCache.sharedCache) async throws -> ShuftiPro.DotLottieFile
+  #endif
+  public static func loadedFrom(filepath: Swift.String, dotLottieCache: ShuftiPro.DotLottieCacheProvider? = DotLottieCache.sharedCache, dispatchQueue: Dispatch.DispatchQueue = .global(), handleResult: @escaping (Swift.Result<ShuftiPro.DotLottieFile, Swift.Error>) -> Swift.Void)
+  #if compiler(>=5.3) && $AsyncAwait
+  @available(iOS 13.0, macOS 10.15, tvOS 13.0, *)
+  public static func asset(named name: Swift.String, bundle: Foundation.Bundle = Bundle.main, dotLottieCache: ShuftiPro.DotLottieCacheProvider? = DotLottieCache.sharedCache) async throws -> ShuftiPro.DotLottieFile
+  #endif
+  public static func asset(named name: Swift.String, bundle: Foundation.Bundle = Bundle.main, dotLottieCache: ShuftiPro.DotLottieCacheProvider? = DotLottieCache.sharedCache, dispatchQueue: Dispatch.DispatchQueue = .global(), handleResult: @escaping (Swift.Result<ShuftiPro.DotLottieFile, Swift.Error>) -> Swift.Void)
+  #if compiler(>=5.3) && $AsyncAwait
+  @available(iOS 13.0, macOS 10.15, tvOS 13.0, *)
+  public static func loadedFrom(url: Foundation.URL, session: Foundation.URLSession = .shared, dotLottieCache: ShuftiPro.DotLottieCacheProvider? = DotLottieCache.sharedCache) async throws -> ShuftiPro.DotLottieFile
+  #endif
+  public static func loadedFrom(url: Foundation.URL, session: Foundation.URLSession = .shared, dotLottieCache: ShuftiPro.DotLottieCacheProvider? = DotLottieCache.sharedCache, handleResult: @escaping (Swift.Result<ShuftiPro.DotLottieFile, Swift.Error>) -> Swift.Void)
+}
+public class StringHTTPHandler : ShuftiPro.HTTPHandler {
+  public init()
+  public func convert(request: Foundation.URLRequest) -> Foundation.Data
+  public func parse(data: Foundation.Data) -> Swift.Int
+  public func register(delegate: ShuftiPro.HTTPHandlerDelegate)
+  @objc deinit
+}
+public typealias LottieCompletionBlock = (Swift.Bool) -> Swift.Void
+public enum ConnectionEvent {
+  case connected([Swift.String : Swift.String])
+  case disconnected(Swift.String, Swift.UInt16)
+  case text(Swift.String)
+  case binary(Foundation.Data)
+  case pong(Foundation.Data?)
+  case ping(Foundation.Data?)
+  case error(Swift.Error)
+}
+public protocol Connection {
+  func write(data: Foundation.Data, opcode: ShuftiPro.FrameOpCode)
+}
+public protocol ConnectionDelegate : AnyObject {
+  func didReceive(event: ShuftiPro.ServerEvent)
+}
+public enum ServerEvent {
+  case connected(ShuftiPro.Connection, [Swift.String : Swift.String])
+  case disconnected(ShuftiPro.Connection, Swift.String, Swift.UInt16)
+  case text(ShuftiPro.Connection, Swift.String)
+  case binary(ShuftiPro.Connection, Foundation.Data)
+  case pong(ShuftiPro.Connection, Foundation.Data?)
+  case ping(ShuftiPro.Connection, Foundation.Data?)
+}
+public protocol Server {
+  func start(address: Swift.String, port: Swift.UInt16) -> Swift.Error?
+}
+public enum DotLottieError : Swift.Error {
+  case invalidFileFormat
+  case invalidData
+  case animationNotAvailable
+  public static func == (a: ShuftiPro.DotLottieError, b: ShuftiPro.DotLottieError) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
+  public var hashValue: Swift.Int {
+    get
+  }
 }
 @_inheritsConvenienceInitializers @objc public class ShuftiPro : ObjectiveC.NSObject {
   public var fontColor: UIKit.UIColor
@@ -44,6 +957,397 @@ import _StringProcessing
   @objc public func shuftiProVerification(requestObject dataObjectObj: [Swift.String : Any], authKeys: [Swift.String : Swift.String], parentVC pvc: UIKit.UIViewController, configs: [Swift.String : Any]?, completion: @escaping (_ result: Any) -> ())
   @objc override dynamic public init()
   @objc deinit
+}
+public enum FoundationSecurityError : Swift.Error {
+  case invalidRequest
+  public static func == (a: ShuftiPro.FoundationSecurityError, b: ShuftiPro.FoundationSecurityError) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
+  public var hashValue: Swift.Int {
+    get
+  }
+}
+public class FoundationSecurity {
+  public init(allowSelfSigned: Swift.Bool = false)
+  @objc deinit
+}
+extension ShuftiPro.FoundationSecurity : ShuftiPro.CertificatePinning {
+  public func evaluateTrust(trust: Security.SecTrust, domain: Swift.String?, completion: ((ShuftiPro.PinningState) -> ()))
+}
+extension ShuftiPro.FoundationSecurity : ShuftiPro.HeaderValidator {
+  public func validate(headers: [Swift.String : Swift.String], key: Swift.String) -> Swift.Error?
+}
+public class BundleImageProvider : ShuftiPro.AnimationImageProvider {
+  public init(bundle: Foundation.Bundle, searchPath: Swift.String?)
+  public func imageForAsset(asset: ShuftiPro.ImageAsset) -> CoreGraphics.CGImage?
+  @objc deinit
+}
+public protocol SocketParsable : AnyObject {
+  func parseBinaryData(_ data: Foundation.Data) -> ShuftiPro.SocketPacket?
+  func parseSocketMessage(_ message: Swift.String) -> ShuftiPro.SocketPacket?
+}
+public enum SocketParsableError : Swift.Error {
+  case invalidDataArray
+  case invalidPacket
+  case invalidPacketType
+  public static func == (a: ShuftiPro.SocketParsableError, b: ShuftiPro.SocketParsableError) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
+  public var hashValue: Swift.Int {
+    get
+  }
+}
+public protocol SocketDataBufferable : AnyObject {
+  var waitingPackets: [ShuftiPro.SocketPacket] { get set }
+}
+extension ShuftiPro.SocketParsable where Self : ShuftiPro.SocketDataBufferable, Self : ShuftiPro.SocketManagerSpec {
+  public func parseSocketMessage(_ message: Swift.String) -> ShuftiPro.SocketPacket?
+  public func parseBinaryData(_ data: Foundation.Data) -> ShuftiPro.SocketPacket?
+}
+@objc final public class SocketAckEmitter : ObjectiveC.NSObject {
+  @objc final public var rawEmitView: ShuftiPro.SocketRawAckView {
+    @objc get
+  }
+  final public var expected: Swift.Bool {
+    get
+  }
+  public init(socket: ShuftiPro.SocketIOClient, ackNum: Swift.Int)
+  final public func with(_ items: ShuftiPro.SocketData...)
+  @objc final public func with(_ items: [Any])
+  @objc deinit
+}
+@objc @_hasMissingDesignatedInitializers final public class OnAckCallback : ObjectiveC.NSObject {
+  @objc deinit
+  @objc final public func timingOut(after seconds: Swift.Double, callback: @escaping ShuftiPro.AckCallback)
+}
+public class FoundationHTTPHandler : ShuftiPro.HTTPHandler {
+  public init()
+  public func convert(request: Foundation.URLRequest) -> Foundation.Data
+  public func parse(data: Foundation.Data) -> Swift.Int
+  public func register(delegate: ShuftiPro.HTTPHandlerDelegate)
+  @objc deinit
+}
+@objc @_inheritsConvenienceInitializers @_Concurrency.MainActor(unsafe) final public class AnimationSubview : UIKit.UIView {
+  @_Concurrency.MainActor(unsafe) @objc override dynamic public init(frame: CoreFoundation.CGRect)
+  @_Concurrency.MainActor(unsafe) @objc required dynamic public init?(coder: Foundation.NSCoder)
+  @objc deinit
+}
+public protocol AnyValueProvider {
+  var valueType: Any.Type { get }
+  var typeErasedStorage: ShuftiPro.AnyValueProviderStorage { get }
+  func hasUpdate(frame: ShuftiPro.AnimationFrameTime) -> Swift.Bool
+}
+extension ShuftiPro.AnyValueProvider {
+  public func value(frame: ShuftiPro.AnimationFrameTime) -> Any
+}
+public enum ValueProviderStorage<T> where T : ShuftiPro.AnyInterpolatable {
+  case singleValue(T)
+  case keyframes([ShuftiPro.Keyframe<T>])
+  case closure((ShuftiPro.AnimationFrameTime) -> T)
+}
+public enum AnyValueProviderStorage {
+  case singleValue(Any)
+  case keyframes([ShuftiPro.Keyframe<Any>], interpolate: (ShuftiPro.AnimationFrameTime) -> Any)
+  case closure((ShuftiPro.AnimationFrameTime) -> Any)
+}
+public enum HTTPUpgradeError : Swift.Error {
+  case notAnUpgrade(Swift.Int)
+  case invalidData
+}
+public struct HTTPWSHeader {
+  public static func createUpgrade(request: Foundation.URLRequest, supportsCompression: Swift.Bool, secKeyValue: Swift.String) -> Foundation.URLRequest
+  public static func generateWebSocketKey() -> Swift.String
+}
+public enum HTTPEvent {
+  case success([Swift.String : Swift.String])
+  case failure(Swift.Error)
+}
+public protocol HTTPHandlerDelegate : AnyObject {
+  func didReceiveHTTP(event: ShuftiPro.HTTPEvent)
+}
+public protocol HTTPHandler {
+  func register(delegate: ShuftiPro.HTTPHandlerDelegate)
+  func convert(request: Foundation.URLRequest) -> Foundation.Data
+  func parse(data: Foundation.Data) -> Swift.Int
+}
+public protocol HTTPServerDelegate : AnyObject {
+  func didReceive(event: ShuftiPro.HTTPEvent)
+}
+public protocol HTTPServerHandler {
+  func register(delegate: ShuftiPro.HTTPServerDelegate)
+  func parse(data: Foundation.Data)
+  func createResponse(headers: [Swift.String : Swift.String]) -> Foundation.Data
+}
+public struct URLParts {
+}
+extension Foundation.URL {
+  public var isTLSScheme: Swift.Bool {
+    get
+  }
+  public func getParts() -> ShuftiPro.URLParts?
+}
+final public class Keyframe<T> {
+  public init(_ value: T, spatialInTangent: ShuftiPro.LottieVector3D? = nil, spatialOutTangent: ShuftiPro.LottieVector3D? = nil)
+  public init(value: T, time: ShuftiPro.AnimationFrameTime, isHold: Swift.Bool = false, inTangent: ShuftiPro.LottieVector2D? = nil, outTangent: ShuftiPro.LottieVector2D? = nil, spatialInTangent: ShuftiPro.LottieVector3D? = nil, spatialOutTangent: ShuftiPro.LottieVector3D? = nil)
+  final public let value: T
+  final public let time: ShuftiPro.AnimationFrameTime
+  final public let isHold: Swift.Bool
+  final public let inTangent: ShuftiPro.LottieVector2D?
+  final public let outTangent: ShuftiPro.LottieVector2D?
+  final public let spatialInTangent: ShuftiPro.LottieVector3D?
+  final public let spatialOutTangent: ShuftiPro.LottieVector3D?
+  @objc deinit
+}
+extension ShuftiPro.Keyframe : Swift.Equatable where T : Swift.Equatable {
+  public static func == (lhs: ShuftiPro.Keyframe<T>, rhs: ShuftiPro.Keyframe<T>) -> Swift.Bool
+}
+extension ShuftiPro.Keyframe : Swift.Hashable where T : Swift.Hashable {
+  final public func hash(into hasher: inout Swift.Hasher)
+  final public var hashValue: Swift.Int {
+    get
+  }
+}
+public class FilepathImageProvider : ShuftiPro.AnimationImageProvider {
+  public init(filepath: Swift.String)
+  public init(filepath: Foundation.URL)
+  public func imageForAsset(asset: ShuftiPro.ImageAsset) -> CoreGraphics.CGImage?
+  @objc deinit
+}
+public protocol SocketData {
+  func socketRepresentation() throws -> ShuftiPro.SocketData
+}
+extension ShuftiPro.SocketData {
+  public func socketRepresentation() -> ShuftiPro.SocketData
+}
+extension Swift.Array : ShuftiPro.SocketData {
+}
+extension Swift.Bool : ShuftiPro.SocketData {
+}
+extension Swift.Dictionary : ShuftiPro.SocketData {
+}
+extension Swift.Double : ShuftiPro.SocketData {
+}
+extension Swift.Int : ShuftiPro.SocketData {
+}
+extension Foundation.NSArray : ShuftiPro.SocketData {
+}
+extension Foundation.Data : ShuftiPro.SocketData {
+}
+extension Foundation.NSData : ShuftiPro.SocketData {
+}
+extension Foundation.NSDictionary : ShuftiPro.SocketData {
+}
+extension Foundation.NSString : ShuftiPro.SocketData {
+}
+extension Foundation.NSNull : ShuftiPro.SocketData {
+}
+extension Swift.String : ShuftiPro.SocketData {
+}
+public typealias AckCallback = ([Any]) -> ()
+public typealias NormalCallback = ([Any], ShuftiPro.SocketAckEmitter) -> ()
+public typealias Post = (msg: Swift.String, completion: (() -> ())?)
+public enum SocketAckStatus : Swift.String {
+  case noAck
+  public static func == (lhs: Swift.String, rhs: ShuftiPro.SocketAckStatus) -> Swift.Bool
+  public static func == (lhs: ShuftiPro.SocketAckStatus, rhs: Swift.String) -> Swift.Bool
+  public init?(rawValue: Swift.String)
+  public typealias RawValue = Swift.String
+  public var rawValue: Swift.String {
+    get
+  }
+}
+public enum LottieBackgroundBehavior {
+  case stop
+  case pause
+  case pauseAndRestore
+  case forceFinish
+  case continuePlaying
+  public static func `default`(for renderingEngine: ShuftiPro.RenderingEngine) -> ShuftiPro.LottieBackgroundBehavior
+  public static func == (a: ShuftiPro.LottieBackgroundBehavior, b: ShuftiPro.LottieBackgroundBehavior) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
+  public var hashValue: Swift.Int {
+    get
+  }
+}
+public enum LottieLoopMode {
+  case playOnce
+  case loop
+  case autoReverse
+  case `repeat`(Swift.Float)
+  case repeatBackwards(Swift.Float)
+}
+extension ShuftiPro.LottieLoopMode : Swift.Equatable {
+  public static func == (lhs: ShuftiPro.LottieLoopMode, rhs: ShuftiPro.LottieLoopMode) -> Swift.Bool
+}
+@objc @_inheritsConvenienceInitializers @IBDesignable @_Concurrency.MainActor(unsafe) open class LottieAnimationView : ShuftiPro.LottieAnimationViewBase {
+  @_Concurrency.MainActor(unsafe) public init(animation: ShuftiPro.LottieAnimation?, imageProvider: ShuftiPro.AnimationImageProvider? = nil, textProvider: ShuftiPro.AnimationTextProvider = DefaultTextProvider(), fontProvider: ShuftiPro.AnimationFontProvider = DefaultFontProvider(), configuration: ShuftiPro.LottieConfiguration = .shared, logger: ShuftiPro.LottieLogger = .shared)
+  @_Concurrency.MainActor(unsafe) public init(dotLottie: ShuftiPro.DotLottieFile?, animationId: Swift.String? = nil, textProvider: ShuftiPro.AnimationTextProvider = DefaultTextProvider(), fontProvider: ShuftiPro.AnimationFontProvider = DefaultFontProvider(), configuration: ShuftiPro.LottieConfiguration = .shared, logger: ShuftiPro.LottieLogger = .shared)
+  @_Concurrency.MainActor(unsafe) public init(configuration: ShuftiPro.LottieConfiguration = .shared, logger: ShuftiPro.LottieLogger = .shared)
+  @_Concurrency.MainActor(unsafe) @objc override dynamic public init(frame: CoreFoundation.CGRect)
+  @_Concurrency.MainActor(unsafe) @objc required dynamic public init?(coder aDecoder: Foundation.NSCoder)
+  @_Concurrency.MainActor(unsafe) open func play(completion: ShuftiPro.LottieCompletionBlock? = nil)
+  @_Concurrency.MainActor(unsafe) open func play(fromProgress: ShuftiPro.AnimationProgressTime? = nil, toProgress: ShuftiPro.AnimationProgressTime, loopMode: ShuftiPro.LottieLoopMode? = nil, completion: ShuftiPro.LottieCompletionBlock? = nil)
+  @_Concurrency.MainActor(unsafe) open func play(fromFrame: ShuftiPro.AnimationFrameTime? = nil, toFrame: ShuftiPro.AnimationFrameTime, loopMode: ShuftiPro.LottieLoopMode? = nil, completion: ShuftiPro.LottieCompletionBlock? = nil)
+  @_Concurrency.MainActor(unsafe) open func play(fromMarker: Swift.String? = nil, toMarker: Swift.String, playEndMarkerFrame: Swift.Bool = true, loopMode: ShuftiPro.LottieLoopMode? = nil, completion: ShuftiPro.LottieCompletionBlock? = nil)
+  @_Concurrency.MainActor(unsafe) open func play(marker: Swift.String, loopMode: ShuftiPro.LottieLoopMode? = nil, completion: ShuftiPro.LottieCompletionBlock? = nil)
+  @_Concurrency.MainActor(unsafe) open func stop()
+  @_Concurrency.MainActor(unsafe) open func pause()
+  @_Concurrency.MainActor(unsafe) final public let configuration: ShuftiPro.LottieConfiguration
+  @_Concurrency.MainActor(unsafe) public var valueProviders: [ShuftiPro.AnimationKeypath : ShuftiPro.AnyValueProvider] {
+    get
+  }
+  @_Concurrency.MainActor(unsafe) public var backgroundBehavior: ShuftiPro.LottieBackgroundBehavior {
+    get
+    set
+  }
+  @_Concurrency.MainActor(unsafe) public var animation: ShuftiPro.LottieAnimation? {
+    get
+    set
+  }
+  @_Concurrency.MainActor(unsafe) public var animationLoaded: ((_ animationView: ShuftiPro.LottieAnimationView, _ animation: ShuftiPro.LottieAnimation) -> Swift.Void)? {
+    get
+    set
+  }
+  @_Concurrency.MainActor(unsafe) public var imageProvider: ShuftiPro.AnimationImageProvider {
+    get
+    set
+  }
+  @_Concurrency.MainActor(unsafe) public var textProvider: ShuftiPro.AnimationTextProvider {
+    get
+    set
+  }
+  @_Concurrency.MainActor(unsafe) public var fontProvider: ShuftiPro.AnimationFontProvider {
+    get
+    set
+  }
+  @_Concurrency.MainActor(unsafe) public var isAnimationPlaying: Swift.Bool {
+    get
+  }
+  @_Concurrency.MainActor(unsafe) public var isAnimationQueued: Swift.Bool {
+    get
+  }
+  @_Concurrency.MainActor(unsafe) public var loopMode: ShuftiPro.LottieLoopMode {
+    get
+    set
+  }
+  @_Concurrency.MainActor(unsafe) public var shouldRasterizeWhenIdle: Swift.Bool {
+    get
+    set
+  }
+  @_Concurrency.MainActor(unsafe) public var currentProgress: ShuftiPro.AnimationProgressTime {
+    get
+    set
+  }
+  @_Concurrency.MainActor(unsafe) public var currentTime: Foundation.TimeInterval {
+    get
+    set
+  }
+  @_Concurrency.MainActor(unsafe) public var currentFrame: ShuftiPro.AnimationFrameTime {
+    get
+    set
+  }
+  @_Concurrency.MainActor(unsafe) public var realtimeAnimationFrame: ShuftiPro.AnimationFrameTime {
+    get
+  }
+  @_Concurrency.MainActor(unsafe) public var realtimeAnimationProgress: ShuftiPro.AnimationProgressTime {
+    get
+  }
+  @_Concurrency.MainActor(unsafe) public var animationSpeed: CoreFoundation.CGFloat {
+    get
+    set
+  }
+  @_Concurrency.MainActor(unsafe) public var respectAnimationFrameRate: Swift.Bool {
+    get
+    set
+  }
+  @_Concurrency.MainActor(unsafe) public var viewportFrame: CoreFoundation.CGRect? {
+    get
+    set
+  }
+  @_Concurrency.MainActor(unsafe) @objc override dynamic public var intrinsicContentSize: CoreFoundation.CGSize {
+    @objc get
+  }
+  @_Concurrency.MainActor(unsafe) public var currentRenderingEngine: ShuftiPro.RenderingEngine? {
+    get
+  }
+  @_Concurrency.MainActor(unsafe) public func loadAnimation(_ animationId: Swift.String? = nil, from dotLottieFile: ShuftiPro.DotLottieFile)
+  @_Concurrency.MainActor(unsafe) public func reloadImages()
+  @_Concurrency.MainActor(unsafe) public func forceDisplayUpdate()
+  @_Concurrency.MainActor(unsafe) public func setValueProvider(_ valueProvider: ShuftiPro.AnyValueProvider, keypath: ShuftiPro.AnimationKeypath)
+  @_Concurrency.MainActor(unsafe) public func getValue(for keypath: ShuftiPro.AnimationKeypath, atFrame: ShuftiPro.AnimationFrameTime?) -> Any?
+  @_Concurrency.MainActor(unsafe) public func getOriginalValue(for keypath: ShuftiPro.AnimationKeypath, atFrame: ShuftiPro.AnimationFrameTime?) -> Any?
+  @_Concurrency.MainActor(unsafe) public func logHierarchyKeypaths()
+  @_Concurrency.MainActor(unsafe) public func addSubview(_ subview: ShuftiPro.AnimationSubview, forLayerAt keypath: ShuftiPro.AnimationKeypath)
+  @_Concurrency.MainActor(unsafe) public func convert(_ rect: CoreFoundation.CGRect, toLayerAt keypath: ShuftiPro.AnimationKeypath?) -> CoreFoundation.CGRect?
+  @_Concurrency.MainActor(unsafe) public func convert(_ point: CoreFoundation.CGPoint, toLayerAt keypath: ShuftiPro.AnimationKeypath?) -> CoreFoundation.CGPoint?
+  @_Concurrency.MainActor(unsafe) public func setNodeIsEnabled(isEnabled: Swift.Bool, keypath: ShuftiPro.AnimationKeypath)
+  @_Concurrency.MainActor(unsafe) public func progressTime(forMarker named: Swift.String) -> ShuftiPro.AnimationProgressTime?
+  @_Concurrency.MainActor(unsafe) public func frameTime(forMarker named: Swift.String) -> ShuftiPro.AnimationFrameTime?
+  @_Concurrency.MainActor(unsafe) public func durationFrameTime(forMarker named: Swift.String) -> ShuftiPro.AnimationFrameTime?
+  @objc deinit
+}
+@available(macOS 10.14, iOS 12.0, watchOS 5.0, tvOS 12.0, *)
+@available(watchOS, unavailable)
+public class WebSocketServer : ShuftiPro.Server, ShuftiPro.ConnectionDelegate {
+  public var onEvent: ((ShuftiPro.ServerEvent) -> Swift.Void)?
+  public init()
+  public func start(address: Swift.String, port: Swift.UInt16) -> Swift.Error?
+  public func didReceive(event: ShuftiPro.ServerEvent)
+  @objc deinit
+}
+@_hasMissingDesignatedInitializers @available(macOS 10.14, iOS 12.0, watchOS 5.0, tvOS 12.0, *)
+public class ServerConnection : ShuftiPro.Connection, ShuftiPro.HTTPServerDelegate, ShuftiPro.FramerEventClient, ShuftiPro.FrameCollectorDelegate, ShuftiPro.TransportEventClient {
+  public var onEvent: ((ShuftiPro.ConnectionEvent) -> Swift.Void)?
+  weak public var delegate: ShuftiPro.ConnectionDelegate?
+  public func write(data: Foundation.Data, opcode: ShuftiPro.FrameOpCode)
+  public func connectionChanged(state: ShuftiPro.ConnectionState)
+  public func didReceive(event: ShuftiPro.HTTPEvent)
+  public func frameProcessed(event: ShuftiPro.FrameEvent)
+  public func didForm(event: ShuftiPro.FrameCollector.Event)
+  public func decompress(data: Foundation.Data, isFinal: Swift.Bool) -> Foundation.Data?
+  @objc deinit
+}
+public enum SecurityErrorCode : Swift.UInt16 {
+  case acceptFailed
+  case pinningFailed
+  public init?(rawValue: Swift.UInt16)
+  public typealias RawValue = Swift.UInt16
+  public var rawValue: Swift.UInt16 {
+    get
+  }
+}
+public enum PinningState {
+  case success
+  case failed(CoreFoundation.CFError?)
+}
+public protocol CertificatePinning : AnyObject {
+  func evaluateTrust(trust: Security.SecTrust, domain: Swift.String?, completion: ((ShuftiPro.PinningState) -> ()))
+}
+public protocol HeaderValidator : AnyObject {
+  func validate(headers: [Swift.String : Swift.String], key: Swift.String) -> Swift.Error?
+}
+extension ShuftiPro.LottieVector1D : Swift.Codable {
+  public init(from decoder: Swift.Decoder) throws
+  public func encode(to encoder: Swift.Encoder) throws
+}
+public struct LottieVector2D : Swift.Codable, Swift.Hashable {
+  public init(from decoder: Swift.Decoder) throws
+  public func encode(to encoder: Swift.Encoder) throws
+  public func hash(into hasher: inout Swift.Hasher)
+  public static func == (a: ShuftiPro.LottieVector2D, b: ShuftiPro.LottieVector2D) -> Swift.Bool
+  public var hashValue: Swift.Int {
+    get
+  }
+}
+extension ShuftiPro.LottieVector3D : Swift.Codable {
+  public init(from decoder: Swift.Decoder) throws
+  public func encode(to encoder: Swift.Encoder) throws
+}
+extension ShuftiPro.LottieVector3D {
+  public var pointValue: CoreFoundation.CGPoint {
+    get
+  }
+  public var sizeValue: CoreFoundation.CGSize {
+    get
+  }
 }
 extension UIKit.UIImage {
   convenience public init?(pixelBuffer: CoreVideo.CVPixelBuffer)
@@ -60,3 +1364,714 @@ extension Foundation.Data {
 extension Swift.String {
   public func sha256() -> Swift.String
 }
+public enum ColorFormatDenominator : Swift.Hashable {
+  case One
+  case OneHundred
+  case TwoFiftyFive
+  public static func == (a: ShuftiPro.ColorFormatDenominator, b: ShuftiPro.ColorFormatDenominator) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
+  public var hashValue: Swift.Int {
+    get
+  }
+}
+public struct LottieColor : Swift.Hashable {
+  public var r: Swift.Double
+  public var g: Swift.Double
+  public var b: Swift.Double
+  public var a: Swift.Double
+  public init(r: Swift.Double, g: Swift.Double, b: Swift.Double, a: Swift.Double, denominator: ShuftiPro.ColorFormatDenominator = .One)
+  public func hash(into hasher: inout Swift.Hasher)
+  public static func == (a: ShuftiPro.LottieColor, b: ShuftiPro.LottieColor) -> Swift.Bool
+  public var hashValue: Swift.Int {
+    get
+  }
+}
+@objc @_inheritsConvenienceInitializers @_Concurrency.MainActor(unsafe) open class AnimatedSwitch : ShuftiPro.AnimatedControl {
+  @_Concurrency.MainActor(unsafe) override public init(animation: ShuftiPro.LottieAnimation, configuration: ShuftiPro.LottieConfiguration = .shared)
+  @_Concurrency.MainActor(unsafe) @objc override dynamic public init()
+  @_Concurrency.MainActor(unsafe) @objc required dynamic public init?(coder aDecoder: Foundation.NSCoder)
+  @_Concurrency.MainActor(unsafe) override open func animationDidSet()
+  @_Concurrency.MainActor(unsafe) @objc override dynamic open func endTracking(_ touch: UIKit.UITouch?, with event: UIKit.UIEvent?)
+  public enum CancelBehavior {
+    case reverse
+    case none
+    public static func == (a: ShuftiPro.AnimatedSwitch.CancelBehavior, b: ShuftiPro.AnimatedSwitch.CancelBehavior) -> Swift.Bool
+    public func hash(into hasher: inout Swift.Hasher)
+    public var hashValue: Swift.Int {
+      get
+    }
+  }
+  @_Concurrency.MainActor(unsafe) public var cancelBehavior: ShuftiPro.AnimatedSwitch.CancelBehavior
+  @_Concurrency.MainActor(unsafe) public var animateUpdateWhenChangingAnimation: Swift.Bool
+  @_Concurrency.MainActor(unsafe) @objc override dynamic public var accessibilityTraits: UIKit.UIAccessibilityTraits {
+    @objc get
+    @objc set
+  }
+  @_Concurrency.MainActor(unsafe) public var isOn: Swift.Bool {
+    get
+    set
+  }
+  @_Concurrency.MainActor(unsafe) public func setIsOn(_ isOn: Swift.Bool, animated: Swift.Bool, shouldFireHaptics: Swift.Bool = true)
+  @_Concurrency.MainActor(unsafe) public func setProgressForState(fromProgress: ShuftiPro.AnimationProgressTime, toProgress: ShuftiPro.AnimationProgressTime, forOnState: Swift.Bool)
+  @objc deinit
+}
+public enum LottieAnimationCache {
+  public static var shared: ShuftiPro.AnimationCacheProvider?
+}
+public enum TCPTransportError : Swift.Error {
+  case invalidRequest
+  public static func == (a: ShuftiPro.TCPTransportError, b: ShuftiPro.TCPTransportError) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
+  public var hashValue: Swift.Int {
+    get
+  }
+}
+@available(macOS 10.14, iOS 12.0, watchOS 5.0, tvOS 12.0, *)
+public class TCPTransport : ShuftiPro.Transport {
+  public var usingTLS: Swift.Bool {
+    get
+  }
+  public init(connection: Network.NWConnection)
+  public init()
+  public func connect(url: Foundation.URL, timeout: Swift.Double = 10, certificatePinning: ShuftiPro.CertificatePinning? = nil)
+  public func disconnect()
+  public func register(delegate: ShuftiPro.TransportEventClient)
+  public func write(data: Foundation.Data, completion: @escaping ((Swift.Error?) -> ()))
+  @objc deinit
+}
+public struct LottieConfiguration : Swift.Hashable {
+  public init(renderingEngine: ShuftiPro.RenderingEngineOption = .automatic, decodingStrategy: ShuftiPro.DecodingStrategy = .dictionaryBased, colorSpace: CoreGraphics.CGColorSpace = CGColorSpaceCreateDeviceRGB())
+  public static var shared: ShuftiPro.LottieConfiguration
+  public var renderingEngine: ShuftiPro.RenderingEngineOption
+  public var decodingStrategy: ShuftiPro.DecodingStrategy
+  public var colorSpace: CoreGraphics.CGColorSpace
+  public func hash(into hasher: inout Swift.Hasher)
+  public static func == (a: ShuftiPro.LottieConfiguration, b: ShuftiPro.LottieConfiguration) -> Swift.Bool
+  public var hashValue: Swift.Int {
+    get
+  }
+}
+public enum RenderingEngineOption : Swift.Hashable {
+  case automatic
+  case specific(ShuftiPro.RenderingEngine)
+  public static var mainThread: ShuftiPro.RenderingEngineOption {
+    get
+  }
+  public static var coreAnimation: ShuftiPro.RenderingEngineOption {
+    get
+  }
+}
+public enum RenderingEngine : Swift.Hashable {
+  case mainThread
+  case coreAnimation
+}
+extension ShuftiPro.RenderingEngineOption : Swift.RawRepresentable, Swift.CustomStringConvertible {
+  public init?(rawValue: Swift.String)
+  public var rawValue: Swift.String {
+    get
+  }
+  public var description: Swift.String {
+    get
+  }
+  public typealias RawValue = Swift.String
+}
+extension ShuftiPro.RenderingEngine : Swift.RawRepresentable, Swift.CustomStringConvertible {
+  public init?(rawValue: Swift.String)
+  public var rawValue: Swift.String {
+    get
+  }
+  public var description: Swift.String {
+    get
+  }
+  public typealias RawValue = Swift.String
+}
+public enum DecodingStrategy : Swift.Hashable {
+  case legacyCodable
+  case dictionaryBased
+  public static func == (a: ShuftiPro.DecodingStrategy, b: ShuftiPro.DecodingStrategy) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
+  public var hashValue: Swift.Int {
+    get
+  }
+}
+public class WSCompression : ShuftiPro.CompressionHandler {
+  public init()
+  public func load(headers: [Swift.String : Swift.String])
+  public func decompress(data: Foundation.Data, isFinal: Swift.Bool) -> Foundation.Data?
+  public func compress(data: Foundation.Data) -> Foundation.Data?
+  @objc deinit
+}
+final public class PointValueProvider {
+  public init(block: @escaping ShuftiPro.PointValueProvider.PointValueBlock)
+  public init(_ point: CoreFoundation.CGPoint)
+  public typealias PointValueBlock = (CoreFoundation.CGFloat) -> CoreFoundation.CGPoint
+  final public var point: CoreFoundation.CGPoint {
+    get
+    set
+  }
+  final public var valueType: Any.Type {
+    get
+  }
+  final public var storage: ShuftiPro.ValueProviderStorage<ShuftiPro.LottieVector3D> {
+    get
+  }
+  final public func hasUpdate(frame _: CoreFoundation.CGFloat) -> Swift.Bool
+  @objc deinit
+}
+public protocol AnimationCacheProvider : AnyObject {
+  func animation(forKey: Swift.String) -> ShuftiPro.LottieAnimation?
+  func setAnimation(_ animation: ShuftiPro.LottieAnimation, forKey: Swift.String)
+  func clearCache()
+}
+public struct SocketPacket : Swift.CustomStringConvertible {
+  public let nsp: Swift.String
+  public let id: Swift.Int
+  public let type: ShuftiPro.SocketPacket.PacketType
+  public var binary: [Foundation.Data] {
+    get
+  }
+  public var data: [Any] {
+    get
+  }
+  public var args: [Any] {
+    get
+  }
+  public var description: Swift.String {
+    get
+  }
+  public var event: Swift.String {
+    get
+  }
+  public var packetString: Swift.String {
+    get
+  }
+}
+extension ShuftiPro.SocketPacket {
+  public enum PacketType : Swift.Int {
+    case connect
+    case disconnect
+    case event
+    case ack
+    case error
+    case binaryEvent
+    case binaryAck
+    public var isBinary: Swift.Bool {
+      get
+    }
+    public init?(rawValue: Swift.Int)
+    public typealias RawValue = Swift.Int
+    public var rawValue: Swift.Int {
+      get
+    }
+  }
+}
+public protocol FrameCollectorDelegate : AnyObject {
+  func didForm(event: ShuftiPro.FrameCollector.Event)
+  func decompress(data: Foundation.Data, isFinal: Swift.Bool) -> Foundation.Data?
+}
+@_hasMissingDesignatedInitializers public class FrameCollector {
+  public enum Event {
+    case text(Swift.String)
+    case binary(Foundation.Data)
+    case pong(Foundation.Data?)
+    case ping(Foundation.Data?)
+    case error(Swift.Error)
+    case closed(Swift.String, Swift.UInt16)
+  }
+  public func add(frame: ShuftiPro.Frame)
+  @objc deinit
+}
+public protocol SocketIOClientSpec : AnyObject {
+  var anyHandler: ((ShuftiPro.SocketAnyEvent) -> ())? { get }
+  var handlers: [ShuftiPro.SocketEventHandler] { get }
+  var manager: ShuftiPro.SocketManagerSpec? { get }
+  var nsp: Swift.String { get }
+  var rawEmitView: ShuftiPro.SocketRawView { get }
+  var sid: Swift.String? { get }
+  var status: ShuftiPro.SocketIOStatus { get }
+  func connect(withPayload payload: [Swift.String : Any]?)
+  func connect(withPayload payload: [Swift.String : Any]?, timeoutAfter: Swift.Double, withHandler handler: (() -> ())?)
+  func didConnect(toNamespace namespace: Swift.String, payload: [Swift.String : Any]?)
+  func didDisconnect(reason: Swift.String)
+  func didError(reason: Swift.String)
+  func disconnect()
+  func emit(_ event: Swift.String, _ items: ShuftiPro.SocketData..., completion: (() -> ())?)
+  func emit(_ event: Swift.String, with items: [ShuftiPro.SocketData], completion: (() -> ())?)
+  func emitAck(_ ack: Swift.Int, with items: [Any])
+  func emitWithAck(_ event: Swift.String, _ items: ShuftiPro.SocketData...) -> ShuftiPro.OnAckCallback
+  func emitWithAck(_ event: Swift.String, with items: [ShuftiPro.SocketData]) -> ShuftiPro.OnAckCallback
+  func handleAck(_ ack: Swift.Int, data: [Any])
+  func handleClientEvent(_ event: ShuftiPro.SocketClientEvent, data: [Any])
+  func handleEvent(_ event: Swift.String, data: [Any], isInternalMessage: Swift.Bool, withAck ack: Swift.Int)
+  func handlePacket(_ packet: ShuftiPro.SocketPacket)
+  func leaveNamespace()
+  func joinNamespace(withPayload payload: [Swift.String : Any]?)
+  func off(clientEvent event: ShuftiPro.SocketClientEvent)
+  func off(_ event: Swift.String)
+  func off(id: Foundation.UUID)
+  func on(_ event: Swift.String, callback: @escaping ShuftiPro.NormalCallback) -> Foundation.UUID
+  func on(clientEvent event: ShuftiPro.SocketClientEvent, callback: @escaping ShuftiPro.NormalCallback) -> Foundation.UUID
+  func once(clientEvent event: ShuftiPro.SocketClientEvent, callback: @escaping ShuftiPro.NormalCallback) -> Foundation.UUID
+  func once(_ event: Swift.String, callback: @escaping ShuftiPro.NormalCallback) -> Foundation.UUID
+  func onAny(_ handler: @escaping (ShuftiPro.SocketAnyEvent) -> ())
+  func removeAllHandlers()
+  func setReconnecting(reason: Swift.String)
+}
+extension ShuftiPro.SocketIOClientSpec {
+  public func didError(reason: Swift.String)
+}
+public enum SocketClientEvent : Swift.String {
+  case connect
+  case disconnect
+  case error
+  case ping
+  case pong
+  case reconnect
+  case reconnectAttempt
+  case statusChange
+  case websocketUpgrade
+  public init?(rawValue: Swift.String)
+  public typealias RawValue = Swift.String
+  public var rawValue: Swift.String {
+    get
+  }
+}
+final public class GradientValueProvider {
+  public init(block: @escaping ShuftiPro.GradientValueProvider.ColorsValueBlock, locations: ShuftiPro.GradientValueProvider.ColorLocationsBlock? = nil)
+  public init(_ colors: [ShuftiPro.LottieColor], locations: [Swift.Double] = [])
+  public typealias ColorsValueBlock = (CoreFoundation.CGFloat) -> [ShuftiPro.LottieColor]
+  public typealias ColorLocationsBlock = (CoreFoundation.CGFloat) -> [Swift.Double]
+  final public var colors: [ShuftiPro.LottieColor] {
+    get
+    set
+  }
+  final public var locations: [Swift.Double] {
+    get
+    set
+  }
+  final public var valueType: Any.Type {
+    get
+  }
+  final public var storage: ShuftiPro.ValueProviderStorage<[Swift.Double]> {
+    get
+  }
+  final public func hasUpdate(frame _: CoreFoundation.CGFloat) -> Swift.Bool
+  @objc deinit
+}
+public protocol AnimationFontProvider {
+  func fontFor(family: Swift.String, size: CoreFoundation.CGFloat) -> CoreText.CTFont?
+}
+final public class DefaultFontProvider : ShuftiPro.AnimationFontProvider {
+  public init()
+  final public func fontFor(family: Swift.String, size: CoreFoundation.CGFloat) -> CoreText.CTFont?
+  @objc deinit
+}
+public enum CloseCode : Swift.UInt16 {
+  case normal
+  case goingAway
+  case protocolError
+  case protocolUnhandledType
+  case noStatusReceived
+  case encoding
+  case policyViolated
+  case messageTooBig
+  public init?(rawValue: Swift.UInt16)
+  public typealias RawValue = Swift.UInt16
+  public var rawValue: Swift.UInt16 {
+    get
+  }
+}
+public enum FrameOpCode : Swift.UInt8 {
+  case continueFrame
+  case textFrame
+  case binaryFrame
+  case connectionClose
+  case ping
+  case pong
+  case unknown
+  public init?(rawValue: Swift.UInt8)
+  public typealias RawValue = Swift.UInt8
+  public var rawValue: Swift.UInt8 {
+    get
+  }
+}
+public struct Frame {
+}
+public enum FrameEvent {
+  case frame(ShuftiPro.Frame)
+  case error(Swift.Error)
+}
+public protocol FramerEventClient : AnyObject {
+  func frameProcessed(event: ShuftiPro.FrameEvent)
+}
+public protocol Framer {
+  func add(data: Foundation.Data)
+  func register(delegate: ShuftiPro.FramerEventClient)
+  func createWriteFrame(opcode: ShuftiPro.FrameOpCode, payload: Foundation.Data, isCompressed: Swift.Bool) -> Foundation.Data
+  func updateCompression(supports: Swift.Bool)
+  func supportsCompression() -> Swift.Bool
+}
+public class WSFramer : ShuftiPro.Framer {
+  public var compressionEnabled: Swift.Bool
+  public init(isServer: Swift.Bool = false)
+  public func updateCompression(supports: Swift.Bool)
+  public func supportsCompression() -> Swift.Bool
+  public func add(data: Foundation.Data)
+  public func register(delegate: ShuftiPro.FramerEventClient)
+  public func createWriteFrame(opcode: ShuftiPro.FrameOpCode, payload: Foundation.Data, isCompressed: Swift.Bool) -> Foundation.Data
+  @objc deinit
+}
+public protocol MyWSArrayType {
+}
+extension Swift.UInt8 : ShuftiPro.MyWSArrayType {
+}
+extension Swift.Array where Element : ShuftiPro.MyWSArrayType, Element : Swift.UnsignedInteger {
+  public func readUint16(offset: Swift.Int) -> Swift.UInt16
+  public func readUint64(offset: Swift.Int) -> Swift.UInt64
+  public func unmaskData(maskStart: Swift.Int, offset: Swift.Int, length: Swift.Int) -> Foundation.Data
+}
+public func writeUint16(_ buffer: inout [Swift.UInt8], offset: Swift.Int, value: Swift.UInt16)
+public func writeUint32(_ buffer: inout [Swift.UInt8], offset: Swift.Int, value: Swift.UInt32)
+public func writeUint64(_ buffer: inout [Swift.UInt8], offset: Swift.Int, value: Swift.UInt64)
+public struct AnimationKeypath : Swift.Hashable, Swift.ExpressibleByStringLiteral {
+  public init(keypath: Swift.String)
+  public init(stringLiteral: Swift.String)
+  public init(keys: [Swift.String])
+  public func hash(into hasher: inout Swift.Hasher)
+  public static func == (a: ShuftiPro.AnimationKeypath, b: ShuftiPro.AnimationKeypath) -> Swift.Bool
+  public typealias ExtendedGraphemeClusterLiteralType = Swift.String
+  public typealias StringLiteralType = Swift.String
+  public typealias UnicodeScalarLiteralType = Swift.String
+  public var hashValue: Swift.Int {
+    get
+  }
+}
+public enum CoordinateSpace : Swift.Int, Swift.Codable {
+  case type2d
+  case type3d
+  public init?(rawValue: Swift.Int)
+  public typealias RawValue = Swift.Int
+  public var rawValue: Swift.Int {
+    get
+  }
+}
+final public class LottieAnimation : Swift.Codable {
+  required public init(from decoder: Swift.Decoder) throws
+  public init(dictionary: [Swift.String : Any]) throws
+  final public let startFrame: ShuftiPro.AnimationFrameTime
+  final public let endFrame: ShuftiPro.AnimationFrameTime
+  final public let framerate: Swift.Double
+  final public var markerNames: [Swift.String] {
+    get
+  }
+  @objc deinit
+  final public func encode(to encoder: Swift.Encoder) throws
+}
+@_hasMissingDesignatedInitializers public class Asset : Swift.Codable {
+  required public init(from decoder: Swift.Decoder) throws
+  final public let id: Swift.String
+  @objc deinit
+  public func encode(to encoder: Swift.Encoder) throws
+}
+public struct LottieVector1D : Swift.Hashable {
+  public init(_ value: Swift.Double)
+  public let value: Swift.Double
+  public func hash(into hasher: inout Swift.Hasher)
+  public static func == (a: ShuftiPro.LottieVector1D, b: ShuftiPro.LottieVector1D) -> Swift.Bool
+  public var hashValue: Swift.Int {
+    get
+  }
+}
+public struct LottieVector3D : Swift.Hashable {
+  public let x: Swift.Double
+  public let y: Swift.Double
+  public let z: Swift.Double
+  public init(x: Swift.Double, y: Swift.Double, z: Swift.Double)
+  public func hash(into hasher: inout Swift.Hasher)
+  public static func == (a: ShuftiPro.LottieVector3D, b: ShuftiPro.LottieVector3D) -> Swift.Bool
+  public var hashValue: Swift.Int {
+    get
+  }
+}
+extension ShuftiPro.LottieColor : Swift.Codable {
+  public init(from decoder: Swift.Decoder) throws
+  public func encode(to encoder: Swift.Encoder) throws
+}
+public protocol DotLottieCacheProvider {
+  func file(forKey: Swift.String) -> ShuftiPro.DotLottieFile?
+  func setFile(_ lottie: ShuftiPro.DotLottieFile, forKey: Swift.String)
+  func clearCache()
+}
+public protocol SocketEnginePollable : ShuftiPro.SocketEngineSpec {
+  var invalidated: Swift.Bool { get }
+  var postWait: [ShuftiPro.Post] { get set }
+  var session: Foundation.URLSession? { get }
+  var waitingForPoll: Swift.Bool { get set }
+  var waitingForPost: Swift.Bool { get set }
+  func doPoll()
+  func sendPollMessage(_ message: Swift.String, withType type: ShuftiPro.SocketEnginePacketType, withData datas: [Foundation.Data], completion: (() -> ())?)
+  func stopPolling()
+}
+extension ShuftiPro.SocketEnginePollable {
+  public func doPoll()
+  public func sendPollMessage(_ message: Swift.String, withType type: ShuftiPro.SocketEnginePacketType, withData datas: [Foundation.Data], completion: (() -> ())? = nil)
+  public func stopPolling()
+}
+public protocol SocketLogger : AnyObject {
+  var log: Swift.Bool { get set }
+  func log(_ message: @autoclosure () -> Swift.String, type: Swift.String)
+  func error(_ message: @autoclosure () -> Swift.String, type: Swift.String)
+}
+extension ShuftiPro.SocketLogger {
+  public func log(_ message: @autoclosure () -> Swift.String, type: Swift.String)
+  public func error(_ message: @autoclosure () -> Swift.String, type: Swift.String)
+}
+final public class FloatValueProvider {
+  public init(block: @escaping ShuftiPro.FloatValueProvider.CGFloatValueBlock)
+  public init(_ float: CoreFoundation.CGFloat)
+  public typealias CGFloatValueBlock = (CoreFoundation.CGFloat) -> CoreFoundation.CGFloat
+  final public var float: CoreFoundation.CGFloat {
+    get
+    set
+  }
+  final public var valueType: Any.Type {
+    get
+  }
+  final public var storage: ShuftiPro.ValueProviderStorage<ShuftiPro.LottieVector1D> {
+    get
+  }
+  final public func hasUpdate(frame _: CoreFoundation.CGFloat) -> Swift.Bool
+  @objc deinit
+}
+public class DotLottieCache : ShuftiPro.DotLottieCacheProvider {
+  public init()
+  public static let sharedCache: ShuftiPro.DotLottieCache
+  public var cacheSize: Swift.Int {
+    get
+    set
+  }
+  public func clearCache()
+  public func file(forKey key: Swift.String) -> ShuftiPro.DotLottieFile?
+  public func setFile(_ lottie: ShuftiPro.DotLottieFile, forKey key: Swift.String)
+  @objc deinit
+}
+@available(*, deprecated, message: "Use DefaultAnimationCache instead, which is thread-safe and automatically responds to memory pressure.")
+public typealias LRUAnimationCache = ShuftiPro.DefaultAnimationCache
+@objc @_hasMissingDesignatedInitializers final public class SocketRawView : ObjectiveC.NSObject {
+  final public func emit(_ event: Swift.String, _ items: ShuftiPro.SocketData...)
+  @objc final public func emit(_ event: Swift.String, with items: [Any])
+  final public func emitWithAck(_ event: Swift.String, _ items: ShuftiPro.SocketData...) -> ShuftiPro.OnAckCallback
+  @objc final public func emitWithAck(_ event: Swift.String, with items: [Any]) -> ShuftiPro.OnAckCallback
+  @objc deinit
+}
+@objc @_hasMissingDesignatedInitializers final public class SocketRawAckView : ObjectiveC.NSObject {
+  final public func with(_ items: ShuftiPro.SocketData...)
+  @objc final public func with(_ items: [Any])
+  @objc deinit
+}
+@objc public protocol SocketEngineClient {
+  @objc func engineDidError(reason: Swift.String)
+  @objc func engineDidClose(reason: Swift.String)
+  @objc func engineDidOpen(reason: Swift.String)
+  @objc func engineDidReceivePing()
+  @objc func engineDidReceivePong()
+  @objc func engineDidSendPing()
+  @objc func engineDidSendPong()
+  @objc func parseEngineMessage(_ msg: Swift.String)
+  @objc func parseEngineBinaryData(_ data: Foundation.Data)
+  @objc func engineDidWebsocketUpgrade(headers: [Swift.String : Swift.String])
+}
+infix operator +| : DefaultPrecedence
+infix operator +- : DefaultPrecedence
+public struct SocketEventHandler {
+  public let event: Swift.String
+  public let id: Foundation.UUID
+  public let callback: ShuftiPro.NormalCallback
+  public func executeCallback(with items: [Any], withAck ack: Swift.Int, withSocket socket: ShuftiPro.SocketIOClient)
+}
+@objc @_inheritsConvenienceInitializers @available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
+public class NativeEngine : ObjectiveC.NSObject, ShuftiPro.Engine, Foundation.URLSessionDataDelegate, Foundation.URLSessionWebSocketDelegate {
+  public func register(delegate: ShuftiPro.EngineDelegate)
+  public func start(request: Foundation.URLRequest)
+  public func stop(closeCode: Swift.UInt16)
+  public func forceStop()
+  public func write(string: Swift.String, completion: (() -> ())?)
+  public func write(data: Foundation.Data, opcode: ShuftiPro.FrameOpCode, completion: (() -> ())?)
+  @objc public func urlSession(_ session: Foundation.URLSession, webSocketTask: Foundation.URLSessionWebSocketTask, didOpenWithProtocol protocol: Swift.String?)
+  @objc public func urlSession(_ session: Foundation.URLSession, webSocketTask: Foundation.URLSessionWebSocketTask, didCloseWith closeCode: Foundation.URLSessionWebSocketTask.CloseCode, reason: Foundation.Data?)
+  @objc override dynamic public init()
+  @objc deinit
+}
+final public class LottieLogger {
+  public init(assert: @escaping ShuftiPro.LottieLogger.Assert = { condition, message, file, line in
+      // If we default to `Swift.assert` directly with `assert: Assert = Swift.assert`,
+      // the call will unexpectedly not respect the -O flag and will crash in release
+      // https://github.com/apple/swift/issues/60249
+      Swift.assert(condition(), message(), file: file, line: line)
+    }, assertionFailure: @escaping ShuftiPro.LottieLogger.AssertionFailure = { message, file, line in
+      // If we default to `Swift.assertionFailure` directly with
+      // `assertionFailure: AssertionFailure = Swift.assertionFailure`,
+      // the call will unexpectedly not respect the -O flag and will crash in release
+      // https://github.com/apple/swift/issues/60249
+      Swift.assertionFailure(message(), file: file, line: line)
+    }, warn: @escaping ShuftiPro.LottieLogger.Warn = { message, _, _ in
+      // swiftlint:disable:next no_direct_standard_out_logs
+      print(message())
+    }, info: @escaping ShuftiPro.LottieLogger.Info = { message in
+      // swiftlint:disable:next no_direct_standard_out_logs
+      print(message())
+    })
+  public typealias Assert = (_ condition: @autoclosure () -> Swift.Bool, _ message: @autoclosure () -> Swift.String, _ fileID: Swift.StaticString, _ line: Swift.UInt) -> Swift.Void
+  public typealias AssertionFailure = (_ message: @autoclosure () -> Swift.String, _ fileID: Swift.StaticString, _ line: Swift.UInt) -> Swift.Void
+  public typealias Warn = (_ message: @autoclosure () -> Swift.String, _ fileID: Swift.StaticString, _ line: Swift.UInt) -> Swift.Void
+  public typealias Info = (_ message: @autoclosure () -> Swift.String) -> Swift.Void
+  public static var shared: ShuftiPro.LottieLogger
+  final public func assert(_ condition: @autoclosure () -> Swift.Bool, _ message: @autoclosure () -> Swift.String = String(), fileID: Swift.StaticString = #fileID, line: Swift.UInt = #line)
+  final public func assertionFailure(_ message: @autoclosure () -> Swift.String = String(), fileID: Swift.StaticString = #fileID, line: Swift.UInt = #line)
+  final public func warn(_ message: @autoclosure () -> Swift.String = String(), fileID: Swift.StaticString = #fileID, line: Swift.UInt = #line)
+  final public func info(_ message: @autoclosure () -> Swift.String = String())
+  @objc deinit
+}
+extension ShuftiPro.LottieLogger {
+  public static var printToConsole: ShuftiPro.LottieLogger {
+    get
+  }
+}
+final public class ColorValueProvider {
+  public init(block: @escaping ShuftiPro.ColorValueProvider.ColorValueBlock)
+  public init(_ color: ShuftiPro.LottieColor)
+  public init(_ keyframes: [ShuftiPro.Keyframe<ShuftiPro.LottieColor>])
+  public typealias ColorValueBlock = (CoreFoundation.CGFloat) -> ShuftiPro.LottieColor
+  final public var color: ShuftiPro.LottieColor {
+    get
+    set
+  }
+  final public var valueType: Any.Type {
+    get
+  }
+  final public var storage: ShuftiPro.ValueProviderStorage<ShuftiPro.LottieColor> {
+    get
+  }
+  final public func hasUpdate(frame _: CoreFoundation.CGFloat) -> Swift.Bool
+  @objc deinit
+}
+public class WSEngine : ShuftiPro.Engine, ShuftiPro.TransportEventClient, ShuftiPro.FramerEventClient, ShuftiPro.FrameCollectorDelegate, ShuftiPro.HTTPHandlerDelegate {
+  public var respondToPingWithPong: Swift.Bool
+  public init(transport: ShuftiPro.Transport, certPinner: ShuftiPro.CertificatePinning? = nil, headerValidator: ShuftiPro.HeaderValidator = FoundationSecurity(), httpHandler: ShuftiPro.HTTPHandler = FoundationHTTPHandler(), framer: ShuftiPro.Framer = WSFramer(), compressionHandler: ShuftiPro.CompressionHandler? = nil)
+  public func register(delegate: ShuftiPro.EngineDelegate)
+  public func start(request: Foundation.URLRequest)
+  public func stop(closeCode: Swift.UInt16 = CloseCode.normal.rawValue)
+  public func forceStop()
+  public func write(string: Swift.String, completion: (() -> ())?)
+  public func write(data: Foundation.Data, opcode: ShuftiPro.FrameOpCode, completion: (() -> ())?)
+  public func connectionChanged(state: ShuftiPro.ConnectionState)
+  public func didReceiveHTTP(event: ShuftiPro.HTTPEvent)
+  public func frameProcessed(event: ShuftiPro.FrameEvent)
+  public func decompress(data: Foundation.Data, isFinal: Swift.Bool) -> Foundation.Data?
+  public func didForm(event: ShuftiPro.FrameCollector.Event)
+  @objc deinit
+}
+public protocol SocketManagerSpec : ShuftiPro.SocketEngineClient {
+  var defaultSocket: ShuftiPro.SocketIOClient { get }
+  var engine: ShuftiPro.SocketEngineSpec? { get set }
+  var forceNew: Swift.Bool { get set }
+  var handleQueue: Dispatch.DispatchQueue { get set }
+  var nsps: [Swift.String : ShuftiPro.SocketIOClient] { get set }
+  var reconnects: Swift.Bool { get set }
+  var reconnectWait: Swift.Int { get set }
+  var reconnectWaitMax: Swift.Int { get set }
+  var randomizationFactor: Swift.Double { get set }
+  var socketURL: Foundation.URL { get }
+  var status: ShuftiPro.SocketIOStatus { get }
+  var version: ShuftiPro.SocketIOVersion { get }
+  func connect()
+  func connectSocket(_ socket: ShuftiPro.SocketIOClient, withPayload: [Swift.String : Any]?)
+  func didDisconnect(reason: Swift.String)
+  func disconnect()
+  func disconnectSocket(_ socket: ShuftiPro.SocketIOClient)
+  func disconnectSocket(forNamespace nsp: Swift.String)
+  func emitAll(_ event: Swift.String, _ items: ShuftiPro.SocketData...)
+  func reconnect()
+  @discardableResult
+  func removeSocket(_ socket: ShuftiPro.SocketIOClient) -> ShuftiPro.SocketIOClient?
+  func socket(forNamespace nsp: Swift.String) -> ShuftiPro.SocketIOClient
+}
+@objc @_inheritsConvenienceInitializers @_Concurrency.MainActor(unsafe) open class AnimatedButton : ShuftiPro.AnimatedControl {
+  @_Concurrency.MainActor(unsafe) override public init(animation: ShuftiPro.LottieAnimation, configuration: ShuftiPro.LottieConfiguration = .shared)
+  @_Concurrency.MainActor(unsafe) @objc override dynamic public init()
+  @_Concurrency.MainActor(unsafe) @objc required dynamic public init?(coder aDecoder: Foundation.NSCoder)
+  @_Concurrency.MainActor(unsafe) @objc override dynamic open func beginTracking(_ touch: UIKit.UITouch, with event: UIKit.UIEvent?) -> Swift.Bool
+  @_Concurrency.MainActor(unsafe) @objc override dynamic open func endTracking(_ touch: UIKit.UITouch?, with event: UIKit.UIEvent?)
+  @_Concurrency.MainActor(unsafe) @objc override dynamic public var accessibilityTraits: UIKit.UIAccessibilityTraits {
+    @objc get
+    @objc set
+  }
+  @_Concurrency.MainActor(unsafe) public func setPlayRange(fromProgress: ShuftiPro.AnimationProgressTime, toProgress: ShuftiPro.AnimationProgressTime, event: UIKit.UIControl.Event)
+  @_Concurrency.MainActor(unsafe) public func setPlayRange(fromMarker fromName: Swift.String, toMarker toName: Swift.String, event: UIKit.UIControl.Event)
+  @objc deinit
+}
+extension ShuftiPro.SocketIOStatus : Swift.Equatable {}
+extension ShuftiPro.SocketIOStatus : Swift.Hashable {}
+extension ShuftiPro.SocketIOStatus : Swift.RawRepresentable {}
+extension ShuftiPro.LayerType : Swift.Equatable {}
+extension ShuftiPro.LayerType : Swift.Hashable {}
+extension ShuftiPro.LayerType : Swift.RawRepresentable {}
+extension ShuftiPro.MatteType : Swift.Equatable {}
+extension ShuftiPro.MatteType : Swift.Hashable {}
+extension ShuftiPro.MatteType : Swift.RawRepresentable {}
+extension ShuftiPro.BlendMode : Swift.Equatable {}
+extension ShuftiPro.BlendMode : Swift.Hashable {}
+extension ShuftiPro.BlendMode : Swift.RawRepresentable {}
+extension ShuftiPro.CompatibleRenderingEngineOption : Swift.Equatable {}
+extension ShuftiPro.CompatibleRenderingEngineOption : Swift.Hashable {}
+extension ShuftiPro.CompatibleRenderingEngineOption : Swift.RawRepresentable {}
+extension ShuftiPro.SizeValueProvider : ShuftiPro.AnyValueProvider {}
+extension ShuftiPro.ErrorType : Swift.Equatable {}
+extension ShuftiPro.ErrorType : Swift.Hashable {}
+extension ShuftiPro.FoundationTransportError : Swift.Equatable {}
+extension ShuftiPro.FoundationTransportError : Swift.Hashable {}
+extension ShuftiPro.SocketEnginePacketType : Swift.Equatable {}
+extension ShuftiPro.SocketEnginePacketType : Swift.Hashable {}
+extension ShuftiPro.SocketEnginePacketType : Swift.RawRepresentable {}
+extension ShuftiPro.SocketIOVersion : Swift.Equatable {}
+extension ShuftiPro.SocketIOVersion : Swift.Hashable {}
+extension ShuftiPro.SocketIOVersion : Swift.RawRepresentable {}
+extension ShuftiPro.SocketIOClientOption : Swift.Equatable {}
+extension ShuftiPro.SocketIOClientOption : Swift.CustomStringConvertible {}
+extension ShuftiPro.DotLottieError : Swift.Equatable {}
+extension ShuftiPro.DotLottieError : Swift.Hashable {}
+extension ShuftiPro.FoundationSecurityError : Swift.Equatable {}
+extension ShuftiPro.FoundationSecurityError : Swift.Hashable {}
+extension ShuftiPro.SocketParsableError : Swift.Equatable {}
+extension ShuftiPro.SocketParsableError : Swift.Hashable {}
+extension ShuftiPro.SocketAckStatus : Swift.Equatable {}
+extension ShuftiPro.SocketAckStatus : Swift.Hashable {}
+extension ShuftiPro.SocketAckStatus : Swift.RawRepresentable {}
+extension ShuftiPro.LottieBackgroundBehavior : Swift.Equatable {}
+extension ShuftiPro.LottieBackgroundBehavior : Swift.Hashable {}
+extension ShuftiPro.SecurityErrorCode : Swift.Equatable {}
+extension ShuftiPro.SecurityErrorCode : Swift.Hashable {}
+extension ShuftiPro.SecurityErrorCode : Swift.RawRepresentable {}
+extension ShuftiPro.AnimatedSwitch.CancelBehavior : Swift.Equatable {}
+extension ShuftiPro.AnimatedSwitch.CancelBehavior : Swift.Hashable {}
+extension ShuftiPro.TCPTransportError : Swift.Equatable {}
+extension ShuftiPro.TCPTransportError : Swift.Hashable {}
+extension ShuftiPro.PointValueProvider : ShuftiPro.AnyValueProvider {}
+extension ShuftiPro.SocketPacket.PacketType : Swift.Equatable {}
+extension ShuftiPro.SocketPacket.PacketType : Swift.Hashable {}
+extension ShuftiPro.SocketPacket.PacketType : Swift.RawRepresentable {}
+extension ShuftiPro.SocketClientEvent : Swift.Equatable {}
+extension ShuftiPro.SocketClientEvent : Swift.Hashable {}
+extension ShuftiPro.SocketClientEvent : Swift.RawRepresentable {}
+extension ShuftiPro.GradientValueProvider : ShuftiPro.AnyValueProvider {}
+extension ShuftiPro.CloseCode : Swift.Equatable {}
+extension ShuftiPro.CloseCode : Swift.Hashable {}
+extension ShuftiPro.CloseCode : Swift.RawRepresentable {}
+extension ShuftiPro.FrameOpCode : Swift.Equatable {}
+extension ShuftiPro.FrameOpCode : Swift.Hashable {}
+extension ShuftiPro.FrameOpCode : Swift.RawRepresentable {}
+extension ShuftiPro.CoordinateSpace : Swift.Equatable {}
+extension ShuftiPro.CoordinateSpace : Swift.Hashable {}
+extension ShuftiPro.CoordinateSpace : Swift.RawRepresentable {}
+extension ShuftiPro.FloatValueProvider : ShuftiPro.AnyValueProvider {}
+extension ShuftiPro.ColorValueProvider : ShuftiPro.AnyValueProvider {}
