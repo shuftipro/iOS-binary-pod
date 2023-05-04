@@ -16,7 +16,7 @@ Pod::Spec.new do |spec|
 #
 
 spec.name         = "ShuftiPro"
-spec.version      = "3.5.4"
+spec.version      = "3.5.5"
 spec.summary      = "Shufti Pro is designed to verify documents in realtime."
 
 # This description is used to generate tags and improve search results.
@@ -84,9 +84,7 @@ spec.source       = { :git => "https://github.com/shuftipro/iOS-binary-pod.git",
   spec.dependency 'lottie-ios'
   spec.swift_version = "5"
 
-# spec.source_files  = "ShuftiPro.framework/Headers/*.h"
-# spec.exclude_files = "Classes/Exclude"
-
-# spec.public_header_files = "ShuftiPro.framework/Headers/*.h"
-
+spec.exclude_files = "Classes/Exclude"
+spec.pod_target_xcconfig = { 'EXCLUDED_ARCHS[sdk=iphonesimulator*]' => 'arm64' }
+spec.user_target_xcconfig = { 'EXCLUDED_ARCHS[sdk=iphonesimulator*]' => 'arm64' }
 end
