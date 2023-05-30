@@ -3207,6 +3207,602 @@
       },
       {
         "kind": "Import",
+        "name": "Foundation",
+        "printedName": "Foundation",
+        "declKind": "Import",
+        "moduleName": "ShuftiPro",
+        "declAttributes": [
+          "RawDocComment"
+        ]
+      },
+      {
+        "kind": "Import",
+        "name": "CommonCrypto",
+        "printedName": "CommonCrypto",
+        "declKind": "Import",
+        "moduleName": "ShuftiPro"
+      },
+      {
+        "kind": "TypeDecl",
+        "name": "Cryptable",
+        "printedName": "Cryptable",
+        "children": [
+          {
+            "kind": "Function",
+            "name": "encrypt",
+            "printedName": "encrypt(_:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Data",
+                "printedName": "Foundation.Data",
+                "usr": "s:10Foundation4DataV"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "s:9ShuftiPro9CryptableP7encrypty10Foundation4DataVSSKF",
+            "mangledName": "$s9ShuftiPro9CryptableP7encrypty10Foundation4DataVSSKF",
+            "moduleName": "ShuftiPro",
+            "genericSig": "<τ_0_0 where τ_0_0 : ShuftiPro.Cryptable>",
+            "sugared_genericSig": "<Self where Self : ShuftiPro.Cryptable>",
+            "protocolReq": true,
+            "throwing": true,
+            "reqNewWitnessTableEntry": true,
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "decrypt",
+            "printedName": "decrypt(_:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Data",
+                "printedName": "Foundation.Data",
+                "usr": "s:10Foundation4DataV"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "s:9ShuftiPro9CryptableP7decryptySS10Foundation4DataVKF",
+            "mangledName": "$s9ShuftiPro9CryptableP7decryptySS10Foundation4DataVKF",
+            "moduleName": "ShuftiPro",
+            "genericSig": "<τ_0_0 where τ_0_0 : ShuftiPro.Cryptable>",
+            "sugared_genericSig": "<Self where Self : ShuftiPro.Cryptable>",
+            "protocolReq": true,
+            "throwing": true,
+            "reqNewWitnessTableEntry": true,
+            "funcSelfKind": "NonMutating"
+          }
+        ],
+        "declKind": "Protocol",
+        "usr": "s:9ShuftiPro9CryptableP",
+        "mangledName": "$s9ShuftiPro9CryptableP",
+        "moduleName": "ShuftiPro"
+      },
+      {
+        "kind": "TypeDecl",
+        "name": "AES",
+        "printedName": "AES",
+        "children": [
+          {
+            "kind": "Var",
+            "name": "key",
+            "printedName": "key",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Data",
+                "printedName": "Foundation.Data",
+                "usr": "s:10Foundation4DataV"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:9ShuftiPro3AESV3key33_24B130CA668AE581E5E53605355AB3C1LL10Foundation4DataVvp",
+            "mangledName": "$s9ShuftiPro3AESV3key33_24B130CA668AE581E5E53605355AB3C1LL10Foundation4DataVvp",
+            "moduleName": "ShuftiPro",
+            "isInternal": true,
+            "declAttributes": [
+              "HasStorage",
+              "AccessControl"
+            ],
+            "fixedbinaryorder": 0,
+            "isLet": true,
+            "hasStorage": true
+          },
+          {
+            "kind": "Var",
+            "name": "ivSize",
+            "printedName": "ivSize",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Int",
+                "printedName": "Swift.Int",
+                "usr": "s:Si"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:9ShuftiPro3AESV6ivSize33_24B130CA668AE581E5E53605355AB3C1LLSivp",
+            "mangledName": "$s9ShuftiPro3AESV6ivSize33_24B130CA668AE581E5E53605355AB3C1LLSivp",
+            "moduleName": "ShuftiPro",
+            "isInternal": true,
+            "declAttributes": [
+              "HasInitialValue",
+              "HasStorage",
+              "AccessControl"
+            ],
+            "fixedbinaryorder": 1,
+            "isLet": true,
+            "hasStorage": true
+          },
+          {
+            "kind": "Var",
+            "name": "options",
+            "printedName": "options",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "UInt32",
+                "printedName": "Swift.UInt32",
+                "usr": "s:s6UInt32V"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:9ShuftiPro3AESV7options33_24B130CA668AE581E5E53605355AB3C1LLs6UInt32Vvp",
+            "mangledName": "$s9ShuftiPro3AESV7options33_24B130CA668AE581E5E53605355AB3C1LLs6UInt32Vvp",
+            "moduleName": "ShuftiPro",
+            "isInternal": true,
+            "declAttributes": [
+              "HasInitialValue",
+              "HasStorage",
+              "AccessControl"
+            ],
+            "fixedbinaryorder": 2,
+            "isLet": true,
+            "hasStorage": true
+          },
+          {
+            "kind": "Constructor",
+            "name": "init",
+            "printedName": "init(keyString:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "AES",
+                "printedName": "ShuftiPro.AES",
+                "usr": "s:9ShuftiPro3AESV"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              }
+            ],
+            "declKind": "Constructor",
+            "usr": "s:9ShuftiPro3AESV9keyStringACSS_tKcfc",
+            "mangledName": "$s9ShuftiPro3AESV9keyStringACSS_tKcfc",
+            "moduleName": "ShuftiPro",
+            "throwing": true,
+            "init_kind": "Designated"
+          },
+          {
+            "kind": "TypeDecl",
+            "name": "Error",
+            "printedName": "Error",
+            "children": [
+              {
+                "kind": "Var",
+                "name": "invalidKeySize",
+                "printedName": "invalidKeySize",
+                "children": [
+                  {
+                    "kind": "TypeFunc",
+                    "name": "Function",
+                    "printedName": "(ShuftiPro.AES.Error.Type) -> ShuftiPro.AES.Error",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Error",
+                        "printedName": "ShuftiPro.AES.Error",
+                        "usr": "s:9ShuftiPro3AESV5ErrorO"
+                      },
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Metatype",
+                        "printedName": "ShuftiPro.AES.Error.Type",
+                        "children": [
+                          {
+                            "kind": "TypeNominal",
+                            "name": "Error",
+                            "printedName": "ShuftiPro.AES.Error",
+                            "usr": "s:9ShuftiPro3AESV5ErrorO"
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ],
+                "declKind": "EnumElement",
+                "usr": "s:9ShuftiPro3AESV5ErrorO14invalidKeySizeyA2EmF",
+                "mangledName": "$s9ShuftiPro3AESV5ErrorO14invalidKeySizeyA2EmF",
+                "moduleName": "ShuftiPro",
+                "fixedbinaryorder": 0
+              },
+              {
+                "kind": "Var",
+                "name": "generateRandomIVFailed",
+                "printedName": "generateRandomIVFailed",
+                "children": [
+                  {
+                    "kind": "TypeFunc",
+                    "name": "Function",
+                    "printedName": "(ShuftiPro.AES.Error.Type) -> ShuftiPro.AES.Error",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Error",
+                        "printedName": "ShuftiPro.AES.Error",
+                        "usr": "s:9ShuftiPro3AESV5ErrorO"
+                      },
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Metatype",
+                        "printedName": "ShuftiPro.AES.Error.Type",
+                        "children": [
+                          {
+                            "kind": "TypeNominal",
+                            "name": "Error",
+                            "printedName": "ShuftiPro.AES.Error",
+                            "usr": "s:9ShuftiPro3AESV5ErrorO"
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ],
+                "declKind": "EnumElement",
+                "usr": "s:9ShuftiPro3AESV5ErrorO22generateRandomIVFailedyA2EmF",
+                "mangledName": "$s9ShuftiPro3AESV5ErrorO22generateRandomIVFailedyA2EmF",
+                "moduleName": "ShuftiPro",
+                "fixedbinaryorder": 1
+              },
+              {
+                "kind": "Var",
+                "name": "encryptionFailed",
+                "printedName": "encryptionFailed",
+                "children": [
+                  {
+                    "kind": "TypeFunc",
+                    "name": "Function",
+                    "printedName": "(ShuftiPro.AES.Error.Type) -> ShuftiPro.AES.Error",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Error",
+                        "printedName": "ShuftiPro.AES.Error",
+                        "usr": "s:9ShuftiPro3AESV5ErrorO"
+                      },
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Metatype",
+                        "printedName": "ShuftiPro.AES.Error.Type",
+                        "children": [
+                          {
+                            "kind": "TypeNominal",
+                            "name": "Error",
+                            "printedName": "ShuftiPro.AES.Error",
+                            "usr": "s:9ShuftiPro3AESV5ErrorO"
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ],
+                "declKind": "EnumElement",
+                "usr": "s:9ShuftiPro3AESV5ErrorO16encryptionFailedyA2EmF",
+                "mangledName": "$s9ShuftiPro3AESV5ErrorO16encryptionFailedyA2EmF",
+                "moduleName": "ShuftiPro",
+                "fixedbinaryorder": 2
+              },
+              {
+                "kind": "Var",
+                "name": "decryptionFailed",
+                "printedName": "decryptionFailed",
+                "children": [
+                  {
+                    "kind": "TypeFunc",
+                    "name": "Function",
+                    "printedName": "(ShuftiPro.AES.Error.Type) -> ShuftiPro.AES.Error",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Error",
+                        "printedName": "ShuftiPro.AES.Error",
+                        "usr": "s:9ShuftiPro3AESV5ErrorO"
+                      },
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Metatype",
+                        "printedName": "ShuftiPro.AES.Error.Type",
+                        "children": [
+                          {
+                            "kind": "TypeNominal",
+                            "name": "Error",
+                            "printedName": "ShuftiPro.AES.Error",
+                            "usr": "s:9ShuftiPro3AESV5ErrorO"
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ],
+                "declKind": "EnumElement",
+                "usr": "s:9ShuftiPro3AESV5ErrorO16decryptionFailedyA2EmF",
+                "mangledName": "$s9ShuftiPro3AESV5ErrorO16decryptionFailedyA2EmF",
+                "moduleName": "ShuftiPro",
+                "fixedbinaryorder": 3
+              },
+              {
+                "kind": "Var",
+                "name": "dataToStringFailed",
+                "printedName": "dataToStringFailed",
+                "children": [
+                  {
+                    "kind": "TypeFunc",
+                    "name": "Function",
+                    "printedName": "(ShuftiPro.AES.Error.Type) -> ShuftiPro.AES.Error",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Error",
+                        "printedName": "ShuftiPro.AES.Error",
+                        "usr": "s:9ShuftiPro3AESV5ErrorO"
+                      },
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Metatype",
+                        "printedName": "ShuftiPro.AES.Error.Type",
+                        "children": [
+                          {
+                            "kind": "TypeNominal",
+                            "name": "Error",
+                            "printedName": "ShuftiPro.AES.Error",
+                            "usr": "s:9ShuftiPro3AESV5ErrorO"
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ],
+                "declKind": "EnumElement",
+                "usr": "s:9ShuftiPro3AESV5ErrorO18dataToStringFailedyA2EmF",
+                "mangledName": "$s9ShuftiPro3AESV5ErrorO18dataToStringFailedyA2EmF",
+                "moduleName": "ShuftiPro",
+                "fixedbinaryorder": 4
+              },
+              {
+                "kind": "Function",
+                "name": "==",
+                "printedName": "==(_:_:)",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Bool",
+                    "printedName": "Swift.Bool",
+                    "usr": "s:Sb"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Error",
+                    "printedName": "ShuftiPro.AES.Error",
+                    "usr": "s:9ShuftiPro3AESV5ErrorO"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Error",
+                    "printedName": "ShuftiPro.AES.Error",
+                    "usr": "s:9ShuftiPro3AESV5ErrorO"
+                  }
+                ],
+                "declKind": "Func",
+                "usr": "s:9ShuftiPro3AESV5ErrorO2eeoiySbAE_AEtFZ",
+                "mangledName": "$s9ShuftiPro3AESV5ErrorO2eeoiySbAE_AEtFZ",
+                "moduleName": "ShuftiPro",
+                "static": true,
+                "implicit": true,
+                "funcSelfKind": "NonMutating"
+              },
+              {
+                "kind": "Var",
+                "name": "hashValue",
+                "printedName": "hashValue",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Int",
+                    "printedName": "Swift.Int",
+                    "usr": "s:Si"
+                  }
+                ],
+                "declKind": "Var",
+                "usr": "s:9ShuftiPro3AESV5ErrorO9hashValueSivp",
+                "mangledName": "$s9ShuftiPro3AESV5ErrorO9hashValueSivp",
+                "moduleName": "ShuftiPro",
+                "implicit": true,
+                "accessors": [
+                  {
+                    "kind": "Accessor",
+                    "name": "Get",
+                    "printedName": "Get()",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Int",
+                        "printedName": "Swift.Int",
+                        "usr": "s:Si"
+                      }
+                    ],
+                    "declKind": "Accessor",
+                    "usr": "s:9ShuftiPro3AESV5ErrorO9hashValueSivg",
+                    "mangledName": "$s9ShuftiPro3AESV5ErrorO9hashValueSivg",
+                    "moduleName": "ShuftiPro",
+                    "implicit": true,
+                    "accessorKind": "get"
+                  }
+                ]
+              },
+              {
+                "kind": "Function",
+                "name": "hash",
+                "printedName": "hash(into:)",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Hasher",
+                    "printedName": "Swift.Hasher",
+                    "paramValueOwnership": "InOut",
+                    "usr": "s:s6HasherV"
+                  }
+                ],
+                "declKind": "Func",
+                "usr": "s:9ShuftiPro3AESV5ErrorO4hash4intoys6HasherVz_tF",
+                "mangledName": "$s9ShuftiPro3AESV5ErrorO4hash4intoys6HasherVz_tF",
+                "moduleName": "ShuftiPro",
+                "implicit": true,
+                "funcSelfKind": "NonMutating"
+              }
+            ],
+            "declKind": "Enum",
+            "usr": "s:9ShuftiPro3AESV5ErrorO",
+            "mangledName": "$s9ShuftiPro3AESV5ErrorO",
+            "moduleName": "ShuftiPro",
+            "isFromExtension": true,
+            "isEnumExhaustive": true,
+            "conformances": [
+              {
+                "kind": "Conformance",
+                "name": "Equatable",
+                "printedName": "Equatable",
+                "usr": "s:SQ",
+                "mangledName": "$sSQ"
+              },
+              {
+                "kind": "Conformance",
+                "name": "Hashable",
+                "printedName": "Hashable",
+                "usr": "s:SH",
+                "mangledName": "$sSH"
+              },
+              {
+                "kind": "Conformance",
+                "name": "Error",
+                "printedName": "Error",
+                "usr": "s:s5ErrorP",
+                "mangledName": "$ss5ErrorP"
+              },
+              {
+                "kind": "Conformance",
+                "name": "Sendable",
+                "printedName": "Sendable",
+                "usr": "s:s8SendableP",
+                "mangledName": "$ss8SendableP"
+              }
+            ]
+          },
+          {
+            "kind": "Function",
+            "name": "encrypt",
+            "printedName": "encrypt(_:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Data",
+                "printedName": "Foundation.Data",
+                "usr": "s:10Foundation4DataV"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "s:9ShuftiPro3AESV7encrypty10Foundation4DataVSSKF",
+            "mangledName": "$s9ShuftiPro3AESV7encrypty10Foundation4DataVSSKF",
+            "moduleName": "ShuftiPro",
+            "isFromExtension": true,
+            "throwing": true,
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "decrypt",
+            "printedName": "decrypt(_:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Data",
+                "printedName": "Foundation.Data",
+                "usr": "s:10Foundation4DataV"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "s:9ShuftiPro3AESV7decryptySS10Foundation4DataVKF",
+            "mangledName": "$s9ShuftiPro3AESV7decryptySS10Foundation4DataVKF",
+            "moduleName": "ShuftiPro",
+            "isFromExtension": true,
+            "throwing": true,
+            "funcSelfKind": "NonMutating"
+          }
+        ],
+        "declKind": "Struct",
+        "usr": "s:9ShuftiPro3AESV",
+        "mangledName": "$s9ShuftiPro3AESV",
+        "moduleName": "ShuftiPro",
+        "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Cryptable",
+            "printedName": "Cryptable",
+            "usr": "s:9ShuftiPro9CryptableP",
+            "mangledName": "$s9ShuftiPro9CryptableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Sendable",
+            "printedName": "Sendable",
+            "usr": "s:s8SendableP",
+            "mangledName": "$ss8SendableP"
+          }
+        ]
+      },
+      {
+        "kind": "Import",
         "name": "UIKit",
         "printedName": "UIKit",
         "declKind": "Import",
@@ -4489,6 +5085,13 @@
         "kind": "Import",
         "name": "AVKit",
         "printedName": "AVKit",
+        "declKind": "Import",
+        "moduleName": "ShuftiPro"
+      },
+      {
+        "kind": "Import",
+        "name": "CommonCrypto",
+        "printedName": "CommonCrypto",
         "declKind": "Import",
         "moduleName": "ShuftiPro"
       },
@@ -21096,6 +21699,13 @@
         ]
       },
       {
+        "kind": "Import",
+        "name": "CommonCrypto",
+        "printedName": "CommonCrypto",
+        "declKind": "Import",
+        "moduleName": "ShuftiPro"
+      },
+      {
         "kind": "TypeDecl",
         "name": "CallApi",
         "printedName": "CallApi",
@@ -21660,6 +22270,53 @@
             "declKind": "Func",
             "usr": "s:9ShuftiPro7CallApiC11viewDidLoadyyF",
             "mangledName": "$s9ShuftiPro7CallApiC11viewDidLoadyyF",
+            "moduleName": "ShuftiPro",
+            "isOpen": true,
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "encryptionRequestObject",
+            "printedName": "encryptionRequestObject(secretKey:requestObject:completion:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "NSDictionary",
+                "printedName": "Foundation.NSDictionary",
+                "usr": "c:objc(cs)NSDictionary"
+              },
+              {
+                "kind": "TypeFunc",
+                "name": "Function",
+                "printedName": "(Any) -> ()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "ProtocolComposition",
+                    "printedName": "Any"
+                  }
+                ]
+              }
+            ],
+            "declKind": "Func",
+            "usr": "s:9ShuftiPro7CallApiC23encryptionRequestObject9secretKey07requestG010completionySS_So12NSDictionaryCyypctF",
+            "mangledName": "$s9ShuftiPro7CallApiC23encryptionRequestObject9secretKey07requestG010completionySS_So12NSDictionaryCyypctF",
             "moduleName": "ShuftiPro",
             "isOpen": true,
             "funcSelfKind": "NonMutating"
@@ -26542,6 +27199,106 @@
           },
           {
             "kind": "Function",
+            "name": "sendSPMOBLogs",
+            "printedName": "sendSPMOBLogs(requestObject:configs:authKeys:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "[Swift.String : Any]?",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Dictionary",
+                    "printedName": "[Swift.String : Any]",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "String",
+                        "printedName": "Swift.String",
+                        "usr": "s:SS"
+                      },
+                      {
+                        "kind": "TypeNominal",
+                        "name": "ProtocolComposition",
+                        "printedName": "Any"
+                      }
+                    ],
+                    "usr": "s:SD"
+                  }
+                ],
+                "usr": "s:Sq"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "[Swift.String : Any]?",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Dictionary",
+                    "printedName": "[Swift.String : Any]",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "String",
+                        "printedName": "Swift.String",
+                        "usr": "s:SS"
+                      },
+                      {
+                        "kind": "TypeNominal",
+                        "name": "ProtocolComposition",
+                        "printedName": "Any"
+                      }
+                    ],
+                    "usr": "s:SD"
+                  }
+                ],
+                "usr": "s:Sq"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "[Swift.String : Swift.String]?",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Dictionary",
+                    "printedName": "[Swift.String : Swift.String]",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "String",
+                        "printedName": "Swift.String",
+                        "usr": "s:SS"
+                      },
+                      {
+                        "kind": "TypeNominal",
+                        "name": "String",
+                        "printedName": "Swift.String",
+                        "usr": "s:SS"
+                      }
+                    ],
+                    "usr": "s:SD"
+                  }
+                ],
+                "usr": "s:Sq"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "s:9ShuftiProAAC13sendSPMOBLogs13requestObject7configs8authKeysySDySSypGSg_AHSDyS2SGSgtF",
+            "mangledName": "$s9ShuftiProAAC13sendSPMOBLogs13requestObject7configs8authKeysySDySSypGSg_AHSDyS2SGSgtF",
+            "moduleName": "ShuftiPro",
+            "isOpen": true,
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
             "name": "checkDarkMode",
             "printedName": "checkDarkMode(configurations:)",
             "children": [
@@ -26648,6 +27405,25 @@
             "declAttributes": [
               "RawDocComment"
             ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "deviceName",
+            "printedName": "deviceName()",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "s:9ShuftiProAAC10deviceNameSSyF",
+            "mangledName": "$s9ShuftiProAAC10deviceNameSSyF",
+            "moduleName": "ShuftiPro",
+            "isOpen": true,
             "funcSelfKind": "NonMutating"
           },
           {
@@ -33621,6 +34397,238 @@
             ]
           },
           {
+            "kind": "Var",
+            "name": "phoneServiceView",
+            "printedName": "phoneServiceView",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "WeakStorage",
+                "printedName": "UIKit.UIView?"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "c:@M@ShuftiPro@objc(cs)StepperView(py)phoneServiceView",
+            "mangledName": "$s9ShuftiPro11StepperViewC012phoneServiceD0So6UIViewCSgvp",
+            "moduleName": "ShuftiPro",
+            "isOpen": true,
+            "declAttributes": [
+              "HasInitialValue",
+              "Custom",
+              "HasStorage",
+              "ReferenceOwnership",
+              "IBOutlet",
+              "ObjC"
+            ],
+            "fixedbinaryorder": 7,
+            "ownership": 1,
+            "hasStorage": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "ImplicitlyUnwrappedOptional",
+                    "printedName": "UIKit.UIView?",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "UIView",
+                        "printedName": "UIKit.UIView",
+                        "usr": "c:objc(cs)UIView"
+                      }
+                    ],
+                    "usr": "s:Sq"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "c:@M@ShuftiPro@objc(cs)StepperView(im)phoneServiceView",
+                "mangledName": "$s9ShuftiPro11StepperViewC012phoneServiceD0So6UIViewCSgvg",
+                "moduleName": "ShuftiPro",
+                "implicit": true,
+                "isOpen": true,
+                "declAttributes": [
+                  "ObjC"
+                ],
+                "accessorKind": "get"
+              },
+              {
+                "kind": "Accessor",
+                "name": "Set",
+                "printedName": "Set()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "ImplicitlyUnwrappedOptional",
+                    "printedName": "UIKit.UIView?",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "UIView",
+                        "printedName": "UIKit.UIView",
+                        "usr": "c:objc(cs)UIView"
+                      }
+                    ],
+                    "usr": "s:Sq"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "c:@M@ShuftiPro@objc(cs)StepperView(im)setPhoneServiceView:",
+                "mangledName": "$s9ShuftiPro11StepperViewC012phoneServiceD0So6UIViewCSgvs",
+                "moduleName": "ShuftiPro",
+                "implicit": true,
+                "isOpen": true,
+                "declAttributes": [
+                  "ObjC"
+                ],
+                "accessorKind": "set"
+              },
+              {
+                "kind": "Accessor",
+                "name": "Modify",
+                "printedName": "Modify()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:9ShuftiPro11StepperViewC012phoneServiceD0So6UIViewCSgvM",
+                "mangledName": "$s9ShuftiPro11StepperViewC012phoneServiceD0So6UIViewCSgvM",
+                "moduleName": "ShuftiPro",
+                "implicit": true,
+                "isOpen": true,
+                "accessorKind": "_modify"
+              }
+            ]
+          },
+          {
+            "kind": "Var",
+            "name": "backgroundChecksView",
+            "printedName": "backgroundChecksView",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "WeakStorage",
+                "printedName": "UIKit.UIView?"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "c:@M@ShuftiPro@objc(cs)StepperView(py)backgroundChecksView",
+            "mangledName": "$s9ShuftiPro11StepperViewC016backgroundChecksD0So6UIViewCSgvp",
+            "moduleName": "ShuftiPro",
+            "isOpen": true,
+            "declAttributes": [
+              "HasInitialValue",
+              "Custom",
+              "HasStorage",
+              "ReferenceOwnership",
+              "IBOutlet",
+              "ObjC"
+            ],
+            "fixedbinaryorder": 8,
+            "ownership": 1,
+            "hasStorage": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "ImplicitlyUnwrappedOptional",
+                    "printedName": "UIKit.UIView?",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "UIView",
+                        "printedName": "UIKit.UIView",
+                        "usr": "c:objc(cs)UIView"
+                      }
+                    ],
+                    "usr": "s:Sq"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "c:@M@ShuftiPro@objc(cs)StepperView(im)backgroundChecksView",
+                "mangledName": "$s9ShuftiPro11StepperViewC016backgroundChecksD0So6UIViewCSgvg",
+                "moduleName": "ShuftiPro",
+                "implicit": true,
+                "isOpen": true,
+                "declAttributes": [
+                  "ObjC"
+                ],
+                "accessorKind": "get"
+              },
+              {
+                "kind": "Accessor",
+                "name": "Set",
+                "printedName": "Set()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "ImplicitlyUnwrappedOptional",
+                    "printedName": "UIKit.UIView?",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "UIView",
+                        "printedName": "UIKit.UIView",
+                        "usr": "c:objc(cs)UIView"
+                      }
+                    ],
+                    "usr": "s:Sq"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "c:@M@ShuftiPro@objc(cs)StepperView(im)setBackgroundChecksView:",
+                "mangledName": "$s9ShuftiPro11StepperViewC016backgroundChecksD0So6UIViewCSgvs",
+                "moduleName": "ShuftiPro",
+                "implicit": true,
+                "isOpen": true,
+                "declAttributes": [
+                  "ObjC"
+                ],
+                "accessorKind": "set"
+              },
+              {
+                "kind": "Accessor",
+                "name": "Modify",
+                "printedName": "Modify()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:9ShuftiPro11StepperViewC016backgroundChecksD0So6UIViewCSgvM",
+                "mangledName": "$s9ShuftiPro11StepperViewC016backgroundChecksD0So6UIViewCSgvM",
+                "moduleName": "ShuftiPro",
+                "implicit": true,
+                "isOpen": true,
+                "accessorKind": "_modify"
+              }
+            ]
+          },
+          {
             "kind": "Constructor",
             "name": "init",
             "printedName": "init(frame:)",
@@ -36293,6 +37301,210 @@
                 "declKind": "Accessor",
                 "usr": "s:9ShuftiPro11AssignProofC19consentVerificationSbvMZ",
                 "mangledName": "$s9ShuftiPro11AssignProofC19consentVerificationSbvMZ",
+                "moduleName": "ShuftiPro",
+                "static": true,
+                "implicit": true,
+                "declAttributes": [
+                  "Transparent",
+                  "Final"
+                ],
+                "accessorKind": "_modify"
+              }
+            ]
+          },
+          {
+            "kind": "Var",
+            "name": "backGroundCheckVerification",
+            "printedName": "backGroundCheckVerification",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Bool",
+                "printedName": "Swift.Bool",
+                "usr": "s:Sb"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:9ShuftiPro11AssignProofC27backGroundCheckVerificationSbvpZ",
+            "mangledName": "$s9ShuftiPro11AssignProofC27backGroundCheckVerificationSbvpZ",
+            "moduleName": "ShuftiPro",
+            "static": true,
+            "declAttributes": [
+              "HasInitialValue",
+              "Final",
+              "HasStorage"
+            ],
+            "hasStorage": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Bool",
+                    "printedName": "Swift.Bool",
+                    "usr": "s:Sb"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:9ShuftiPro11AssignProofC27backGroundCheckVerificationSbvgZ",
+                "mangledName": "$s9ShuftiPro11AssignProofC27backGroundCheckVerificationSbvgZ",
+                "moduleName": "ShuftiPro",
+                "static": true,
+                "implicit": true,
+                "declAttributes": [
+                  "Transparent",
+                  "Final"
+                ],
+                "accessorKind": "get"
+              },
+              {
+                "kind": "Accessor",
+                "name": "Set",
+                "printedName": "Set()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Bool",
+                    "printedName": "Swift.Bool",
+                    "usr": "s:Sb"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:9ShuftiPro11AssignProofC27backGroundCheckVerificationSbvsZ",
+                "mangledName": "$s9ShuftiPro11AssignProofC27backGroundCheckVerificationSbvsZ",
+                "moduleName": "ShuftiPro",
+                "static": true,
+                "implicit": true,
+                "declAttributes": [
+                  "Transparent",
+                  "Final"
+                ],
+                "accessorKind": "set"
+              },
+              {
+                "kind": "Accessor",
+                "name": "Modify",
+                "printedName": "Modify()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:9ShuftiPro11AssignProofC27backGroundCheckVerificationSbvMZ",
+                "mangledName": "$s9ShuftiPro11AssignProofC27backGroundCheckVerificationSbvMZ",
+                "moduleName": "ShuftiPro",
+                "static": true,
+                "implicit": true,
+                "declAttributes": [
+                  "Transparent",
+                  "Final"
+                ],
+                "accessorKind": "_modify"
+              }
+            ]
+          },
+          {
+            "kind": "Var",
+            "name": "phoneServiceVerification",
+            "printedName": "phoneServiceVerification",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Bool",
+                "printedName": "Swift.Bool",
+                "usr": "s:Sb"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:9ShuftiPro11AssignProofC24phoneServiceVerificationSbvpZ",
+            "mangledName": "$s9ShuftiPro11AssignProofC24phoneServiceVerificationSbvpZ",
+            "moduleName": "ShuftiPro",
+            "static": true,
+            "declAttributes": [
+              "HasInitialValue",
+              "Final",
+              "HasStorage"
+            ],
+            "hasStorage": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Bool",
+                    "printedName": "Swift.Bool",
+                    "usr": "s:Sb"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:9ShuftiPro11AssignProofC24phoneServiceVerificationSbvgZ",
+                "mangledName": "$s9ShuftiPro11AssignProofC24phoneServiceVerificationSbvgZ",
+                "moduleName": "ShuftiPro",
+                "static": true,
+                "implicit": true,
+                "declAttributes": [
+                  "Transparent",
+                  "Final"
+                ],
+                "accessorKind": "get"
+              },
+              {
+                "kind": "Accessor",
+                "name": "Set",
+                "printedName": "Set()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Bool",
+                    "printedName": "Swift.Bool",
+                    "usr": "s:Sb"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:9ShuftiPro11AssignProofC24phoneServiceVerificationSbvsZ",
+                "mangledName": "$s9ShuftiPro11AssignProofC24phoneServiceVerificationSbvsZ",
+                "moduleName": "ShuftiPro",
+                "static": true,
+                "implicit": true,
+                "declAttributes": [
+                  "Transparent",
+                  "Final"
+                ],
+                "accessorKind": "set"
+              },
+              {
+                "kind": "Accessor",
+                "name": "Modify",
+                "printedName": "Modify()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:9ShuftiPro11AssignProofC24phoneServiceVerificationSbvMZ",
+                "mangledName": "$s9ShuftiPro11AssignProofC24phoneServiceVerificationSbvMZ",
                 "moduleName": "ShuftiPro",
                 "static": true,
                 "implicit": true,
@@ -41217,6 +42429,108 @@
           },
           {
             "kind": "Var",
+            "name": "encryptedRequest",
+            "printedName": "encryptedRequest",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Bool",
+                "printedName": "Swift.Bool",
+                "usr": "s:Sb"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:9ShuftiPro11AssignProofC16encryptedRequestSbvpZ",
+            "mangledName": "$s9ShuftiPro11AssignProofC16encryptedRequestSbvpZ",
+            "moduleName": "ShuftiPro",
+            "static": true,
+            "declAttributes": [
+              "HasInitialValue",
+              "Final",
+              "HasStorage"
+            ],
+            "hasStorage": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Bool",
+                    "printedName": "Swift.Bool",
+                    "usr": "s:Sb"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:9ShuftiPro11AssignProofC16encryptedRequestSbvgZ",
+                "mangledName": "$s9ShuftiPro11AssignProofC16encryptedRequestSbvgZ",
+                "moduleName": "ShuftiPro",
+                "static": true,
+                "implicit": true,
+                "declAttributes": [
+                  "Transparent",
+                  "Final"
+                ],
+                "accessorKind": "get"
+              },
+              {
+                "kind": "Accessor",
+                "name": "Set",
+                "printedName": "Set()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Bool",
+                    "printedName": "Swift.Bool",
+                    "usr": "s:Sb"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:9ShuftiPro11AssignProofC16encryptedRequestSbvsZ",
+                "mangledName": "$s9ShuftiPro11AssignProofC16encryptedRequestSbvsZ",
+                "moduleName": "ShuftiPro",
+                "static": true,
+                "implicit": true,
+                "declAttributes": [
+                  "Transparent",
+                  "Final"
+                ],
+                "accessorKind": "set"
+              },
+              {
+                "kind": "Accessor",
+                "name": "Modify",
+                "printedName": "Modify()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:9ShuftiPro11AssignProofC16encryptedRequestSbvMZ",
+                "mangledName": "$s9ShuftiPro11AssignProofC16encryptedRequestSbvMZ",
+                "moduleName": "ShuftiPro",
+                "static": true,
+                "implicit": true,
+                "declAttributes": [
+                  "Transparent",
+                  "Final"
+                ],
+                "accessorKind": "_modify"
+              }
+            ]
+          },
+          {
+            "kind": "Var",
             "name": "selectedSupportedType",
             "printedName": "selectedSupportedType",
             "children": [
@@ -43771,6 +45085,108 @@
                 "declKind": "Accessor",
                 "usr": "s:9ShuftiPro11AssignProofC19allowOfflineConsentSSvMZ",
                 "mangledName": "$s9ShuftiPro11AssignProofC19allowOfflineConsentSSvMZ",
+                "moduleName": "ShuftiPro",
+                "static": true,
+                "implicit": true,
+                "declAttributes": [
+                  "Transparent",
+                  "Final"
+                ],
+                "accessorKind": "_modify"
+              }
+            ]
+          },
+          {
+            "kind": "Var",
+            "name": "autoCaptureTimeCounted",
+            "printedName": "autoCaptureTimeCounted",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Int",
+                "printedName": "Swift.Int",
+                "usr": "s:Si"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:9ShuftiPro11AssignProofC22autoCaptureTimeCountedSivpZ",
+            "mangledName": "$s9ShuftiPro11AssignProofC22autoCaptureTimeCountedSivpZ",
+            "moduleName": "ShuftiPro",
+            "static": true,
+            "declAttributes": [
+              "HasInitialValue",
+              "Final",
+              "HasStorage"
+            ],
+            "hasStorage": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Int",
+                    "printedName": "Swift.Int",
+                    "usr": "s:Si"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:9ShuftiPro11AssignProofC22autoCaptureTimeCountedSivgZ",
+                "mangledName": "$s9ShuftiPro11AssignProofC22autoCaptureTimeCountedSivgZ",
+                "moduleName": "ShuftiPro",
+                "static": true,
+                "implicit": true,
+                "declAttributes": [
+                  "Transparent",
+                  "Final"
+                ],
+                "accessorKind": "get"
+              },
+              {
+                "kind": "Accessor",
+                "name": "Set",
+                "printedName": "Set()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Int",
+                    "printedName": "Swift.Int",
+                    "usr": "s:Si"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:9ShuftiPro11AssignProofC22autoCaptureTimeCountedSivsZ",
+                "mangledName": "$s9ShuftiPro11AssignProofC22autoCaptureTimeCountedSivsZ",
+                "moduleName": "ShuftiPro",
+                "static": true,
+                "implicit": true,
+                "declAttributes": [
+                  "Transparent",
+                  "Final"
+                ],
+                "accessorKind": "set"
+              },
+              {
+                "kind": "Accessor",
+                "name": "Modify",
+                "printedName": "Modify()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:9ShuftiPro11AssignProofC22autoCaptureTimeCountedSivMZ",
+                "mangledName": "$s9ShuftiPro11AssignProofC22autoCaptureTimeCountedSivMZ",
                 "moduleName": "ShuftiPro",
                 "static": true,
                 "implicit": true,
@@ -55122,6 +56538,97 @@
           },
           {
             "kind": "Var",
+            "name": "progress",
+            "printedName": "progress",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Double",
+                "printedName": "Swift.Double",
+                "usr": "s:Sd"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:9ShuftiPro9CameraVc2C8progressSdvp",
+            "mangledName": "$s9ShuftiPro9CameraVc2C8progressSdvp",
+            "moduleName": "ShuftiPro",
+            "isOpen": true,
+            "declAttributes": [
+              "Custom",
+              "HasInitialValue",
+              "HasStorage"
+            ],
+            "fixedbinaryorder": 54,
+            "hasStorage": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Double",
+                    "printedName": "Swift.Double",
+                    "usr": "s:Sd"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:9ShuftiPro9CameraVc2C8progressSdvg",
+                "mangledName": "$s9ShuftiPro9CameraVc2C8progressSdvg",
+                "moduleName": "ShuftiPro",
+                "implicit": true,
+                "isOpen": true,
+                "accessorKind": "get"
+              },
+              {
+                "kind": "Accessor",
+                "name": "Set",
+                "printedName": "Set()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Double",
+                    "printedName": "Swift.Double",
+                    "usr": "s:Sd"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:9ShuftiPro9CameraVc2C8progressSdvs",
+                "mangledName": "$s9ShuftiPro9CameraVc2C8progressSdvs",
+                "moduleName": "ShuftiPro",
+                "implicit": true,
+                "isOpen": true,
+                "accessorKind": "set"
+              },
+              {
+                "kind": "Accessor",
+                "name": "Modify",
+                "printedName": "Modify()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:9ShuftiPro9CameraVc2C8progressSdvM",
+                "mangledName": "$s9ShuftiPro9CameraVc2C8progressSdvM",
+                "moduleName": "ShuftiPro",
+                "implicit": true,
+                "isOpen": true,
+                "accessorKind": "_modify"
+              }
+            ]
+          },
+          {
+            "kind": "Var",
             "name": "faceMode",
             "printedName": "faceMode",
             "children": [
@@ -55142,7 +56649,7 @@
               "HasInitialValue",
               "HasStorage"
             ],
-            "fixedbinaryorder": 54,
+            "fixedbinaryorder": 55,
             "hasStorage": true,
             "accessors": [
               {
@@ -55233,7 +56740,7 @@
               "HasInitialValue",
               "HasStorage"
             ],
-            "fixedbinaryorder": 55,
+            "fixedbinaryorder": 56,
             "hasStorage": true,
             "accessors": [
               {
@@ -55324,7 +56831,7 @@
               "HasInitialValue",
               "HasStorage"
             ],
-            "fixedbinaryorder": 56,
+            "fixedbinaryorder": 57,
             "hasStorage": true,
             "accessors": [
               {
@@ -55415,7 +56922,7 @@
               "HasInitialValue",
               "HasStorage"
             ],
-            "fixedbinaryorder": 57,
+            "fixedbinaryorder": 58,
             "hasStorage": true,
             "accessors": [
               {
@@ -55506,7 +57013,7 @@
               "HasInitialValue",
               "HasStorage"
             ],
-            "fixedbinaryorder": 58,
+            "fixedbinaryorder": 59,
             "hasStorage": true,
             "accessors": [
               {
@@ -55597,7 +57104,7 @@
               "HasInitialValue",
               "HasStorage"
             ],
-            "fixedbinaryorder": 59,
+            "fixedbinaryorder": 60,
             "hasStorage": true,
             "accessors": [
               {
@@ -55688,7 +57195,7 @@
               "HasInitialValue",
               "HasStorage"
             ],
-            "fixedbinaryorder": 60,
+            "fixedbinaryorder": 61,
             "hasStorage": true,
             "accessors": [
               {
@@ -55779,7 +57286,7 @@
               "HasInitialValue",
               "HasStorage"
             ],
-            "fixedbinaryorder": 61,
+            "fixedbinaryorder": 62,
             "hasStorage": true,
             "accessors": [
               {
@@ -55870,7 +57377,7 @@
               "HasInitialValue",
               "HasStorage"
             ],
-            "fixedbinaryorder": 62,
+            "fixedbinaryorder": 63,
             "hasStorage": true,
             "accessors": [
               {
@@ -55961,7 +57468,7 @@
               "HasInitialValue",
               "HasStorage"
             ],
-            "fixedbinaryorder": 63,
+            "fixedbinaryorder": 64,
             "hasStorage": true,
             "accessors": [
               {
@@ -56052,7 +57559,7 @@
               "Final",
               "HasStorage"
             ],
-            "fixedbinaryorder": 64,
+            "fixedbinaryorder": 65,
             "isLet": true,
             "hasStorage": true,
             "accessors": [
@@ -56102,7 +57609,7 @@
               "HasInitialValue",
               "HasStorage"
             ],
-            "fixedbinaryorder": 65,
+            "fixedbinaryorder": 66,
             "hasStorage": true,
             "accessors": [
               {
@@ -56194,7 +57701,7 @@
               "HasStorage",
               "RawDocComment"
             ],
-            "fixedbinaryorder": 66,
+            "fixedbinaryorder": 67,
             "hasStorage": true,
             "accessors": [
               {
@@ -56285,7 +57792,7 @@
               "HasInitialValue",
               "HasStorage"
             ],
-            "fixedbinaryorder": 67,
+            "fixedbinaryorder": 68,
             "hasStorage": true,
             "accessors": [
               {
@@ -56376,7 +57883,7 @@
               "HasInitialValue",
               "HasStorage"
             ],
-            "fixedbinaryorder": 68,
+            "fixedbinaryorder": 69,
             "hasStorage": true,
             "accessors": [
               {
@@ -56467,7 +57974,7 @@
               "HasInitialValue",
               "HasStorage"
             ],
-            "fixedbinaryorder": 69,
+            "fixedbinaryorder": 70,
             "hasStorage": true,
             "accessors": [
               {
@@ -56558,7 +58065,7 @@
               "HasInitialValue",
               "HasStorage"
             ],
-            "fixedbinaryorder": 70,
+            "fixedbinaryorder": 71,
             "hasStorage": true,
             "accessors": [
               {
@@ -56649,7 +58156,7 @@
               "Final",
               "HasStorage"
             ],
-            "fixedbinaryorder": 71,
+            "fixedbinaryorder": 72,
             "isLet": true,
             "hasStorage": true,
             "accessors": [
@@ -56699,7 +58206,7 @@
               "HasInitialValue",
               "HasStorage"
             ],
-            "fixedbinaryorder": 72,
+            "fixedbinaryorder": 73,
             "hasStorage": true,
             "accessors": [
               {
@@ -56790,7 +58297,7 @@
               "HasInitialValue",
               "HasStorage"
             ],
-            "fixedbinaryorder": 73,
+            "fixedbinaryorder": 74,
             "hasStorage": true,
             "accessors": [
               {
@@ -56881,7 +58388,7 @@
               "HasInitialValue",
               "HasStorage"
             ],
-            "fixedbinaryorder": 74,
+            "fixedbinaryorder": 75,
             "hasStorage": true,
             "accessors": [
               {
@@ -56972,7 +58479,7 @@
               "HasInitialValue",
               "HasStorage"
             ],
-            "fixedbinaryorder": 75,
+            "fixedbinaryorder": 76,
             "hasStorage": true,
             "accessors": [
               {
@@ -57064,7 +58571,7 @@
               "HasStorage",
               "RawDocComment"
             ],
-            "fixedbinaryorder": 76,
+            "fixedbinaryorder": 77,
             "hasStorage": true,
             "accessors": [
               {
@@ -57155,7 +58662,7 @@
               "Final",
               "HasStorage"
             ],
-            "fixedbinaryorder": 77,
+            "fixedbinaryorder": 78,
             "isLet": true,
             "hasStorage": true,
             "accessors": [
@@ -57213,7 +58720,7 @@
               "HasInitialValue",
               "HasStorage"
             ],
-            "fixedbinaryorder": 78,
+            "fixedbinaryorder": 79,
             "hasStorage": true,
             "accessors": [
               {
@@ -57328,7 +58835,7 @@
               "HasInitialValue",
               "HasStorage"
             ],
-            "fixedbinaryorder": 79,
+            "fixedbinaryorder": 80,
             "hasStorage": true,
             "accessors": [
               {
@@ -57443,7 +58950,7 @@
               "HasInitialValue",
               "HasStorage"
             ],
-            "fixedbinaryorder": 80,
+            "fixedbinaryorder": 81,
             "hasStorage": true,
             "accessors": [
               {
@@ -57558,7 +59065,7 @@
               "HasInitialValue",
               "HasStorage"
             ],
-            "fixedbinaryorder": 81,
+            "fixedbinaryorder": 82,
             "hasStorage": true,
             "accessors": [
               {
@@ -57665,7 +59172,7 @@
               "HasInitialValue",
               "HasStorage"
             ],
-            "fixedbinaryorder": 82,
+            "fixedbinaryorder": 83,
             "hasStorage": true,
             "accessors": [
               {
@@ -57756,7 +59263,7 @@
               "HasInitialValue",
               "HasStorage"
             ],
-            "fixedbinaryorder": 83,
+            "fixedbinaryorder": 84,
             "hasStorage": true,
             "accessors": [
               {
@@ -57847,7 +59354,7 @@
               "HasInitialValue",
               "HasStorage"
             ],
-            "fixedbinaryorder": 84,
+            "fixedbinaryorder": 85,
             "hasStorage": true,
             "accessors": [
               {
@@ -57938,7 +59445,7 @@
               "HasInitialValue",
               "HasStorage"
             ],
-            "fixedbinaryorder": 85,
+            "fixedbinaryorder": 86,
             "hasStorage": true,
             "accessors": [
               {
@@ -58029,7 +59536,7 @@
               "HasInitialValue",
               "HasStorage"
             ],
-            "fixedbinaryorder": 86,
+            "fixedbinaryorder": 87,
             "hasStorage": true,
             "accessors": [
               {
@@ -58120,7 +59627,7 @@
               "HasInitialValue",
               "HasStorage"
             ],
-            "fixedbinaryorder": 87,
+            "fixedbinaryorder": 88,
             "hasStorage": true,
             "accessors": [
               {
@@ -58211,7 +59718,7 @@
               "HasInitialValue",
               "HasStorage"
             ],
-            "fixedbinaryorder": 88,
+            "fixedbinaryorder": 89,
             "hasStorage": true,
             "accessors": [
               {
@@ -58311,7 +59818,7 @@
               "HasStorage",
               "RawDocComment"
             ],
-            "fixedbinaryorder": 89,
+            "fixedbinaryorder": 90,
             "hasStorage": true,
             "accessors": [
               {
@@ -58418,7 +59925,7 @@
               "Custom",
               "HasStorage"
             ],
-            "fixedbinaryorder": 90,
+            "fixedbinaryorder": 91,
             "hasStorage": true,
             "accessors": [
               {
@@ -58509,7 +60016,7 @@
               "HasInitialValue",
               "HasStorage"
             ],
-            "fixedbinaryorder": 91,
+            "fixedbinaryorder": 92,
             "hasStorage": true,
             "accessors": [
               {
@@ -58698,7 +60205,7 @@
               "HasStorage",
               "Final"
             ],
-            "fixedbinaryorder": 92,
+            "fixedbinaryorder": 93,
             "hasStorage": true
           },
           {
@@ -58723,7 +60230,7 @@
               "HasInitialValue",
               "HasStorage"
             ],
-            "fixedbinaryorder": 93,
+            "fixedbinaryorder": 94,
             "hasStorage": true,
             "accessors": [
               {
@@ -58814,7 +60321,7 @@
               "HasInitialValue",
               "HasStorage"
             ],
-            "fixedbinaryorder": 94,
+            "fixedbinaryorder": 95,
             "hasStorage": true,
             "accessors": [
               {
@@ -58905,7 +60412,7 @@
               "Custom",
               "HasStorage"
             ],
-            "fixedbinaryorder": 95,
+            "fixedbinaryorder": 96,
             "hasStorage": true,
             "accessors": [
               {
@@ -59004,7 +60511,7 @@
               "HasInitialValue",
               "HasStorage"
             ],
-            "fixedbinaryorder": 96,
+            "fixedbinaryorder": 97,
             "hasStorage": true,
             "accessors": [
               {
@@ -59111,7 +60618,7 @@
               "HasInitialValue",
               "HasStorage"
             ],
-            "fixedbinaryorder": 97,
+            "fixedbinaryorder": 98,
             "hasStorage": true,
             "accessors": [
               {
@@ -59202,7 +60709,7 @@
               "HasInitialValue",
               "HasStorage"
             ],
-            "fixedbinaryorder": 98,
+            "fixedbinaryorder": 99,
             "hasStorage": true,
             "accessors": [
               {
@@ -64875,6 +66382,16 @@
         ]
       },
       {
+        "kind": "Import",
+        "name": "CommonCrypto",
+        "printedName": "CommonCrypto",
+        "declKind": "Import",
+        "moduleName": "ShuftiPro",
+        "declAttributes": [
+          "RawDocComment"
+        ]
+      },
+      {
         "kind": "TypeDecl",
         "name": "RequestLog",
         "printedName": "RequestLog",
@@ -65011,7 +66528,7 @@
           {
             "kind": "Function",
             "name": "sendLog",
-            "printedName": "sendLog(requestId:statusCode:data:)",
+            "printedName": "sendLog(requestId:statusCode:data:screenName:)",
             "children": [
               {
                 "kind": "TypeNominal",
@@ -65043,11 +66560,17 @@
                   }
                 ],
                 "usr": "s:Sq"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
               }
             ],
             "declKind": "Func",
-            "usr": "s:9ShuftiPro10RequestLogC04sendD09requestId10statusCode4dataySS_S2SSgtF",
-            "mangledName": "$s9ShuftiPro10RequestLogC04sendD09requestId10statusCode4dataySS_S2SSgtF",
+            "usr": "s:9ShuftiPro10RequestLogC04sendD09requestId10statusCode4data10screenNameySS_S2SSgSStF",
+            "mangledName": "$s9ShuftiPro10RequestLogC04sendD09requestId10statusCode4data10screenNameySS_S2SSgSStF",
             "moduleName": "ShuftiPro",
             "isOpen": true,
             "funcSelfKind": "NonMutating"
@@ -65145,7 +66668,7 @@
           {
             "kind": "Function",
             "name": "createLogData",
-            "printedName": "createLogData(requestId:statusCode:data:)",
+            "printedName": "createLogData(requestId:statusCode:data:screenName:)",
             "children": [
               {
                 "kind": "TypeNominal",
@@ -65183,13 +66706,116 @@
                 "name": "String",
                 "printedName": "Swift.String",
                 "usr": "s:SS"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
               }
             ],
             "declKind": "Func",
-            "usr": "s:9ShuftiPro10RequestLogC06createD4Data9requestId10statusCode4dataSDySSypGSS_S2StF",
-            "mangledName": "$s9ShuftiPro10RequestLogC06createD4Data9requestId10statusCode4dataSDySSypGSS_S2StF",
+            "usr": "s:9ShuftiPro10RequestLogC06createD4Data9requestId10statusCode4data10screenNameSDySSypGSS_S3StF",
+            "mangledName": "$s9ShuftiPro10RequestLogC06createD4Data9requestId10statusCode4data10screenNameSDySSypGSS_S3StF",
             "moduleName": "ShuftiPro",
             "isOpen": true,
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "createRawLogData",
+            "printedName": "createRawLogData(requestId:statusCode:data:screenName:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Dictionary",
+                "printedName": "[Swift.String : Any]",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "String",
+                    "printedName": "Swift.String",
+                    "usr": "s:SS"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "ProtocolComposition",
+                    "printedName": "Any"
+                  }
+                ],
+                "usr": "s:SD"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Dictionary",
+                "printedName": "[Swift.String : Any]",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "String",
+                    "printedName": "Swift.String",
+                    "usr": "s:SS"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "ProtocolComposition",
+                    "printedName": "Any"
+                  }
+                ],
+                "usr": "s:SD"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "s:9ShuftiPro10RequestLogC09createRawD4Data9requestId10statusCode4data10screenNameSDySSypGSS_SSAISStF",
+            "mangledName": "$s9ShuftiPro10RequestLogC09createRawD4Data9requestId10statusCode4data10screenNameSDySSypGSS_SSAISStF",
+            "moduleName": "ShuftiPro",
+            "isOpen": true,
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "computeSHA256Hash",
+            "printedName": "computeSHA256Hash(requestId:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "s:9ShuftiPro10RequestLogC17computeSHA256Hash9requestIdS2S_tF",
+            "mangledName": "$s9ShuftiPro10RequestLogC17computeSHA256Hash9requestIdS2S_tF",
+            "moduleName": "ShuftiPro",
+            "isOpen": true,
+            "declAttributes": [
+              "RawDocComment"
+            ],
             "funcSelfKind": "NonMutating"
           },
           {
@@ -65273,6 +66899,13 @@
         "kind": "Import",
         "name": "WebKit",
         "printedName": "WebKit",
+        "declKind": "Import",
+        "moduleName": "ShuftiPro"
+      },
+      {
+        "kind": "Import",
+        "name": "CommonCrypto",
+        "printedName": "CommonCrypto",
         "declKind": "Import",
         "moduleName": "ShuftiPro"
       },
@@ -70741,6 +72374,40 @@
             "declKind": "Func",
             "usr": "s:9ShuftiPro8ResultVcC17navigateToWebView3url10completionySS_yypctF",
             "mangledName": "$s9ShuftiPro8ResultVcC17navigateToWebView3url10completionySS_yypctF",
+            "moduleName": "ShuftiPro",
+            "isOpen": true,
+            "declAttributes": [
+              "Custom",
+              "RawDocComment"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "encryptionRequestObject",
+            "printedName": "encryptionRequestObject(secretKey:requestObject:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "NSDictionary",
+                "printedName": "Foundation.NSDictionary",
+                "usr": "c:objc(cs)NSDictionary"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "s:9ShuftiPro8ResultVcC23encryptionRequestObject9secretKey07requestG0ySS_So12NSDictionaryCtF",
+            "mangledName": "$s9ShuftiPro8ResultVcC23encryptionRequestObject9secretKey07requestG0ySS_So12NSDictionaryCtF",
             "moduleName": "ShuftiPro",
             "isOpen": true,
             "declAttributes": [
@@ -92562,6 +94229,29 @@
       },
       {
         "kind": "Var",
+        "name": "TOKEN",
+        "printedName": "TOKEN",
+        "children": [
+          {
+            "kind": "TypeNominal",
+            "name": "String",
+            "printedName": "Swift.String",
+            "usr": "s:SS"
+          }
+        ],
+        "declKind": "Var",
+        "usr": "s:9ShuftiPro5TOKENSSvp",
+        "mangledName": "$s9ShuftiPro5TOKENSSvp",
+        "moduleName": "ShuftiPro",
+        "declAttributes": [
+          "HasInitialValue",
+          "HasStorage"
+        ],
+        "isLet": true,
+        "hasStorage": true
+      },
+      {
+        "kind": "Var",
         "name": "VERIFICATION_STATUS_URL",
         "printedName": "VERIFICATION_STATUS_URL",
         "children": [
@@ -98206,112 +99896,112 @@
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/WebViewController.swift",
       "kind": "StringLiteral",
-      "offset": 507,
+      "offset": 527,
       "length": 2,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/WebViewController.swift",
       "kind": "StringLiteral",
-      "offset": 529,
+      "offset": 549,
       "length": 2,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/WebViewController.swift",
       "kind": "StringLiteral",
-      "offset": 553,
+      "offset": 573,
       "length": 2,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/WebViewController.swift",
       "kind": "StringLiteral",
-      "offset": 633,
+      "offset": 653,
       "length": 2,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/WebViewController.swift",
       "kind": "StringLiteral",
-      "offset": 671,
+      "offset": 691,
       "length": 2,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/WebViewController.swift",
       "kind": "StringLiteral",
-      "offset": 710,
+      "offset": 730,
       "length": 12,
       "value": "\"video_only\""
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/WebViewController.swift",
       "kind": "StringLiteral",
-      "offset": 762,
+      "offset": 782,
       "length": 2,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/WebViewController.swift",
       "kind": "BooleanLiteral",
-      "offset": 792,
+      "offset": 812,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/WebViewController.swift",
       "kind": "StringLiteral",
-      "offset": 828,
+      "offset": 848,
       "length": 2,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/WebViewController.swift",
       "kind": "StringLiteral",
-      "offset": 850,
+      "offset": 870,
       "length": 2,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/WebViewController.swift",
       "kind": "BooleanLiteral",
-      "offset": 879,
+      "offset": 899,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/WebViewController.swift",
       "kind": "StringLiteral",
-      "offset": 919,
+      "offset": 939,
       "length": 2,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/WebViewController.swift",
       "kind": "StringLiteral",
-      "offset": 962,
+      "offset": 982,
       "length": 2,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/WebViewController.swift",
       "kind": "StringLiteral",
-      "offset": 993,
+      "offset": 1013,
       "length": 2,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/WebViewController.swift",
       "kind": "BooleanLiteral",
-      "offset": 1029,
+      "offset": 1049,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/WebViewController.swift",
       "kind": "StringLiteral",
-      "offset": 1062,
+      "offset": 1082,
       "length": 36,
       "value": "\"https:\/\/www.mydummy.shuftipro.com\/\""
     },
@@ -98591,56 +100281,56 @@
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/CallApi.swift",
       "kind": "StringLiteral",
-      "offset": 401,
+      "offset": 421,
       "length": 2,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/CallApi.swift",
       "kind": "StringLiteral",
-      "offset": 423,
+      "offset": 443,
       "length": 2,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/CallApi.swift",
       "kind": "StringLiteral",
-      "offset": 447,
+      "offset": 467,
       "length": 2,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/CallApi.swift",
       "kind": "StringLiteral",
-      "offset": 10316,
+      "offset": 15087,
       "length": 7,
       "value": "\":#[]@\""
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/CallApi.swift",
       "kind": "StringLiteral",
-      "offset": 10421,
+      "offset": 15192,
       "length": 13,
       "value": "\"!$&'()*+,;=\""
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/CallApi.swift",
       "kind": "StringLiteral",
-      "offset": 10524,
+      "offset": 15295,
       "length": 54,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/CallApi.swift",
       "kind": "StringLiteral",
-      "offset": 10553,
+      "offset": 15324,
       "length": 1,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/CallApi.swift",
       "kind": "StringLiteral",
-      "offset": 10577,
+      "offset": 15348,
       "length": 2,
       "value": "\"\""
     },
@@ -98766,7 +100456,7 @@
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/Utils\/SocketHelper.swift",
       "kind": "StringLiteral",
-      "offset": 1164,
+      "offset": 1310,
       "length": 4,
       "value": "\"q1\""
     },
@@ -98943,7 +100633,7 @@
       "kind": "StringLiteral",
       "offset": 2631,
       "length": 7,
-      "value": "\"3.5.6\""
+      "value": "\"3.5.7\""
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/PreviewScreen\/ConfirmPhotoVc.swift",
@@ -99207,224 +100897,217 @@
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/AssignProofs.swift",
       "kind": "BooleanLiteral",
-      "offset": 939,
+      "offset": 938,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/AssignProofs.swift",
       "kind": "BooleanLiteral",
-      "offset": 988,
+      "offset": 989,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/AssignProofs.swift",
       "kind": "BooleanLiteral",
-      "offset": 1036,
+      "offset": 1037,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/AssignProofs.swift",
       "kind": "BooleanLiteral",
-      "offset": 1087,
+      "offset": 1096,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/AssignProofs.swift",
       "kind": "BooleanLiteral",
-      "offset": 1134,
+      "offset": 1144,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/AssignProofs.swift",
       "kind": "BooleanLiteral",
-      "offset": 1181,
+      "offset": 1195,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/AssignProofs.swift",
       "kind": "BooleanLiteral",
-      "offset": 1221,
+      "offset": 1242,
+      "length": 5,
+      "value": "false"
+    },
+    {
+      "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/AssignProofs.swift",
+      "kind": "BooleanLiteral",
+      "offset": 1289,
+      "length": 5,
+      "value": "false"
+    },
+    {
+      "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/AssignProofs.swift",
+      "kind": "BooleanLiteral",
+      "offset": 1329,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/AssignProofs.swift",
       "kind": "BooleanLiteral",
-      "offset": 1267,
+      "offset": 1375,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/AssignProofs.swift",
       "kind": "BooleanLiteral",
-      "offset": 1317,
+      "offset": 1425,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/AssignProofs.swift",
       "kind": "BooleanLiteral",
-      "offset": 1363,
+      "offset": 1471,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/AssignProofs.swift",
       "kind": "BooleanLiteral",
-      "offset": 1408,
+      "offset": 1516,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/AssignProofs.swift",
       "kind": "BooleanLiteral",
-      "offset": 1455,
+      "offset": 1563,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/AssignProofs.swift",
       "kind": "BooleanLiteral",
-      "offset": 1499,
+      "offset": 1607,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/AssignProofs.swift",
       "kind": "BooleanLiteral",
-      "offset": 1535,
+      "offset": 1643,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/AssignProofs.swift",
       "kind": "StringLiteral",
-      "offset": 1688,
+      "offset": 1796,
       "length": 2,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/AssignProofs.swift",
       "kind": "StringLiteral",
-      "offset": 1725,
+      "offset": 1833,
       "length": 2,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/AssignProofs.swift",
       "kind": "StringLiteral",
-      "offset": 1763,
+      "offset": 1871,
       "length": 2,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/AssignProofs.swift",
       "kind": "StringLiteral",
-      "offset": 1794,
+      "offset": 1902,
       "length": 2,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/AssignProofs.swift",
       "kind": "StringLiteral",
-      "offset": 1823,
+      "offset": 1931,
       "length": 2,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/AssignProofs.swift",
       "kind": "StringLiteral",
-      "offset": 1852,
+      "offset": 1960,
       "length": 2,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/AssignProofs.swift",
       "kind": "StringLiteral",
-      "offset": 1884,
+      "offset": 1992,
       "length": 2,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/AssignProofs.swift",
       "kind": "StringLiteral",
-      "offset": 1914,
+      "offset": 2022,
       "length": 2,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/AssignProofs.swift",
       "kind": "StringLiteral",
-      "offset": 1948,
+      "offset": 2056,
       "length": 2,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/AssignProofs.swift",
       "kind": "StringLiteral",
-      "offset": 1986,
+      "offset": 2094,
       "length": 2,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/AssignProofs.swift",
       "kind": "StringLiteral",
-      "offset": 2023,
+      "offset": 2131,
       "length": 2,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/AssignProofs.swift",
       "kind": "StringLiteral",
-      "offset": 2064,
+      "offset": 2172,
       "length": 2,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/AssignProofs.swift",
       "kind": "StringLiteral",
-      "offset": 2097,
+      "offset": 2205,
       "length": 2,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/AssignProofs.swift",
       "kind": "StringLiteral",
-      "offset": 2134,
+      "offset": 2242,
       "length": 2,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/AssignProofs.swift",
       "kind": "StringLiteral",
-      "offset": 2167,
-      "length": 2,
-      "value": "\"\""
-    },
-    {
-      "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/AssignProofs.swift",
-      "kind": "StringLiteral",
-      "offset": 2202,
-      "length": 2,
-      "value": "\"\""
-    },
-    {
-      "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/AssignProofs.swift",
-      "kind": "StringLiteral",
-      "offset": 2241,
-      "length": 2,
-      "value": "\"\""
-    },
-    {
-      "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/AssignProofs.swift",
-      "kind": "StringLiteral",
-      "offset": 2273,
+      "offset": 2275,
       "length": 2,
       "value": "\"\""
     },
@@ -99438,210 +101121,245 @@
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/AssignProofs.swift",
       "kind": "StringLiteral",
-      "offset": 2360,
+      "offset": 2349,
+      "length": 2,
+      "value": "\"\""
+    },
+    {
+      "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/AssignProofs.swift",
+      "kind": "StringLiteral",
+      "offset": 2381,
+      "length": 2,
+      "value": "\"\""
+    },
+    {
+      "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/AssignProofs.swift",
+      "kind": "StringLiteral",
+      "offset": 2418,
+      "length": 2,
+      "value": "\"\""
+    },
+    {
+      "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/AssignProofs.swift",
+      "kind": "StringLiteral",
+      "offset": 2468,
       "length": 2,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/AssignProofs.swift",
       "kind": "BooleanLiteral",
-      "offset": 2612,
+      "offset": 2720,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/AssignProofs.swift",
       "kind": "BooleanLiteral",
-      "offset": 2650,
+      "offset": 2758,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/AssignProofs.swift",
       "kind": "BooleanLiteral",
-      "offset": 2693,
+      "offset": 2801,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/AssignProofs.swift",
       "kind": "BooleanLiteral",
-      "offset": 2731,
+      "offset": 2839,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/AssignProofs.swift",
       "kind": "BooleanLiteral",
-      "offset": 2776,
+      "offset": 2884,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/AssignProofs.swift",
       "kind": "BooleanLiteral",
-      "offset": 2814,
+      "offset": 2922,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/AssignProofs.swift",
       "kind": "StringLiteral",
-      "offset": 2845,
+      "offset": 2953,
+      "length": 2,
+      "value": "\"\""
+    },
+    {
+      "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/AssignProofs.swift",
+      "kind": "BooleanLiteral",
+      "offset": 2990,
+      "length": 5,
+      "value": "false"
+    },
+    {
+      "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/AssignProofs.swift",
+      "kind": "StringLiteral",
+      "offset": 3075,
       "length": 2,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/AssignProofs.swift",
       "kind": "StringLiteral",
-      "offset": 2927,
+      "offset": 3718,
       "length": 2,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/AssignProofs.swift",
       "kind": "StringLiteral",
-      "offset": 3570,
+      "offset": 3902,
       "length": 2,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/AssignProofs.swift",
       "kind": "StringLiteral",
-      "offset": 3754,
+      "offset": 3935,
       "length": 2,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/AssignProofs.swift",
       "kind": "StringLiteral",
-      "offset": 3787,
+      "offset": 3971,
       "length": 2,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/AssignProofs.swift",
       "kind": "StringLiteral",
-      "offset": 3823,
+      "offset": 4008,
       "length": 2,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/AssignProofs.swift",
       "kind": "StringLiteral",
-      "offset": 3860,
+      "offset": 4048,
       "length": 2,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/AssignProofs.swift",
       "kind": "StringLiteral",
-      "offset": 3900,
+      "offset": 4089,
       "length": 2,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/AssignProofs.swift",
       "kind": "StringLiteral",
-      "offset": 3941,
+      "offset": 4132,
       "length": 2,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/AssignProofs.swift",
       "kind": "StringLiteral",
-      "offset": 3984,
+      "offset": 4176,
       "length": 2,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/AssignProofs.swift",
       "kind": "StringLiteral",
-      "offset": 4028,
+      "offset": 4215,
       "length": 2,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/AssignProofs.swift",
       "kind": "StringLiteral",
-      "offset": 4067,
+      "offset": 4255,
       "length": 2,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/AssignProofs.swift",
       "kind": "StringLiteral",
-      "offset": 4107,
+      "offset": 4294,
       "length": 2,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/AssignProofs.swift",
       "kind": "StringLiteral",
-      "offset": 4146,
+      "offset": 4334,
       "length": 2,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/AssignProofs.swift",
-      "kind": "StringLiteral",
-      "offset": 4186,
-      "length": 2,
-      "value": "\"\""
+      "kind": "IntegerLiteral",
+      "offset": 4382,
+      "length": 1,
+      "value": "0"
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/AssignProofs.swift",
       "kind": "StringLiteral",
-      "offset": 4271,
+      "offset": 4466,
       "length": 9,
       "value": "\"#323232\""
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/AssignProofs.swift",
       "kind": "StringLiteral",
-      "offset": 4340,
+      "offset": 4535,
       "length": 9,
       "value": "\"#FFFFFF\""
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/AssignProofs.swift",
       "kind": "StringLiteral",
-      "offset": 4413,
+      "offset": 4608,
       "length": 9,
       "value": "\"#2C6CDD\""
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/AssignProofs.swift",
       "kind": "StringLiteral",
-      "offset": 4484,
+      "offset": 4679,
       "length": 9,
       "value": "\"#FFFFFF\""
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/AssignProofs.swift",
       "kind": "StringLiteral",
-      "offset": 4552,
+      "offset": 4747,
       "length": 9,
       "value": "\"#000000\""
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/AssignProofs.swift",
       "kind": "StringLiteral",
-      "offset": 4623,
+      "offset": 4818,
       "length": 9,
       "value": "\"#EF5350\""
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/AssignProofs.swift",
       "kind": "StringLiteral",
-      "offset": 4696,
+      "offset": 4891,
       "length": 9,
       "value": "\"#2B6AD8\""
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/AssignProofs.swift",
       "kind": "StringLiteral",
-      "offset": 4794,
+      "offset": 4989,
       "length": 9,
       "value": "\"#1D2C42\""
     },
@@ -99773,22 +101491,22 @@
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/CameraScreen\/CameraVc2.swift",
+      "kind": "FloatLiteral",
+      "offset": 3494,
+      "length": 3,
+      "value": "1.0"
+    },
+    {
+      "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/CameraScreen\/CameraVc2.swift",
       "kind": "BooleanLiteral",
-      "offset": 3485,
+      "offset": 3517,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/CameraScreen\/CameraVc2.swift",
       "kind": "BooleanLiteral",
-      "offset": 3514,
-      "length": 5,
-      "value": "false"
-    },
-    {
-      "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/CameraScreen\/CameraVc2.swift",
-      "kind": "BooleanLiteral",
-      "offset": 3547,
+      "offset": 3546,
       "length": 5,
       "value": "false"
     },
@@ -99802,14 +101520,14 @@
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/CameraScreen\/CameraVc2.swift",
       "kind": "BooleanLiteral",
-      "offset": 3615,
+      "offset": 3611,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/CameraScreen\/CameraVc2.swift",
       "kind": "BooleanLiteral",
-      "offset": 3648,
+      "offset": 3647,
       "length": 5,
       "value": "false"
     },
@@ -99823,1848 +101541,1848 @@
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/CameraScreen\/CameraVc2.swift",
       "kind": "BooleanLiteral",
-      "offset": 3708,
+      "offset": 3712,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/CameraScreen\/CameraVc2.swift",
       "kind": "BooleanLiteral",
-      "offset": 3736,
+      "offset": 3740,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/CameraScreen\/CameraVc2.swift",
       "kind": "BooleanLiteral",
-      "offset": 3771,
+      "offset": 3768,
+      "length": 5,
+      "value": "false"
+    },
+    {
+      "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/CameraScreen\/CameraVc2.swift",
+      "kind": "BooleanLiteral",
+      "offset": 3803,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/CameraScreen\/CameraVc2.swift",
       "kind": "IntegerLiteral",
-      "offset": 3804,
+      "offset": 3836,
       "length": 2,
       "value": "10"
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/CameraScreen\/CameraVc2.swift",
       "kind": "BooleanLiteral",
-      "offset": 3898,
+      "offset": 3930,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/CameraScreen\/CameraVc2.swift",
       "kind": "StringLiteral",
-      "offset": 4108,
+      "offset": 4140,
       "length": 2,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/CameraScreen\/CameraVc2.swift",
       "kind": "BooleanLiteral",
-      "offset": 4173,
+      "offset": 4205,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/CameraScreen\/CameraVc2.swift",
       "kind": "BooleanLiteral",
-      "offset": 4203,
+      "offset": 4235,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/CameraScreen\/CameraVc2.swift",
       "kind": "BooleanLiteral",
-      "offset": 4232,
+      "offset": 4264,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/CameraScreen\/CameraVc2.swift",
       "kind": "BooleanLiteral",
-      "offset": 4268,
+      "offset": 4300,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/CameraScreen\/CameraVc2.swift",
       "kind": "IntegerLiteral",
-      "offset": 4531,
+      "offset": 4563,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/CameraScreen\/CameraVc2.swift",
       "kind": "IntegerLiteral",
-      "offset": 4819,
+      "offset": 4851,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/CameraScreen\/CameraVc2.swift",
       "kind": "FloatLiteral",
-      "offset": 4843,
+      "offset": 4875,
       "length": 3,
       "value": "0.0"
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/CameraScreen\/CameraVc2.swift",
       "kind": "BooleanLiteral",
-      "offset": 4882,
+      "offset": 4914,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/CameraScreen\/CameraVc2.swift",
       "kind": "BooleanLiteral",
-      "offset": 4918,
+      "offset": 4950,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/CameraScreen\/CameraVc2.swift",
       "kind": "StringLiteral",
-      "offset": 4960,
+      "offset": 4992,
       "length": 2,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/CameraScreen\/CameraVc2.swift",
       "kind": "StringLiteral",
-      "offset": 4993,
+      "offset": 5025,
       "length": 2,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/CameraScreen\/CameraVc2.swift",
       "kind": "StringLiteral",
-      "offset": 5399,
+      "offset": 5431,
       "length": 2,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/CameraScreen\/CameraVc2.swift",
       "kind": "BooleanLiteral",
-      "offset": 5567,
+      "offset": 5599,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/CameraScreen\/CameraVc2.swift",
       "kind": "BooleanLiteral",
-      "offset": 5597,
+      "offset": 5629,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/CameraScreen\/CameraVc2.swift",
       "kind": "BooleanLiteral",
-      "offset": 5689,
+      "offset": 5721,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/CameraScreen\/CameraVc2.swift",
       "kind": "StringLiteral",
-      "offset": 5635,
+      "offset": 5667,
       "length": 2,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/CameraScreen\/CameraVc2.swift",
       "kind": "StringLiteral",
-      "offset": 6352,
+      "offset": 6384,
       "length": 2,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/CameraScreen\/CameraVc2.swift",
       "kind": "BooleanLiteral",
-      "offset": 6387,
+      "offset": 6419,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/Exteniosns\/Exteniosns.swift",
       "kind": "FloatLiteral",
-      "offset": 28488,
+      "offset": 29148,
       "length": 11,
       "value": "0.168627451"
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/Exteniosns\/Exteniosns.swift",
       "kind": "FloatLiteral",
-      "offset": 28508,
+      "offset": 29168,
       "length": 12,
       "value": "0.4156862745"
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/Exteniosns\/Exteniosns.swift",
       "kind": "FloatLiteral",
-      "offset": 28528,
+      "offset": 29188,
       "length": 12,
       "value": "0.8470588235"
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/Exteniosns\/Exteniosns.swift",
       "kind": "FloatLiteral",
-      "offset": 28549,
+      "offset": 29209,
       "length": 3,
       "value": "0.5"
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/Exteniosns\/Exteniosns.swift",
       "kind": "FloatLiteral",
-      "offset": 28595,
+      "offset": 29255,
       "length": 11,
       "value": "0.168627451"
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/Exteniosns\/Exteniosns.swift",
       "kind": "FloatLiteral",
-      "offset": 28615,
+      "offset": 29275,
       "length": 12,
       "value": "0.4156862745"
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/Exteniosns\/Exteniosns.swift",
       "kind": "FloatLiteral",
-      "offset": 28635,
+      "offset": 29295,
       "length": 12,
       "value": "0.8470588235"
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/Exteniosns\/Exteniosns.swift",
       "kind": "IntegerLiteral",
-      "offset": 28656,
+      "offset": 29316,
       "length": 1,
       "value": "1"
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/Exteniosns\/Exteniosns.swift",
       "kind": "FloatLiteral",
-      "offset": 28703,
+      "offset": 29363,
       "length": 11,
       "value": "0.168627451"
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/Exteniosns\/Exteniosns.swift",
       "kind": "FloatLiteral",
-      "offset": 28723,
+      "offset": 29383,
       "length": 12,
       "value": "0.4156862745"
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/Exteniosns\/Exteniosns.swift",
       "kind": "FloatLiteral",
-      "offset": 28743,
+      "offset": 29403,
       "length": 12,
       "value": "0.8470588235"
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/Exteniosns\/Exteniosns.swift",
       "kind": "IntegerLiteral",
-      "offset": 28764,
+      "offset": 29424,
       "length": 1,
       "value": "1"
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/Exteniosns\/Exteniosns.swift",
       "kind": "FloatLiteral",
-      "offset": 28811,
+      "offset": 29471,
       "length": 12,
       "value": "0.1137254902"
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/Exteniosns\/Exteniosns.swift",
       "kind": "FloatLiteral",
-      "offset": 28832,
+      "offset": 29492,
       "length": 12,
       "value": "0.1725490196"
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/Exteniosns\/Exteniosns.swift",
       "kind": "FloatLiteral",
-      "offset": 28852,
+      "offset": 29512,
       "length": 12,
       "value": "0.2588235294"
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/Exteniosns\/Exteniosns.swift",
       "kind": "IntegerLiteral",
-      "offset": 28873,
+      "offset": 29533,
       "length": 1,
       "value": "1"
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/Exteniosns\/Exteniosns.swift",
       "kind": "FloatLiteral",
-      "offset": 28923,
+      "offset": 29583,
       "length": 12,
       "value": "0.4431372549"
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/Exteniosns\/Exteniosns.swift",
       "kind": "FloatLiteral",
-      "offset": 28944,
+      "offset": 29604,
       "length": 12,
       "value": "0.5019607843"
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/Exteniosns\/Exteniosns.swift",
       "kind": "FloatLiteral",
-      "offset": 28964,
+      "offset": 29624,
       "length": 12,
       "value": "0.6862745098"
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/Exteniosns\/Exteniosns.swift",
       "kind": "FloatLiteral",
-      "offset": 28985,
+      "offset": 29645,
       "length": 12,
       "value": "0.8462514309"
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/Exteniosns\/Exteniosns.swift",
       "kind": "FloatLiteral",
-      "offset": 29042,
+      "offset": 29702,
       "length": 12,
       "value": "0.1568627451"
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/Exteniosns\/Exteniosns.swift",
       "kind": "FloatLiteral",
-      "offset": 29063,
+      "offset": 29723,
       "length": 12,
       "value": "0.6549019608"
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/Exteniosns\/Exteniosns.swift",
       "kind": "FloatLiteral",
-      "offset": 29083,
+      "offset": 29743,
       "length": 12,
       "value": "0.2705882353"
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/Exteniosns\/Exteniosns.swift",
       "kind": "IntegerLiteral",
-      "offset": 29104,
+      "offset": 29764,
       "length": 1,
       "value": "1"
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/Exteniosns\/Exteniosns.swift",
       "kind": "IntegerLiteral",
-      "offset": 29150,
+      "offset": 29810,
       "length": 1,
       "value": "1"
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/Exteniosns\/Exteniosns.swift",
       "kind": "IntegerLiteral",
-      "offset": 29160,
+      "offset": 29820,
       "length": 1,
       "value": "1"
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/Exteniosns\/Exteniosns.swift",
       "kind": "IntegerLiteral",
-      "offset": 29169,
+      "offset": 29829,
       "length": 1,
       "value": "1"
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/Exteniosns\/Exteniosns.swift",
       "kind": "FloatLiteral",
-      "offset": 29179,
+      "offset": 29839,
       "length": 12,
       "value": "0.8462514309"
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/Exteniosns\/Exteniosns.swift",
       "kind": "FloatLiteral",
-      "offset": 29240,
+      "offset": 29900,
       "length": 11,
       "value": "0.937254902"
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/Exteniosns\/Exteniosns.swift",
       "kind": "FloatLiteral",
-      "offset": 29260,
+      "offset": 29920,
       "length": 12,
       "value": "0.9450980392"
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/Exteniosns\/Exteniosns.swift",
       "kind": "FloatLiteral",
-      "offset": 29280,
+      "offset": 29940,
       "length": 12,
       "value": "0.9647058824"
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/Exteniosns\/Exteniosns.swift",
       "kind": "FloatLiteral",
-      "offset": 29301,
+      "offset": 29961,
       "length": 12,
       "value": "0.8462514309"
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/Exteniosns\/Exteniosns.swift",
       "kind": "FloatLiteral",
-      "offset": 29363,
+      "offset": 30023,
       "length": 12,
       "value": "0.5450980392"
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/Exteniosns\/Exteniosns.swift",
       "kind": "FloatLiteral",
-      "offset": 29384,
+      "offset": 30044,
       "length": 12,
       "value": "0.7647058824"
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/Exteniosns\/Exteniosns.swift",
       "kind": "FloatLiteral",
-      "offset": 29404,
+      "offset": 30064,
       "length": 12,
       "value": "0.2901960784"
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/Exteniosns\/Exteniosns.swift",
       "kind": "IntegerLiteral",
-      "offset": 29425,
+      "offset": 30085,
       "length": 1,
       "value": "1"
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/Exteniosns\/Exteniosns.swift",
       "kind": "IntegerLiteral",
-      "offset": 29469,
+      "offset": 30129,
       "length": 1,
       "value": "1"
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/Exteniosns\/Exteniosns.swift",
       "kind": "FloatLiteral",
-      "offset": 29479,
+      "offset": 30139,
       "length": 12,
       "value": "0.2705882353"
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/Exteniosns\/Exteniosns.swift",
       "kind": "FloatLiteral",
-      "offset": 29499,
+      "offset": 30159,
       "length": 12,
       "value": "0.2274509804"
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/Exteniosns\/Exteniosns.swift",
       "kind": "IntegerLiteral",
-      "offset": 29520,
+      "offset": 30180,
       "length": 1,
       "value": "1"
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/Exteniosns\/Exteniosns.swift",
       "kind": "FloatLiteral",
-      "offset": 29571,
+      "offset": 30231,
       "length": 12,
       "value": "0.9411764706"
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/Exteniosns\/Exteniosns.swift",
       "kind": "FloatLiteral",
-      "offset": 29592,
+      "offset": 30252,
       "length": 12,
       "value": "0.9411764706"
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/Exteniosns\/Exteniosns.swift",
       "kind": "FloatLiteral",
-      "offset": 29612,
+      "offset": 30272,
       "length": 12,
       "value": "0.9411764706"
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/Exteniosns\/Exteniosns.swift",
       "kind": "IntegerLiteral",
-      "offset": 29633,
+      "offset": 30293,
       "length": 1,
       "value": "1"
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/Exteniosns\/Exteniosns.swift",
       "kind": "FloatLiteral",
-      "offset": 29684,
+      "offset": 30344,
       "length": 12,
       "value": "0.7176470588"
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/Exteniosns\/Exteniosns.swift",
       "kind": "FloatLiteral",
-      "offset": 29705,
+      "offset": 30365,
       "length": 12,
       "value": "0.7176470588"
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/Exteniosns\/Exteniosns.swift",
       "kind": "FloatLiteral",
-      "offset": 29725,
+      "offset": 30385,
       "length": 12,
       "value": "0.7176470588"
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/Exteniosns\/Exteniosns.swift",
       "kind": "FloatLiteral",
-      "offset": 29746,
+      "offset": 30406,
       "length": 12,
       "value": "0.3966004833"
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/Exteniosns\/Exteniosns.swift",
       "kind": "BooleanLiteral",
-      "offset": 33731,
+      "offset": 34391,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/Exteniosns\/Exteniosns.swift",
       "kind": "FloatLiteral",
-      "offset": 44399,
+      "offset": 45059,
       "length": 3,
       "value": "0.8"
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/Exteniosns\/Exteniosns.swift",
       "kind": "StringLiteral",
-      "offset": 44446,
+      "offset": 45106,
       "length": 18,
       "value": "\"Vision Detectors\""
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/Exteniosns\/Exteniosns.swift",
       "kind": "StringLiteral",
-      "offset": 44505,
+      "offset": 45165,
       "length": 19,
       "value": "\"Select a detector\""
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/Exteniosns\/Exteniosns.swift",
       "kind": "StringLiteral",
-      "offset": 44564,
+      "offset": 45224,
       "length": 8,
       "value": "\"Cancel\""
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/Exteniosns\/Exteniosns.swift",
       "kind": "StringLiteral",
-      "offset": 44616,
+      "offset": 45276,
       "length": 54,
       "value": "\"com.google.mlkit.visiondetector.VideoDataOutputQueue\""
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/Exteniosns\/Exteniosns.swift",
       "kind": "StringLiteral",
-      "offset": 44706,
+      "offset": 45366,
       "length": 46,
       "value": "\"com.google.mlkit.visiondetector.SessionQueue\""
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/Exteniosns\/Exteniosns.swift",
       "kind": "StringLiteral",
-      "offset": 44787,
+      "offset": 45447,
       "length": 12,
       "value": "\"No Results\""
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/Exteniosns\/Exteniosns.swift",
       "kind": "FloatLiteral",
-      "offset": 44905,
+      "offset": 45565,
       "length": 4,
       "value": "0.75"
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/Exteniosns\/Exteniosns.swift",
       "kind": "FloatLiteral",
-      "offset": 44951,
+      "offset": 45611,
       "length": 3,
       "value": "4.0"
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/Exteniosns\/Exteniosns.swift",
       "kind": "FloatLiteral",
-      "offset": 44991,
+      "offset": 45651,
       "length": 3,
       "value": "3.0"
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/Exteniosns\/Exteniosns.swift",
       "kind": "FloatLiteral",
-      "offset": 45035,
+      "offset": 45695,
       "length": 3,
       "value": "1.0"
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/Exteniosns\/Exteniosns.swift",
       "kind": "FloatLiteral",
-      "offset": 45073,
+      "offset": 45733,
       "length": 4,
       "value": "10.0"
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/Exteniosns\/Exteniosns.swift",
       "kind": "FloatLiteral",
-      "offset": 45123,
+      "offset": 45783,
       "length": 5,
       "value": "200.0"
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/Exteniosns\/Exteniosns.swift",
       "kind": "IntegerLiteral",
-      "offset": 45164,
+      "offset": 45824,
       "length": 1,
       "value": "5"
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/Exteniosns\/Exteniosns.swift",
       "kind": "FloatLiteral",
-      "offset": 45206,
+      "offset": 45866,
       "length": 3,
       "value": "0.4"
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/Exteniosns\/Exteniosns.swift",
       "kind": "FloatLiteral",
-      "offset": 45250,
+      "offset": 45910,
       "length": 3,
       "value": "0.1"
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/Exteniosns\/Exteniosns.swift",
       "kind": "FloatLiteral",
-      "offset": 45298,
+      "offset": 45958,
       "length": 3,
       "value": "0.5"
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/Exteniosns\/Exteniosns.swift",
       "kind": "FloatLiteral",
-      "offset": 45347,
+      "offset": 46007,
       "length": 3,
       "value": "0.8"
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/Exteniosns\/Exteniosns.swift",
       "kind": "StringLiteral",
-      "offset": 51958,
+      "offset": 52618,
       "length": 2,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/Exteniosns\/Exteniosns.swift",
       "kind": "IntegerLiteral",
-      "offset": 52050,
+      "offset": 52710,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/Exteniosns\/Exteniosns.swift",
       "kind": "StringLiteral",
-      "offset": 52336,
+      "offset": 52996,
       "length": 9,
       "value": "\"iPod5,1\""
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/Exteniosns\/Exteniosns.swift",
       "kind": "StringLiteral",
-      "offset": 52386,
+      "offset": 53046,
       "length": 29,
       "value": "\"iPod touch (5th generation)\""
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/Exteniosns\/Exteniosns.swift",
       "kind": "StringLiteral",
-      "offset": 52433,
+      "offset": 53093,
       "length": 9,
       "value": "\"iPod7,1\""
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/Exteniosns\/Exteniosns.swift",
       "kind": "StringLiteral",
-      "offset": 52483,
+      "offset": 53143,
       "length": 29,
       "value": "\"iPod touch (6th generation)\""
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/Exteniosns\/Exteniosns.swift",
       "kind": "StringLiteral",
-      "offset": 52530,
+      "offset": 53190,
       "length": 9,
       "value": "\"iPod9,1\""
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/Exteniosns\/Exteniosns.swift",
       "kind": "StringLiteral",
-      "offset": 52580,
+      "offset": 53240,
       "length": 29,
       "value": "\"iPod touch (7th generation)\""
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/Exteniosns\/Exteniosns.swift",
       "kind": "StringLiteral",
-      "offset": 52627,
+      "offset": 53287,
       "length": 11,
       "value": "\"iPhone3,1\""
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/Exteniosns\/Exteniosns.swift",
       "kind": "StringLiteral",
-      "offset": 52640,
+      "offset": 53300,
       "length": 11,
       "value": "\"iPhone3,2\""
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/Exteniosns\/Exteniosns.swift",
       "kind": "StringLiteral",
-      "offset": 52653,
+      "offset": 53313,
       "length": 11,
       "value": "\"iPhone3,3\""
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/Exteniosns\/Exteniosns.swift",
       "kind": "StringLiteral",
-      "offset": 52677,
+      "offset": 53337,
       "length": 10,
       "value": "\"iPhone 4\""
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/Exteniosns\/Exteniosns.swift",
       "kind": "StringLiteral",
-      "offset": 52705,
+      "offset": 53365,
       "length": 11,
       "value": "\"iPhone4,1\""
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/Exteniosns\/Exteniosns.swift",
       "kind": "StringLiteral",
-      "offset": 52755,
+      "offset": 53415,
       "length": 11,
       "value": "\"iPhone 4s\""
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/Exteniosns\/Exteniosns.swift",
       "kind": "StringLiteral",
-      "offset": 52784,
+      "offset": 53444,
       "length": 11,
       "value": "\"iPhone5,1\""
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/Exteniosns\/Exteniosns.swift",
       "kind": "StringLiteral",
-      "offset": 52797,
+      "offset": 53457,
       "length": 11,
       "value": "\"iPhone5,2\""
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/Exteniosns\/Exteniosns.swift",
       "kind": "StringLiteral",
-      "offset": 52834,
+      "offset": 53494,
       "length": 10,
       "value": "\"iPhone 5\""
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/Exteniosns\/Exteniosns.swift",
       "kind": "StringLiteral",
-      "offset": 52862,
+      "offset": 53522,
       "length": 11,
       "value": "\"iPhone5,3\""
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/Exteniosns\/Exteniosns.swift",
       "kind": "StringLiteral",
-      "offset": 52875,
+      "offset": 53535,
       "length": 11,
       "value": "\"iPhone5,4\""
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/Exteniosns\/Exteniosns.swift",
       "kind": "StringLiteral",
-      "offset": 52912,
+      "offset": 53572,
       "length": 11,
       "value": "\"iPhone 5c\""
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/Exteniosns\/Exteniosns.swift",
       "kind": "StringLiteral",
-      "offset": 52941,
+      "offset": 53601,
       "length": 11,
       "value": "\"iPhone6,1\""
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/Exteniosns\/Exteniosns.swift",
       "kind": "StringLiteral",
-      "offset": 52954,
+      "offset": 53614,
       "length": 11,
       "value": "\"iPhone6,2\""
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/Exteniosns\/Exteniosns.swift",
       "kind": "StringLiteral",
-      "offset": 52991,
+      "offset": 53651,
       "length": 11,
       "value": "\"iPhone 5s\""
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/Exteniosns\/Exteniosns.swift",
       "kind": "StringLiteral",
-      "offset": 53020,
+      "offset": 53680,
       "length": 11,
       "value": "\"iPhone7,2\""
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/Exteniosns\/Exteniosns.swift",
       "kind": "StringLiteral",
-      "offset": 53070,
+      "offset": 53730,
       "length": 10,
       "value": "\"iPhone 6\""
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/Exteniosns\/Exteniosns.swift",
       "kind": "StringLiteral",
-      "offset": 53098,
+      "offset": 53758,
       "length": 11,
       "value": "\"iPhone7,1\""
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/Exteniosns\/Exteniosns.swift",
       "kind": "StringLiteral",
-      "offset": 53148,
+      "offset": 53808,
       "length": 15,
       "value": "\"iPhone 6 Plus\""
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/Exteniosns\/Exteniosns.swift",
       "kind": "StringLiteral",
-      "offset": 53181,
+      "offset": 53841,
       "length": 11,
       "value": "\"iPhone8,1\""
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/Exteniosns\/Exteniosns.swift",
       "kind": "StringLiteral",
-      "offset": 53231,
+      "offset": 53891,
       "length": 11,
       "value": "\"iPhone 6s\""
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/Exteniosns\/Exteniosns.swift",
       "kind": "StringLiteral",
-      "offset": 53260,
+      "offset": 53920,
       "length": 11,
       "value": "\"iPhone8,2\""
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/Exteniosns\/Exteniosns.swift",
       "kind": "StringLiteral",
-      "offset": 53310,
+      "offset": 53970,
       "length": 16,
       "value": "\"iPhone 6s Plus\""
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/Exteniosns\/Exteniosns.swift",
       "kind": "StringLiteral",
-      "offset": 53344,
+      "offset": 54004,
       "length": 11,
       "value": "\"iPhone8,4\""
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/Exteniosns\/Exteniosns.swift",
       "kind": "StringLiteral",
-      "offset": 53394,
+      "offset": 54054,
       "length": 11,
       "value": "\"iPhone SE\""
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/Exteniosns\/Exteniosns.swift",
       "kind": "StringLiteral",
-      "offset": 53423,
+      "offset": 54083,
       "length": 11,
       "value": "\"iPhone9,1\""
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/Exteniosns\/Exteniosns.swift",
       "kind": "StringLiteral",
-      "offset": 53436,
+      "offset": 54096,
       "length": 11,
       "value": "\"iPhone9,3\""
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/Exteniosns\/Exteniosns.swift",
       "kind": "StringLiteral",
-      "offset": 53473,
+      "offset": 54133,
       "length": 10,
       "value": "\"iPhone 7\""
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/Exteniosns\/Exteniosns.swift",
       "kind": "StringLiteral",
-      "offset": 53501,
+      "offset": 54161,
       "length": 11,
       "value": "\"iPhone9,2\""
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/Exteniosns\/Exteniosns.swift",
       "kind": "StringLiteral",
-      "offset": 53514,
+      "offset": 54174,
       "length": 11,
       "value": "\"iPhone9,4\""
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/Exteniosns\/Exteniosns.swift",
       "kind": "StringLiteral",
-      "offset": 53551,
+      "offset": 54211,
       "length": 15,
       "value": "\"iPhone 7 Plus\""
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/Exteniosns\/Exteniosns.swift",
       "kind": "StringLiteral",
-      "offset": 53584,
+      "offset": 54244,
       "length": 12,
       "value": "\"iPhone10,1\""
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/Exteniosns\/Exteniosns.swift",
       "kind": "StringLiteral",
-      "offset": 53598,
+      "offset": 54258,
       "length": 12,
       "value": "\"iPhone10,4\""
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/Exteniosns\/Exteniosns.swift",
       "kind": "StringLiteral",
-      "offset": 53634,
+      "offset": 54294,
       "length": 10,
       "value": "\"iPhone 8\""
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/Exteniosns\/Exteniosns.swift",
       "kind": "StringLiteral",
-      "offset": 53662,
+      "offset": 54322,
       "length": 12,
       "value": "\"iPhone10,2\""
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/Exteniosns\/Exteniosns.swift",
       "kind": "StringLiteral",
-      "offset": 53676,
+      "offset": 54336,
       "length": 12,
       "value": "\"iPhone10,5\""
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/Exteniosns\/Exteniosns.swift",
       "kind": "StringLiteral",
-      "offset": 53712,
+      "offset": 54372,
       "length": 15,
       "value": "\"iPhone 8 Plus\""
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/Exteniosns\/Exteniosns.swift",
       "kind": "StringLiteral",
-      "offset": 53745,
+      "offset": 54405,
       "length": 12,
       "value": "\"iPhone10,3\""
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/Exteniosns\/Exteniosns.swift",
       "kind": "StringLiteral",
-      "offset": 53759,
+      "offset": 54419,
       "length": 12,
       "value": "\"iPhone10,6\""
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/Exteniosns\/Exteniosns.swift",
       "kind": "StringLiteral",
-      "offset": 53795,
+      "offset": 54455,
       "length": 10,
       "value": "\"iPhone X\""
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/Exteniosns\/Exteniosns.swift",
       "kind": "StringLiteral",
-      "offset": 53823,
+      "offset": 54483,
       "length": 12,
       "value": "\"iPhone11,2\""
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/Exteniosns\/Exteniosns.swift",
       "kind": "StringLiteral",
-      "offset": 53873,
+      "offset": 54533,
       "length": 11,
       "value": "\"iPhone XS\""
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/Exteniosns\/Exteniosns.swift",
       "kind": "StringLiteral",
-      "offset": 53902,
+      "offset": 54562,
       "length": 12,
       "value": "\"iPhone11,4\""
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/Exteniosns\/Exteniosns.swift",
       "kind": "StringLiteral",
-      "offset": 53916,
+      "offset": 54576,
       "length": 12,
       "value": "\"iPhone11,6\""
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/Exteniosns\/Exteniosns.swift",
       "kind": "StringLiteral",
-      "offset": 53952,
+      "offset": 54612,
       "length": 15,
       "value": "\"iPhone XS Max\""
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/Exteniosns\/Exteniosns.swift",
       "kind": "StringLiteral",
-      "offset": 53985,
+      "offset": 54645,
       "length": 12,
       "value": "\"iPhone11,8\""
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/Exteniosns\/Exteniosns.swift",
       "kind": "StringLiteral",
-      "offset": 54035,
+      "offset": 54695,
       "length": 11,
       "value": "\"iPhone XR\""
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/Exteniosns\/Exteniosns.swift",
       "kind": "StringLiteral",
-      "offset": 54064,
+      "offset": 54724,
       "length": 12,
       "value": "\"iPhone12,1\""
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/Exteniosns\/Exteniosns.swift",
       "kind": "StringLiteral",
-      "offset": 54114,
+      "offset": 54774,
       "length": 11,
       "value": "\"iPhone 11\""
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/Exteniosns\/Exteniosns.swift",
       "kind": "StringLiteral",
-      "offset": 54143,
+      "offset": 54803,
       "length": 12,
       "value": "\"iPhone12,3\""
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/Exteniosns\/Exteniosns.swift",
       "kind": "StringLiteral",
-      "offset": 54193,
+      "offset": 54853,
       "length": 15,
       "value": "\"iPhone 11 Pro\""
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/Exteniosns\/Exteniosns.swift",
       "kind": "StringLiteral",
-      "offset": 54226,
+      "offset": 54886,
       "length": 12,
       "value": "\"iPhone12,5\""
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/Exteniosns\/Exteniosns.swift",
       "kind": "StringLiteral",
-      "offset": 54276,
+      "offset": 54936,
       "length": 19,
       "value": "\"iPhone 11 Pro Max\""
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/Exteniosns\/Exteniosns.swift",
       "kind": "StringLiteral",
-      "offset": 54313,
+      "offset": 54973,
       "length": 12,
       "value": "\"iPhone12,8\""
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/Exteniosns\/Exteniosns.swift",
       "kind": "StringLiteral",
-      "offset": 54363,
+      "offset": 55023,
       "length": 28,
       "value": "\"iPhone SE (2nd generation)\""
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/Exteniosns\/Exteniosns.swift",
       "kind": "StringLiteral",
-      "offset": 54409,
+      "offset": 55069,
       "length": 12,
       "value": "\"iPhone13,1\""
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/Exteniosns\/Exteniosns.swift",
       "kind": "StringLiteral",
-      "offset": 54459,
+      "offset": 55119,
       "length": 16,
       "value": "\"iPhone 12 mini\""
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/Exteniosns\/Exteniosns.swift",
       "kind": "StringLiteral",
-      "offset": 54493,
+      "offset": 55153,
       "length": 12,
       "value": "\"iPhone13,2\""
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/Exteniosns\/Exteniosns.swift",
       "kind": "StringLiteral",
-      "offset": 54543,
+      "offset": 55203,
       "length": 11,
       "value": "\"iPhone 12\""
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/Exteniosns\/Exteniosns.swift",
       "kind": "StringLiteral",
-      "offset": 54572,
+      "offset": 55232,
       "length": 12,
       "value": "\"iPhone13,3\""
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/Exteniosns\/Exteniosns.swift",
       "kind": "StringLiteral",
-      "offset": 54622,
+      "offset": 55282,
       "length": 15,
       "value": "\"iPhone 12 Pro\""
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/Exteniosns\/Exteniosns.swift",
       "kind": "StringLiteral",
-      "offset": 54655,
+      "offset": 55315,
       "length": 12,
       "value": "\"iPhone13,4\""
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/Exteniosns\/Exteniosns.swift",
       "kind": "StringLiteral",
-      "offset": 54705,
+      "offset": 55365,
       "length": 19,
       "value": "\"iPhone 12 Pro Max\""
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/Exteniosns\/Exteniosns.swift",
       "kind": "StringLiteral",
-      "offset": 54742,
+      "offset": 55402,
       "length": 9,
       "value": "\"iPad2,1\""
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/Exteniosns\/Exteniosns.swift",
       "kind": "StringLiteral",
-      "offset": 54753,
+      "offset": 55413,
       "length": 9,
       "value": "\"iPad2,2\""
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/Exteniosns\/Exteniosns.swift",
       "kind": "StringLiteral",
-      "offset": 54764,
+      "offset": 55424,
       "length": 9,
       "value": "\"iPad2,3\""
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/Exteniosns\/Exteniosns.swift",
       "kind": "StringLiteral",
-      "offset": 54775,
+      "offset": 55435,
       "length": 9,
       "value": "\"iPad2,4\""
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/Exteniosns\/Exteniosns.swift",
       "kind": "StringLiteral",
-      "offset": 54792,
+      "offset": 55452,
       "length": 8,
       "value": "\"iPad 2\""
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/Exteniosns\/Exteniosns.swift",
       "kind": "StringLiteral",
-      "offset": 54818,
+      "offset": 55478,
       "length": 9,
       "value": "\"iPad3,1\""
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/Exteniosns\/Exteniosns.swift",
       "kind": "StringLiteral",
-      "offset": 54829,
+      "offset": 55489,
       "length": 9,
       "value": "\"iPad3,2\""
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/Exteniosns\/Exteniosns.swift",
       "kind": "StringLiteral",
-      "offset": 54840,
+      "offset": 55500,
       "length": 9,
       "value": "\"iPad3,3\""
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/Exteniosns\/Exteniosns.swift",
       "kind": "StringLiteral",
-      "offset": 54868,
+      "offset": 55528,
       "length": 23,
       "value": "\"iPad (3rd generation)\""
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/Exteniosns\/Exteniosns.swift",
       "kind": "StringLiteral",
-      "offset": 54909,
+      "offset": 55569,
       "length": 9,
       "value": "\"iPad3,4\""
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/Exteniosns\/Exteniosns.swift",
       "kind": "StringLiteral",
-      "offset": 54920,
+      "offset": 55580,
       "length": 9,
       "value": "\"iPad3,5\""
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/Exteniosns\/Exteniosns.swift",
       "kind": "StringLiteral",
-      "offset": 54931,
+      "offset": 55591,
       "length": 9,
       "value": "\"iPad3,6\""
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/Exteniosns\/Exteniosns.swift",
       "kind": "StringLiteral",
-      "offset": 54959,
+      "offset": 55619,
       "length": 23,
       "value": "\"iPad (4th generation)\""
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/Exteniosns\/Exteniosns.swift",
       "kind": "StringLiteral",
-      "offset": 55000,
+      "offset": 55660,
       "length": 10,
       "value": "\"iPad6,11\""
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/Exteniosns\/Exteniosns.swift",
       "kind": "StringLiteral",
-      "offset": 55012,
+      "offset": 55672,
       "length": 10,
       "value": "\"iPad6,12\""
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/Exteniosns\/Exteniosns.swift",
       "kind": "StringLiteral",
-      "offset": 55050,
+      "offset": 55710,
       "length": 23,
       "value": "\"iPad (5th generation)\""
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/Exteniosns\/Exteniosns.swift",
       "kind": "StringLiteral",
-      "offset": 55091,
+      "offset": 55751,
       "length": 9,
       "value": "\"iPad7,5\""
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/Exteniosns\/Exteniosns.swift",
       "kind": "StringLiteral",
-      "offset": 55102,
+      "offset": 55762,
       "length": 9,
       "value": "\"iPad7,6\""
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/Exteniosns\/Exteniosns.swift",
       "kind": "StringLiteral",
-      "offset": 55141,
+      "offset": 55801,
       "length": 23,
       "value": "\"iPad (6th generation)\""
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/Exteniosns\/Exteniosns.swift",
       "kind": "StringLiteral",
-      "offset": 55182,
+      "offset": 55842,
       "length": 10,
       "value": "\"iPad7,11\""
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/Exteniosns\/Exteniosns.swift",
       "kind": "StringLiteral",
-      "offset": 55194,
+      "offset": 55854,
       "length": 10,
       "value": "\"iPad7,12\""
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/Exteniosns\/Exteniosns.swift",
       "kind": "StringLiteral",
-      "offset": 55232,
+      "offset": 55892,
       "length": 23,
       "value": "\"iPad (7th generation)\""
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/Exteniosns\/Exteniosns.swift",
       "kind": "StringLiteral",
-      "offset": 55273,
+      "offset": 55933,
       "length": 10,
       "value": "\"iPad11,6\""
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/Exteniosns\/Exteniosns.swift",
       "kind": "StringLiteral",
-      "offset": 55285,
+      "offset": 55945,
       "length": 10,
       "value": "\"iPad11,7\""
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/Exteniosns\/Exteniosns.swift",
       "kind": "StringLiteral",
-      "offset": 55323,
+      "offset": 55983,
       "length": 23,
       "value": "\"iPad (8th generation)\""
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/Exteniosns\/Exteniosns.swift",
       "kind": "StringLiteral",
-      "offset": 55364,
+      "offset": 56024,
       "length": 9,
       "value": "\"iPad4,1\""
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/Exteniosns\/Exteniosns.swift",
       "kind": "StringLiteral",
-      "offset": 55375,
+      "offset": 56035,
       "length": 9,
       "value": "\"iPad4,2\""
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/Exteniosns\/Exteniosns.swift",
       "kind": "StringLiteral",
-      "offset": 55386,
+      "offset": 56046,
       "length": 9,
       "value": "\"iPad4,3\""
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/Exteniosns\/Exteniosns.swift",
       "kind": "StringLiteral",
-      "offset": 55414,
+      "offset": 56074,
       "length": 10,
       "value": "\"iPad Air\""
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/Exteniosns\/Exteniosns.swift",
       "kind": "StringLiteral",
-      "offset": 55442,
+      "offset": 56102,
       "length": 9,
       "value": "\"iPad5,3\""
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/Exteniosns\/Exteniosns.swift",
       "kind": "StringLiteral",
-      "offset": 55453,
+      "offset": 56113,
       "length": 9,
       "value": "\"iPad5,4\""
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/Exteniosns\/Exteniosns.swift",
       "kind": "StringLiteral",
-      "offset": 55492,
+      "offset": 56152,
       "length": 12,
       "value": "\"iPad Air 2\""
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/Exteniosns\/Exteniosns.swift",
       "kind": "StringLiteral",
-      "offset": 55522,
+      "offset": 56182,
       "length": 10,
       "value": "\"iPad11,3\""
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/Exteniosns\/Exteniosns.swift",
       "kind": "StringLiteral",
-      "offset": 55534,
+      "offset": 56194,
       "length": 10,
       "value": "\"iPad11,4\""
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/Exteniosns\/Exteniosns.swift",
       "kind": "StringLiteral",
-      "offset": 55572,
+      "offset": 56232,
       "length": 27,
       "value": "\"iPad Air (3rd generation)\""
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/Exteniosns\/Exteniosns.swift",
       "kind": "StringLiteral",
-      "offset": 55617,
+      "offset": 56277,
       "length": 10,
       "value": "\"iPad13,1\""
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/Exteniosns\/Exteniosns.swift",
       "kind": "StringLiteral",
-      "offset": 55629,
+      "offset": 56289,
       "length": 10,
       "value": "\"iPad13,2\""
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/Exteniosns\/Exteniosns.swift",
       "kind": "StringLiteral",
-      "offset": 55667,
+      "offset": 56327,
       "length": 27,
       "value": "\"iPad Air (4th generation)\""
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/Exteniosns\/Exteniosns.swift",
       "kind": "StringLiteral",
-      "offset": 55712,
+      "offset": 56372,
       "length": 9,
       "value": "\"iPad2,5\""
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/Exteniosns\/Exteniosns.swift",
       "kind": "StringLiteral",
-      "offset": 55723,
+      "offset": 56383,
       "length": 9,
       "value": "\"iPad2,6\""
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/Exteniosns\/Exteniosns.swift",
       "kind": "StringLiteral",
-      "offset": 55734,
+      "offset": 56394,
       "length": 9,
       "value": "\"iPad2,7\""
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/Exteniosns\/Exteniosns.swift",
       "kind": "StringLiteral",
-      "offset": 55762,
+      "offset": 56422,
       "length": 11,
       "value": "\"iPad mini\""
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/Exteniosns\/Exteniosns.swift",
       "kind": "StringLiteral",
-      "offset": 55791,
+      "offset": 56451,
       "length": 9,
       "value": "\"iPad4,4\""
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/Exteniosns\/Exteniosns.swift",
       "kind": "StringLiteral",
-      "offset": 55802,
+      "offset": 56462,
       "length": 9,
       "value": "\"iPad4,5\""
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/Exteniosns\/Exteniosns.swift",
       "kind": "StringLiteral",
-      "offset": 55813,
+      "offset": 56473,
       "length": 9,
       "value": "\"iPad4,6\""
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/Exteniosns\/Exteniosns.swift",
       "kind": "StringLiteral",
-      "offset": 55841,
+      "offset": 56501,
       "length": 13,
       "value": "\"iPad mini 2\""
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/Exteniosns\/Exteniosns.swift",
       "kind": "StringLiteral",
-      "offset": 55872,
+      "offset": 56532,
       "length": 9,
       "value": "\"iPad4,7\""
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/Exteniosns\/Exteniosns.swift",
       "kind": "StringLiteral",
-      "offset": 55883,
+      "offset": 56543,
       "length": 9,
       "value": "\"iPad4,8\""
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/Exteniosns\/Exteniosns.swift",
       "kind": "StringLiteral",
-      "offset": 55894,
+      "offset": 56554,
       "length": 9,
       "value": "\"iPad4,9\""
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/Exteniosns\/Exteniosns.swift",
       "kind": "StringLiteral",
-      "offset": 55922,
+      "offset": 56582,
       "length": 13,
       "value": "\"iPad mini 3\""
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/Exteniosns\/Exteniosns.swift",
       "kind": "StringLiteral",
-      "offset": 55953,
+      "offset": 56613,
       "length": 9,
       "value": "\"iPad5,1\""
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/Exteniosns\/Exteniosns.swift",
       "kind": "StringLiteral",
-      "offset": 55964,
+      "offset": 56624,
       "length": 9,
       "value": "\"iPad5,2\""
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/Exteniosns\/Exteniosns.swift",
       "kind": "StringLiteral",
-      "offset": 56003,
+      "offset": 56663,
       "length": 13,
       "value": "\"iPad mini 4\""
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/Exteniosns\/Exteniosns.swift",
       "kind": "StringLiteral",
-      "offset": 56034,
+      "offset": 56694,
       "length": 10,
       "value": "\"iPad11,1\""
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/Exteniosns\/Exteniosns.swift",
       "kind": "StringLiteral",
-      "offset": 56046,
+      "offset": 56706,
       "length": 10,
       "value": "\"iPad11,2\""
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/Exteniosns\/Exteniosns.swift",
       "kind": "StringLiteral",
-      "offset": 56084,
+      "offset": 56744,
       "length": 28,
       "value": "\"iPad mini (5th generation)\""
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/Exteniosns\/Exteniosns.swift",
       "kind": "StringLiteral",
-      "offset": 56130,
+      "offset": 56790,
       "length": 9,
       "value": "\"iPad6,3\""
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/Exteniosns\/Exteniosns.swift",
       "kind": "StringLiteral",
-      "offset": 56141,
+      "offset": 56801,
       "length": 9,
       "value": "\"iPad6,4\""
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/Exteniosns\/Exteniosns.swift",
       "kind": "StringLiteral",
-      "offset": 56180,
+      "offset": 56840,
       "length": 21,
       "value": "\"iPad Pro (9.7-inch)\""
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/Exteniosns\/Exteniosns.swift",
       "kind": "StringLiteral",
-      "offset": 56219,
+      "offset": 56879,
       "length": 9,
       "value": "\"iPad7,3\""
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/Exteniosns\/Exteniosns.swift",
       "kind": "StringLiteral",
-      "offset": 56230,
+      "offset": 56890,
       "length": 9,
       "value": "\"iPad7,4\""
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/Exteniosns\/Exteniosns.swift",
       "kind": "StringLiteral",
-      "offset": 56269,
+      "offset": 56929,
       "length": 22,
       "value": "\"iPad Pro (10.5-inch)\""
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/Exteniosns\/Exteniosns.swift",
       "kind": "StringLiteral",
-      "offset": 56309,
+      "offset": 56969,
       "length": 9,
       "value": "\"iPad8,1\""
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/Exteniosns\/Exteniosns.swift",
       "kind": "StringLiteral",
-      "offset": 56320,
+      "offset": 56980,
       "length": 9,
       "value": "\"iPad8,2\""
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/Exteniosns\/Exteniosns.swift",
       "kind": "StringLiteral",
-      "offset": 56331,
+      "offset": 56991,
       "length": 9,
       "value": "\"iPad8,3\""
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/Exteniosns\/Exteniosns.swift",
       "kind": "StringLiteral",
-      "offset": 56342,
+      "offset": 57002,
       "length": 9,
       "value": "\"iPad8,4\""
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/Exteniosns\/Exteniosns.swift",
       "kind": "StringLiteral",
-      "offset": 56359,
+      "offset": 57019,
       "length": 37,
       "value": "\"iPad Pro (11-inch) (1st generation)\""
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/Exteniosns\/Exteniosns.swift",
       "kind": "StringLiteral",
-      "offset": 56414,
+      "offset": 57074,
       "length": 9,
       "value": "\"iPad8,9\""
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/Exteniosns\/Exteniosns.swift",
       "kind": "StringLiteral",
-      "offset": 56425,
+      "offset": 57085,
       "length": 10,
       "value": "\"iPad8,10\""
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/Exteniosns\/Exteniosns.swift",
       "kind": "StringLiteral",
-      "offset": 56464,
+      "offset": 57124,
       "length": 37,
       "value": "\"iPad Pro (11-inch) (2nd generation)\""
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/Exteniosns\/Exteniosns.swift",
       "kind": "StringLiteral",
-      "offset": 56519,
+      "offset": 57179,
       "length": 9,
       "value": "\"iPad6,7\""
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/Exteniosns\/Exteniosns.swift",
       "kind": "StringLiteral",
-      "offset": 56530,
+      "offset": 57190,
       "length": 9,
       "value": "\"iPad6,8\""
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/Exteniosns\/Exteniosns.swift",
       "kind": "StringLiteral",
-      "offset": 56569,
+      "offset": 57229,
       "length": 39,
       "value": "\"iPad Pro (12.9-inch) (1st generation)\""
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/Exteniosns\/Exteniosns.swift",
       "kind": "StringLiteral",
-      "offset": 56626,
+      "offset": 57286,
       "length": 9,
       "value": "\"iPad7,1\""
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/Exteniosns\/Exteniosns.swift",
       "kind": "StringLiteral",
-      "offset": 56637,
+      "offset": 57297,
       "length": 9,
       "value": "\"iPad7,2\""
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/Exteniosns\/Exteniosns.swift",
       "kind": "StringLiteral",
-      "offset": 56676,
+      "offset": 57336,
       "length": 39,
       "value": "\"iPad Pro (12.9-inch) (2nd generation)\""
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/Exteniosns\/Exteniosns.swift",
       "kind": "StringLiteral",
-      "offset": 56733,
+      "offset": 57393,
       "length": 9,
       "value": "\"iPad8,5\""
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/Exteniosns\/Exteniosns.swift",
       "kind": "StringLiteral",
-      "offset": 56744,
+      "offset": 57404,
       "length": 9,
       "value": "\"iPad8,6\""
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/Exteniosns\/Exteniosns.swift",
       "kind": "StringLiteral",
-      "offset": 56755,
+      "offset": 57415,
       "length": 9,
       "value": "\"iPad8,7\""
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/Exteniosns\/Exteniosns.swift",
       "kind": "StringLiteral",
-      "offset": 56766,
+      "offset": 57426,
       "length": 9,
       "value": "\"iPad8,8\""
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/Exteniosns\/Exteniosns.swift",
       "kind": "StringLiteral",
-      "offset": 56783,
+      "offset": 57443,
       "length": 39,
       "value": "\"iPad Pro (12.9-inch) (3rd generation)\""
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/Exteniosns\/Exteniosns.swift",
       "kind": "StringLiteral",
-      "offset": 56840,
+      "offset": 57500,
       "length": 10,
       "value": "\"iPad8,11\""
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/Exteniosns\/Exteniosns.swift",
       "kind": "StringLiteral",
-      "offset": 56852,
+      "offset": 57512,
       "length": 10,
       "value": "\"iPad8,12\""
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/Exteniosns\/Exteniosns.swift",
       "kind": "StringLiteral",
-      "offset": 56890,
+      "offset": 57550,
       "length": 39,
       "value": "\"iPad Pro (12.9-inch) (4th generation)\""
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/Exteniosns\/Exteniosns.swift",
       "kind": "StringLiteral",
-      "offset": 56947,
+      "offset": 57607,
       "length": 12,
       "value": "\"AppleTV5,3\""
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/Exteniosns\/Exteniosns.swift",
       "kind": "StringLiteral",
-      "offset": 56997,
+      "offset": 57657,
       "length": 10,
       "value": "\"Apple TV\""
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/Exteniosns\/Exteniosns.swift",
       "kind": "StringLiteral",
-      "offset": 57025,
+      "offset": 57685,
       "length": 12,
       "value": "\"AppleTV6,2\""
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/Exteniosns\/Exteniosns.swift",
       "kind": "StringLiteral",
-      "offset": 57075,
+      "offset": 57735,
       "length": 13,
       "value": "\"Apple TV 4K\""
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/Exteniosns\/Exteniosns.swift",
       "kind": "StringLiteral",
-      "offset": 57106,
+      "offset": 57766,
       "length": 19,
       "value": "\"AudioAccessory1,1\""
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/Exteniosns\/Exteniosns.swift",
       "kind": "StringLiteral",
-      "offset": 57156,
+      "offset": 57816,
       "length": 9,
       "value": "\"HomePod\""
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/Exteniosns\/Exteniosns.swift",
       "kind": "StringLiteral",
-      "offset": 57183,
+      "offset": 57843,
       "length": 19,
       "value": "\"AudioAccessory5,1\""
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/Exteniosns\/Exteniosns.swift",
       "kind": "StringLiteral",
-      "offset": 57233,
+      "offset": 57893,
       "length": 14,
       "value": "\"HomePod mini\""
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/Exteniosns\/Exteniosns.swift",
       "kind": "StringLiteral",
-      "offset": 57265,
+      "offset": 57925,
       "length": 6,
       "value": "\"i386\""
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/Exteniosns\/Exteniosns.swift",
       "kind": "StringLiteral",
-      "offset": 57273,
+      "offset": 57933,
       "length": 8,
       "value": "\"x86_64\""
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/Exteniosns\/Exteniosns.swift",
       "kind": "StringLiteral",
-      "offset": 57315,
+      "offset": 57975,
       "length": 104,
       "value": "\"Simulator \""
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/Exteniosns\/Exteniosns.swift",
       "kind": "StringLiteral",
-      "offset": 57378,
+      "offset": 58038,
       "length": 28,
       "value": "\"SIMULATOR_MODEL_IDENTIFIER\""
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/Exteniosns\/Exteniosns.swift",
       "kind": "StringLiteral",
-      "offset": 57411,
+      "offset": 58071,
       "length": 5,
       "value": "\"iOS\""
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/Exteniosns\/Exteniosns.swift",
       "kind": "StringLiteral",
-      "offset": 57418,
+      "offset": 58078,
       "length": 1,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/Exteniosns\/Exteniosns.swift",
       "kind": "IntegerLiteral",
-      "offset": 60016,
+      "offset": 60676,
       "length": 1,
       "value": "2"
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/Exteniosns\/Exteniosns.swift",
       "kind": "IntegerLiteral",
-      "offset": 60285,
+      "offset": 60945,
       "length": 1,
       "value": "2"
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/ResultVc\/ResultVc.swift",
       "kind": "StringLiteral",
-      "offset": 419,
-      "length": 2,
-      "value": "\"\""
-    },
-    {
-      "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/ResultVc\/ResultVc.swift",
-      "kind": "StringLiteral",
-      "offset": 441,
+      "offset": 443,
       "length": 2,
       "value": "\"\""
     },
@@ -101677,127 +103395,134 @@
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/ResultVc\/ResultVc.swift",
-      "kind": "BooleanLiteral",
-      "offset": 492,
-      "length": 5,
-      "value": "false"
-    },
-    {
-      "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/ResultVc\/ResultVc.swift",
-      "kind": "BooleanLiteral",
-      "offset": 527,
-      "length": 5,
-      "value": "false"
-    },
-    {
-      "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/ResultVc\/ResultVc.swift",
-      "kind": "BooleanLiteral",
-      "offset": 560,
-      "length": 5,
-      "value": "false"
-    },
-    {
-      "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/ResultVc\/ResultVc.swift",
       "kind": "StringLiteral",
-      "offset": 594,
-      "length": 2,
-      "value": "\"\""
-    },
-    {
-      "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/ResultVc\/ResultVc.swift",
-      "kind": "StringLiteral",
-      "offset": 642,
-      "length": 2,
-      "value": "\"\""
-    },
-    {
-      "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/ResultVc\/ResultVc.swift",
-      "kind": "StringLiteral",
-      "offset": 672,
-      "length": 2,
-      "value": "\"\""
-    },
-    {
-      "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/ResultVc\/ResultVc.swift",
-      "kind": "StringLiteral",
-      "offset": 691,
+      "offset": 489,
       "length": 2,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/ResultVc\/ResultVc.swift",
       "kind": "BooleanLiteral",
-      "offset": 722,
+      "offset": 516,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/ResultVc\/ResultVc.swift",
       "kind": "BooleanLiteral",
-      "offset": 762,
+      "offset": 551,
+      "length": 5,
+      "value": "false"
+    },
+    {
+      "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/ResultVc\/ResultVc.swift",
+      "kind": "BooleanLiteral",
+      "offset": 584,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/ResultVc\/ResultVc.swift",
       "kind": "StringLiteral",
-      "offset": 787,
+      "offset": 622,
       "length": 2,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/ResultVc\/ResultVc.swift",
       "kind": "StringLiteral",
-      "offset": 844,
-      "length": 2,
-      "value": "\"\""
-    },
-    {
-      "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/ResultVc\/ResultVc.swift",
-      "kind": "BooleanLiteral",
-      "offset": 884,
-      "length": 5,
-      "value": "false"
-    },
-    {
-      "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/ResultVc\/ResultVc.swift",
-      "kind": "BooleanLiteral",
-      "offset": 923,
-      "length": 5,
-      "value": "false"
-    },
-    {
-      "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/ResultVc\/ResultVc.swift",
-      "kind": "BooleanLiteral",
-      "offset": 961,
-      "length": 5,
-      "value": "false"
-    },
-    {
-      "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/ResultVc\/ResultVc.swift",
-      "kind": "StringLiteral",
-      "offset": 1004,
+      "offset": 670,
       "length": 2,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/ResultVc\/ResultVc.swift",
       "kind": "StringLiteral",
-      "offset": 1477,
+      "offset": 700,
+      "length": 2,
+      "value": "\"\""
+    },
+    {
+      "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/ResultVc\/ResultVc.swift",
+      "kind": "StringLiteral",
+      "offset": 719,
+      "length": 2,
+      "value": "\"\""
+    },
+    {
+      "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/ResultVc\/ResultVc.swift",
+      "kind": "BooleanLiteral",
+      "offset": 754,
+      "length": 5,
+      "value": "false"
+    },
+    {
+      "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/ResultVc\/ResultVc.swift",
+      "kind": "BooleanLiteral",
+      "offset": 794,
+      "length": 5,
+      "value": "false"
+    },
+    {
+      "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/ResultVc\/ResultVc.swift",
+      "kind": "StringLiteral",
+      "offset": 819,
+      "length": 2,
+      "value": "\"\""
+    },
+    {
+      "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/ResultVc\/ResultVc.swift",
+      "kind": "StringLiteral",
+      "offset": 876,
+      "length": 2,
+      "value": "\"\""
+    },
+    {
+      "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/ResultVc\/ResultVc.swift",
+      "kind": "BooleanLiteral",
+      "offset": 916,
+      "length": 5,
+      "value": "false"
+    },
+    {
+      "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/ResultVc\/ResultVc.swift",
+      "kind": "BooleanLiteral",
+      "offset": 955,
+      "length": 5,
+      "value": "false"
+    },
+    {
+      "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/ResultVc\/ResultVc.swift",
+      "kind": "BooleanLiteral",
+      "offset": 993,
+      "length": 5,
+      "value": "false"
+    },
+    {
+      "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/ResultVc\/ResultVc.swift",
+      "kind": "StringLiteral",
+      "offset": 1040,
+      "length": 2,
+      "value": "\"\""
+    },
+    {
+      "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/ResultVc\/ResultVc.swift",
+      "kind": "StringLiteral",
+      "offset": 2023,
       "length": 64,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/ResultVc\/ResultVc.swift",
       "kind": "StringLiteral",
-      "offset": 1529,
+      "offset": 2075,
       "length": 1,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/ResultVc\/ResultVc.swift",
       "kind": "StringLiteral",
-      "offset": 1540,
+      "offset": 2086,
       "length": 2,
       "value": "\"\""
     },
@@ -102119,189 +103844,189 @@
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/ConsentScreen\/DeclarationOfConsentVc.swift",
       "kind": "StringLiteral",
-      "offset": 592,
+      "offset": 596,
       "length": 2,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/ConsentScreen\/DeclarationOfConsentVc.swift",
       "kind": "StringLiteral",
-      "offset": 631,
+      "offset": 636,
       "length": 2,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/ConsentScreen\/DeclarationOfConsentVc.swift",
       "kind": "StringLiteral",
-      "offset": 655,
+      "offset": 660,
       "length": 2,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/ConsentScreen\/DeclarationOfConsentVc.swift",
       "kind": "StringLiteral",
-      "offset": 685,
+      "offset": 690,
       "length": 2,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/ConsentScreen\/DeclarationOfConsentVc.swift",
       "kind": "BooleanLiteral",
-      "offset": 730,
+      "offset": 739,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/ConsentScreen\/DeclarationOfConsentVc.swift",
       "kind": "BooleanLiteral",
-      "offset": 755,
+      "offset": 764,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/ConsentScreen\/DeclarationOfConsentVc.swift",
       "kind": "BooleanLiteral",
-      "offset": 784,
+      "offset": 793,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/ConsentScreen\/DeclarationOfConsentVc.swift",
       "kind": "BooleanLiteral",
-      "offset": 817,
+      "offset": 826,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/ConsentScreen\/DeclarationOfConsentVc.swift",
       "kind": "BooleanLiteral",
-      "offset": 849,
+      "offset": 858,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/ConsentScreen\/DeclarationOfConsentVc.swift",
       "kind": "BooleanLiteral",
-      "offset": 885,
+      "offset": 894,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/ConsentScreen\/DeclarationOfConsentVc.swift",
       "kind": "BooleanLiteral",
-      "offset": 913,
+      "offset": 922,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/ConsentScreen\/DeclarationOfConsentVc.swift",
       "kind": "BooleanLiteral",
-      "offset": 945,
+      "offset": 954,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/ConsentScreen\/DeclarationOfConsentVc.swift",
       "kind": "BooleanLiteral",
-      "offset": 973,
+      "offset": 982,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/ConsentScreen\/DeclarationOfConsentVc.swift",
       "kind": "BooleanLiteral",
-      "offset": 1006,
+      "offset": 1015,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/ConsentScreen\/DeclarationOfConsentVc.swift",
       "kind": "BooleanLiteral",
-      "offset": 1040,
+      "offset": 1049,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/ConsentScreen\/DeclarationOfConsentVc.swift",
       "kind": "BooleanLiteral",
-      "offset": 1082,
+      "offset": 1091,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/ConsentScreen\/DeclarationOfConsentVc.swift",
       "kind": "BooleanLiteral",
-      "offset": 1122,
+      "offset": 1131,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/ConsentScreen\/DeclarationOfConsentVc.swift",
       "kind": "BooleanLiteral",
-      "offset": 1158,
+      "offset": 1167,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/ConsentScreen\/DeclarationOfConsentVc.swift",
       "kind": "BooleanLiteral",
-      "offset": 1253,
+      "offset": 1262,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/ConsentScreen\/DeclarationOfConsentVc.swift",
       "kind": "BooleanLiteral",
-      "offset": 1374,
+      "offset": 1387,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/ConsentScreen\/DeclarationOfConsentVc.swift",
       "kind": "BooleanLiteral",
-      "offset": 1413,
+      "offset": 1426,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/ConsentScreen\/DeclarationOfConsentVc.swift",
       "kind": "BooleanLiteral",
-      "offset": 1455,
+      "offset": 1468,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/ConsentScreen\/DeclarationOfConsentVc.swift",
       "kind": "BooleanLiteral",
-      "offset": 1493,
+      "offset": 1506,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/ConsentScreen\/DeclarationOfConsentVc.swift",
       "kind": "BooleanLiteral",
-      "offset": 1531,
+      "offset": 1544,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/ConsentScreen\/DeclarationOfConsentVc.swift",
       "kind": "StringLiteral",
-      "offset": 1811,
+      "offset": 1844,
       "length": 2,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/ConsentScreen\/DeclarationOfConsentVc.swift",
       "kind": "StringLiteral",
-      "offset": 1859,
+      "offset": 1892,
       "length": 2,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/ConsentScreen\/DeclarationOfConsentVc.swift",
       "kind": "BooleanLiteral",
-      "offset": 38072,
+      "offset": 39305,
       "length": 5,
       "value": "false"
     },
@@ -102392,14 +104117,21 @@
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/Utils\/Constants.swift",
       "kind": "StringLiteral",
-      "offset": 553,
+      "offset": 476,
+      "length": 18,
+      "value": "\"SPMOB12345678910\""
+    },
+    {
+      "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/Utils\/Constants.swift",
+      "kind": "StringLiteral",
+      "offset": 585,
       "length": 47,
       "value": "\"https:\/\/api.shuftipro.com\/sdk\/request\/status\/\""
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/Utils\/Constants.swift",
       "kind": "StringLiteral",
-      "offset": 783,
+      "offset": 815,
       "length": 65,
       "value": "\"https:\/\/wi.shuftiapps.com\/api\/webhooks\/62e75de700e59e187206ae74\""
     }
