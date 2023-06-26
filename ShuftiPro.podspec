@@ -2,7 +2,7 @@
 Pod::Spec.new do |spec|
 
 spec.name         = "ShuftiPro"
-spec.version      = "3.5.7"
+spec.version      = "3.5.8"
 spec.summary      = "Shufti Pro is designed to verify documents in realtime."
 
 spec.description  = <<-DESC
@@ -13,7 +13,7 @@ spec.homepage     = "https://github.com/shuftipro/iOS-binary-pod"
 
 spec.license      = { :type => "MIT", :file => "LICENSE" }
 
-spec.author             = { "Shufti Pro" => "support@shuftipro.com" }
+spec.author       = { "Shufti Pro" => "support@shuftipro.com" }
 
 
 spec.platform     = :ios, "11.0"
