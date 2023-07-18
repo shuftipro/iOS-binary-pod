@@ -400,6 +400,12 @@ SWIFT_CLASS("_TtC9ShuftiPro9CameraVc2")
 - (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder OBJC_DESIGNATED_INITIALIZER;
 @end
 
+@class AVCaptureOutput;
+@class AVCaptureConnection;
+
+@interface CameraVc2 (SWIFT_EXTENSION(ShuftiPro)) <AVCaptureVideoDataOutputSampleBufferDelegate>
+- (void)captureOutput:(AVCaptureOutput * _Nonnull)output didOutputSampleBuffer:(CMSampleBufferRef _Nonnull)sampleBuffer fromConnection:(AVCaptureConnection * _Nonnull)connection;
+@end
 
 @class AVCapturePhotoOutput;
 @class AVCapturePhoto;
@@ -408,12 +414,6 @@ SWIFT_CLASS("_TtC9ShuftiPro9CameraVc2")
 - (void)captureOutput:(AVCapturePhotoOutput * _Nonnull)output didFinishProcessingPhoto:(AVCapturePhoto * _Nonnull)photo error:(NSError * _Nullable)error;
 @end
 
-@class AVCaptureOutput;
-@class AVCaptureConnection;
-
-@interface CameraVc2 (SWIFT_EXTENSION(ShuftiPro)) <AVCaptureVideoDataOutputSampleBufferDelegate>
-- (void)captureOutput:(AVCaptureOutput * _Nonnull)output didOutputSampleBuffer:(CMSampleBufferRef _Nonnull)sampleBuffer fromConnection:(AVCaptureConnection * _Nonnull)connection;
-@end
 
 
 
@@ -587,6 +587,21 @@ SWIFT_CLASS("_TtC9ShuftiPro14DesignableView")
 - (void)layoutSubviews;
 - (nonnull instancetype)initWithFrame:(CGRect)frame OBJC_DESIGNATED_INITIALIZER;
 - (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder OBJC_DESIGNATED_INITIALIZER;
+@end
+
+
+SWIFT_CLASS("_TtC9ShuftiPro20ExpandableHeaderView")
+@interface ExpandableHeaderView : UITableViewHeaderFooterView
+@property (nonatomic, weak) IBOutlet UIView * _Null_unspecified sectionView;
+@property (nonatomic, weak) IBOutlet UIImageView * _Null_unspecified sectionLableImg;
+@property (nonatomic, weak) IBOutlet UILabel * _Null_unspecified serviceLable;
+@property (nonatomic, weak) IBOutlet UILabel * _Null_unspecified subTitleLable;
+@property (nonatomic, weak) IBOutlet UIImageView * _Null_unspecified sectionArrowImg;
+- (void)awakeFromNib;
+- (void)prepareForReuse;
+- (nonnull instancetype)initWithReuseIdentifier:(NSString * _Nullable)reuseIdentifier OBJC_DESIGNATED_INITIALIZER;
+- (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)aDecoder OBJC_DESIGNATED_INITIALIZER;
+- (void)selectHeaderViewWithGesture:(UITapGestureRecognizer * _Nonnull)gesture;
 @end
 
 
@@ -846,6 +861,7 @@ SWIFT_CLASS("_TtC9ShuftiPro18SupportedTypesCell")
 @property (nonatomic, weak) IBOutlet UIView * _Null_unspecified bottomBorderView;
 - (void)awakeFromNib;
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated;
+- (void)prepareForReuse;
 - (nonnull instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString * _Nullable)reuseIdentifier OBJC_DESIGNATED_INITIALIZER SWIFT_AVAILABILITY(ios,introduced=3.0);
 - (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder OBJC_DESIGNATED_INITIALIZER;
 @end
@@ -1036,6 +1052,34 @@ SWIFT_CLASS("_TtC9ShuftiPro13UploadVideoVc")
 - (void)handleGestureWithGesture:(UISwipeGestureRecognizer * _Nonnull)gesture;
 @end
 
+
+
+
+SWIFT_CLASS("_TtC9ShuftiPro38VerificationRequirementsViewController")
+@interface VerificationRequirementsViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
+@property (nonatomic, weak) IBOutlet UITableView * _Null_unspecified tableView;
+@property (nonatomic, weak) IBOutlet UIStackView * _Null_unspecified viewHeadingStack;
+@property (nonatomic, weak) IBOutlet UILabel * _Null_unspecified headingLable;
+@property (nonatomic, weak) IBOutlet UILabel * _Null_unspecified subHeadingLable;
+@property (nonatomic, weak) IBOutlet UILabel * _Null_unspecified endInstructionLable;
+@property (nonatomic, weak) IBOutlet UIButton * _Null_unspecified proceedBtn;
+@property (nonatomic, weak) IBOutlet UILabel * _Null_unspecified footerLabel;
+@property (nonatomic, weak) IBOutlet UIImageView * _Null_unspecified footerImage;
+- (void)viewDidLoad;
+- (void)viewWillAppear:(BOOL)animated;
+- (NSInteger)numberOfSectionsInTableView:(UITableView * _Nonnull)tableView SWIFT_WARN_UNUSED_RESULT;
+- (NSInteger)tableView:(UITableView * _Nonnull)tableView numberOfRowsInSection:(NSInteger)section SWIFT_WARN_UNUSED_RESULT;
+- (CGFloat)tableView:(UITableView * _Nonnull)tableView heightForHeaderInSection:(NSInteger)section SWIFT_WARN_UNUSED_RESULT;
+- (CGFloat)tableView:(UITableView * _Nonnull)tableView heightForRowAtIndexPath:(NSIndexPath * _Nonnull)indexPath SWIFT_WARN_UNUSED_RESULT;
+- (CGFloat)tableView:(UITableView * _Nonnull)tableView heightForFooterInSection:(NSInteger)section SWIFT_WARN_UNUSED_RESULT;
+- (UIView * _Nullable)tableView:(UITableView * _Nonnull)tableView viewForHeaderInSection:(NSInteger)section SWIFT_WARN_UNUSED_RESULT;
+- (UITableViewCell * _Nonnull)tableView:(UITableView * _Nonnull)tableView cellForRowAtIndexPath:(NSIndexPath * _Nonnull)indexPath SWIFT_WARN_UNUSED_RESULT;
+- (void)tableView:(UITableView * _Nonnull)tableView didSelectRowAtIndexPath:(NSIndexPath * _Nonnull)indexPath;
+- (IBAction)continueBtnPressed:(id _Nonnull)sender;
+- (void)handleGestureWithGesture:(UISwipeGestureRecognizer * _Nonnull)gesture;
+- (nonnull instancetype)initWithNibName:(NSString * _Nullable)nibNameOrNil bundle:(NSBundle * _Nullable)nibBundleOrNil OBJC_DESIGNATED_INITIALIZER;
+- (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder OBJC_DESIGNATED_INITIALIZER;
+@end
 
 
 @class UINavigationBar;
