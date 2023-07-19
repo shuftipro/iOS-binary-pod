@@ -1654,32 +1654,6 @@
             "funcSelfKind": "NonMutating"
           },
           {
-            "kind": "Function",
-            "name": "prepareForReuse",
-            "printedName": "prepareForReuse()",
-            "children": [
-              {
-                "kind": "TypeNominal",
-                "name": "Void",
-                "printedName": "()"
-              }
-            ],
-            "declKind": "Func",
-            "usr": "c:@M@ShuftiPro@objc(cs)SupportedTypesCell(im)prepareForReuse",
-            "mangledName": "$s9ShuftiPro18SupportedTypesCellC15prepareForReuseyyF",
-            "moduleName": "ShuftiPro",
-            "overriding": true,
-            "isOpen": true,
-            "objc_name": "prepareForReuse",
-            "declAttributes": [
-              "Dynamic",
-              "ObjC",
-              "Custom",
-              "Override"
-            ],
-            "funcSelfKind": "NonMutating"
-          },
-          {
             "kind": "Constructor",
             "name": "init",
             "printedName": "init(style:reuseIdentifier:)",
@@ -6715,9 +6689,9 @@
               },
               {
                 "kind": "TypeNominal",
-                "name": "SupportedTypesCell",
-                "printedName": "ShuftiPro.SupportedTypesCell",
-                "usr": "c:@M@ShuftiPro@objc(cs)SupportedTypesCell"
+                "name": "VerificationSupportedTypesCell",
+                "printedName": "ShuftiPro.VerificationSupportedTypesCell",
+                "usr": "c:@M@ShuftiPro@objc(cs)VerificationSupportedTypesCell"
               },
               {
                 "kind": "TypeNominal",
@@ -6733,8 +6707,8 @@
               }
             ],
             "declKind": "Func",
-            "usr": "s:9ShuftiPro38VerificationRequirementsViewControllerC14setCellStyling4cell16verificationType9indexPathyAA014SupportedTypesH0C_SS10Foundation05IndexN0VtF",
-            "mangledName": "$s9ShuftiPro38VerificationRequirementsViewControllerC14setCellStyling4cell16verificationType9indexPathyAA014SupportedTypesH0C_SS10Foundation05IndexN0VtF",
+            "usr": "s:9ShuftiPro38VerificationRequirementsViewControllerC14setCellStyling4cell16verificationType9indexPathyAA0c14SupportedTypesH0C_SS10Foundation05IndexN0VtF",
+            "mangledName": "$s9ShuftiPro38VerificationRequirementsViewControllerC14setCellStyling4cell16verificationType9indexPathyAA0c14SupportedTypesH0C_SS10Foundation05IndexN0VtF",
             "moduleName": "ShuftiPro",
             "isOpen": true,
             "declAttributes": [
@@ -16190,6 +16164,1329 @@
         "mangledName": "$s9ShuftiPro7SectionV",
         "moduleName": "ShuftiPro",
         "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Sendable",
+            "printedName": "Sendable",
+            "usr": "s:s8SendableP",
+            "mangledName": "$ss8SendableP"
+          }
+        ]
+      },
+      {
+        "kind": "Import",
+        "name": "UIKit",
+        "printedName": "UIKit",
+        "declKind": "Import",
+        "moduleName": "ShuftiPro",
+        "declAttributes": [
+          "RawDocComment"
+        ]
+      },
+      {
+        "kind": "TypeDecl",
+        "name": "VerificationSupportedTypesCell",
+        "printedName": "VerificationSupportedTypesCell",
+        "children": [
+          {
+            "kind": "Var",
+            "name": "supportedTypes",
+            "printedName": "supportedTypes",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "WeakStorage",
+                "printedName": "UIKit.UILabel?"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "c:@M@ShuftiPro@objc(cs)VerificationSupportedTypesCell(py)supportedTypes",
+            "mangledName": "$s9ShuftiPro30VerificationSupportedTypesCellC09supportedE0So7UILabelCSgvp",
+            "moduleName": "ShuftiPro",
+            "isOpen": true,
+            "declAttributes": [
+              "HasInitialValue",
+              "Custom",
+              "HasStorage",
+              "ReferenceOwnership",
+              "IBOutlet",
+              "ObjC"
+            ],
+            "fixedbinaryorder": 0,
+            "ownership": 1,
+            "hasStorage": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "ImplicitlyUnwrappedOptional",
+                    "printedName": "UIKit.UILabel?",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "UILabel",
+                        "printedName": "UIKit.UILabel",
+                        "usr": "c:objc(cs)UILabel"
+                      }
+                    ],
+                    "usr": "s:Sq"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "c:@M@ShuftiPro@objc(cs)VerificationSupportedTypesCell(im)supportedTypes",
+                "mangledName": "$s9ShuftiPro30VerificationSupportedTypesCellC09supportedE0So7UILabelCSgvg",
+                "moduleName": "ShuftiPro",
+                "implicit": true,
+                "isOpen": true,
+                "declAttributes": [
+                  "ObjC"
+                ],
+                "accessorKind": "get"
+              },
+              {
+                "kind": "Accessor",
+                "name": "Set",
+                "printedName": "Set()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "ImplicitlyUnwrappedOptional",
+                    "printedName": "UIKit.UILabel?",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "UILabel",
+                        "printedName": "UIKit.UILabel",
+                        "usr": "c:objc(cs)UILabel"
+                      }
+                    ],
+                    "usr": "s:Sq"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "c:@M@ShuftiPro@objc(cs)VerificationSupportedTypesCell(im)setSupportedTypes:",
+                "mangledName": "$s9ShuftiPro30VerificationSupportedTypesCellC09supportedE0So7UILabelCSgvs",
+                "moduleName": "ShuftiPro",
+                "implicit": true,
+                "isOpen": true,
+                "declAttributes": [
+                  "ObjC"
+                ],
+                "accessorKind": "set"
+              },
+              {
+                "kind": "Accessor",
+                "name": "Modify",
+                "printedName": "Modify()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:9ShuftiPro30VerificationSupportedTypesCellC09supportedE0So7UILabelCSgvM",
+                "mangledName": "$s9ShuftiPro30VerificationSupportedTypesCellC09supportedE0So7UILabelCSgvM",
+                "moduleName": "ShuftiPro",
+                "implicit": true,
+                "isOpen": true,
+                "accessorKind": "_modify"
+              }
+            ]
+          },
+          {
+            "kind": "Var",
+            "name": "supportedTypesImage",
+            "printedName": "supportedTypesImage",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "WeakStorage",
+                "printedName": "UIKit.UIImageView?"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "c:@M@ShuftiPro@objc(cs)VerificationSupportedTypesCell(py)supportedTypesImage",
+            "mangledName": "$s9ShuftiPro30VerificationSupportedTypesCellC09supportedE5ImageSo11UIImageViewCSgvp",
+            "moduleName": "ShuftiPro",
+            "isOpen": true,
+            "declAttributes": [
+              "HasInitialValue",
+              "Custom",
+              "HasStorage",
+              "ReferenceOwnership",
+              "IBOutlet",
+              "ObjC"
+            ],
+            "fixedbinaryorder": 1,
+            "ownership": 1,
+            "hasStorage": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "ImplicitlyUnwrappedOptional",
+                    "printedName": "UIKit.UIImageView?",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "UIImageView",
+                        "printedName": "UIKit.UIImageView",
+                        "usr": "c:objc(cs)UIImageView"
+                      }
+                    ],
+                    "usr": "s:Sq"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "c:@M@ShuftiPro@objc(cs)VerificationSupportedTypesCell(im)supportedTypesImage",
+                "mangledName": "$s9ShuftiPro30VerificationSupportedTypesCellC09supportedE5ImageSo11UIImageViewCSgvg",
+                "moduleName": "ShuftiPro",
+                "implicit": true,
+                "isOpen": true,
+                "declAttributes": [
+                  "ObjC"
+                ],
+                "accessorKind": "get"
+              },
+              {
+                "kind": "Accessor",
+                "name": "Set",
+                "printedName": "Set()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "ImplicitlyUnwrappedOptional",
+                    "printedName": "UIKit.UIImageView?",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "UIImageView",
+                        "printedName": "UIKit.UIImageView",
+                        "usr": "c:objc(cs)UIImageView"
+                      }
+                    ],
+                    "usr": "s:Sq"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "c:@M@ShuftiPro@objc(cs)VerificationSupportedTypesCell(im)setSupportedTypesImage:",
+                "mangledName": "$s9ShuftiPro30VerificationSupportedTypesCellC09supportedE5ImageSo11UIImageViewCSgvs",
+                "moduleName": "ShuftiPro",
+                "implicit": true,
+                "isOpen": true,
+                "declAttributes": [
+                  "ObjC"
+                ],
+                "accessorKind": "set"
+              },
+              {
+                "kind": "Accessor",
+                "name": "Modify",
+                "printedName": "Modify()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:9ShuftiPro30VerificationSupportedTypesCellC09supportedE5ImageSo11UIImageViewCSgvM",
+                "mangledName": "$s9ShuftiPro30VerificationSupportedTypesCellC09supportedE5ImageSo11UIImageViewCSgvM",
+                "moduleName": "ShuftiPro",
+                "implicit": true,
+                "isOpen": true,
+                "accessorKind": "_modify"
+              }
+            ]
+          },
+          {
+            "kind": "Var",
+            "name": "proceedImg",
+            "printedName": "proceedImg",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "WeakStorage",
+                "printedName": "UIKit.UIImageView?"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "c:@M@ShuftiPro@objc(cs)VerificationSupportedTypesCell(py)proceedImg",
+            "mangledName": "$s9ShuftiPro30VerificationSupportedTypesCellC10proceedImgSo11UIImageViewCSgvp",
+            "moduleName": "ShuftiPro",
+            "isOpen": true,
+            "declAttributes": [
+              "HasInitialValue",
+              "Custom",
+              "HasStorage",
+              "ReferenceOwnership",
+              "IBOutlet",
+              "ObjC"
+            ],
+            "fixedbinaryorder": 2,
+            "ownership": 1,
+            "hasStorage": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "ImplicitlyUnwrappedOptional",
+                    "printedName": "UIKit.UIImageView?",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "UIImageView",
+                        "printedName": "UIKit.UIImageView",
+                        "usr": "c:objc(cs)UIImageView"
+                      }
+                    ],
+                    "usr": "s:Sq"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "c:@M@ShuftiPro@objc(cs)VerificationSupportedTypesCell(im)proceedImg",
+                "mangledName": "$s9ShuftiPro30VerificationSupportedTypesCellC10proceedImgSo11UIImageViewCSgvg",
+                "moduleName": "ShuftiPro",
+                "implicit": true,
+                "isOpen": true,
+                "declAttributes": [
+                  "ObjC"
+                ],
+                "accessorKind": "get"
+              },
+              {
+                "kind": "Accessor",
+                "name": "Set",
+                "printedName": "Set()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "ImplicitlyUnwrappedOptional",
+                    "printedName": "UIKit.UIImageView?",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "UIImageView",
+                        "printedName": "UIKit.UIImageView",
+                        "usr": "c:objc(cs)UIImageView"
+                      }
+                    ],
+                    "usr": "s:Sq"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "c:@M@ShuftiPro@objc(cs)VerificationSupportedTypesCell(im)setProceedImg:",
+                "mangledName": "$s9ShuftiPro30VerificationSupportedTypesCellC10proceedImgSo11UIImageViewCSgvs",
+                "moduleName": "ShuftiPro",
+                "implicit": true,
+                "isOpen": true,
+                "declAttributes": [
+                  "ObjC"
+                ],
+                "accessorKind": "set"
+              },
+              {
+                "kind": "Accessor",
+                "name": "Modify",
+                "printedName": "Modify()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:9ShuftiPro30VerificationSupportedTypesCellC10proceedImgSo11UIImageViewCSgvM",
+                "mangledName": "$s9ShuftiPro30VerificationSupportedTypesCellC10proceedImgSo11UIImageViewCSgvM",
+                "moduleName": "ShuftiPro",
+                "implicit": true,
+                "isOpen": true,
+                "accessorKind": "_modify"
+              }
+            ]
+          },
+          {
+            "kind": "Var",
+            "name": "containerView",
+            "printedName": "containerView",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "WeakStorage",
+                "printedName": "UIKit.UIView?"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "c:@M@ShuftiPro@objc(cs)VerificationSupportedTypesCell(py)containerView",
+            "mangledName": "$s9ShuftiPro30VerificationSupportedTypesCellC13containerViewSo6UIViewCSgvp",
+            "moduleName": "ShuftiPro",
+            "isOpen": true,
+            "declAttributes": [
+              "HasInitialValue",
+              "Custom",
+              "HasStorage",
+              "ReferenceOwnership",
+              "IBOutlet",
+              "ObjC"
+            ],
+            "fixedbinaryorder": 3,
+            "ownership": 1,
+            "hasStorage": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "ImplicitlyUnwrappedOptional",
+                    "printedName": "UIKit.UIView?",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "UIView",
+                        "printedName": "UIKit.UIView",
+                        "usr": "c:objc(cs)UIView"
+                      }
+                    ],
+                    "usr": "s:Sq"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "c:@M@ShuftiPro@objc(cs)VerificationSupportedTypesCell(im)containerView",
+                "mangledName": "$s9ShuftiPro30VerificationSupportedTypesCellC13containerViewSo6UIViewCSgvg",
+                "moduleName": "ShuftiPro",
+                "implicit": true,
+                "isOpen": true,
+                "declAttributes": [
+                  "ObjC"
+                ],
+                "accessorKind": "get"
+              },
+              {
+                "kind": "Accessor",
+                "name": "Set",
+                "printedName": "Set()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "ImplicitlyUnwrappedOptional",
+                    "printedName": "UIKit.UIView?",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "UIView",
+                        "printedName": "UIKit.UIView",
+                        "usr": "c:objc(cs)UIView"
+                      }
+                    ],
+                    "usr": "s:Sq"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "c:@M@ShuftiPro@objc(cs)VerificationSupportedTypesCell(im)setContainerView:",
+                "mangledName": "$s9ShuftiPro30VerificationSupportedTypesCellC13containerViewSo6UIViewCSgvs",
+                "moduleName": "ShuftiPro",
+                "implicit": true,
+                "isOpen": true,
+                "declAttributes": [
+                  "ObjC"
+                ],
+                "accessorKind": "set"
+              },
+              {
+                "kind": "Accessor",
+                "name": "Modify",
+                "printedName": "Modify()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:9ShuftiPro30VerificationSupportedTypesCellC13containerViewSo6UIViewCSgvM",
+                "mangledName": "$s9ShuftiPro30VerificationSupportedTypesCellC13containerViewSo6UIViewCSgvM",
+                "moduleName": "ShuftiPro",
+                "implicit": true,
+                "isOpen": true,
+                "accessorKind": "_modify"
+              }
+            ]
+          },
+          {
+            "kind": "Var",
+            "name": "proceedView",
+            "printedName": "proceedView",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "WeakStorage",
+                "printedName": "UIKit.UIView?"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "c:@M@ShuftiPro@objc(cs)VerificationSupportedTypesCell(py)proceedView",
+            "mangledName": "$s9ShuftiPro30VerificationSupportedTypesCellC11proceedViewSo6UIViewCSgvp",
+            "moduleName": "ShuftiPro",
+            "isOpen": true,
+            "declAttributes": [
+              "HasInitialValue",
+              "Custom",
+              "HasStorage",
+              "ReferenceOwnership",
+              "IBOutlet",
+              "ObjC"
+            ],
+            "fixedbinaryorder": 4,
+            "ownership": 1,
+            "hasStorage": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "ImplicitlyUnwrappedOptional",
+                    "printedName": "UIKit.UIView?",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "UIView",
+                        "printedName": "UIKit.UIView",
+                        "usr": "c:objc(cs)UIView"
+                      }
+                    ],
+                    "usr": "s:Sq"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "c:@M@ShuftiPro@objc(cs)VerificationSupportedTypesCell(im)proceedView",
+                "mangledName": "$s9ShuftiPro30VerificationSupportedTypesCellC11proceedViewSo6UIViewCSgvg",
+                "moduleName": "ShuftiPro",
+                "implicit": true,
+                "isOpen": true,
+                "declAttributes": [
+                  "ObjC"
+                ],
+                "accessorKind": "get"
+              },
+              {
+                "kind": "Accessor",
+                "name": "Set",
+                "printedName": "Set()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "ImplicitlyUnwrappedOptional",
+                    "printedName": "UIKit.UIView?",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "UIView",
+                        "printedName": "UIKit.UIView",
+                        "usr": "c:objc(cs)UIView"
+                      }
+                    ],
+                    "usr": "s:Sq"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "c:@M@ShuftiPro@objc(cs)VerificationSupportedTypesCell(im)setProceedView:",
+                "mangledName": "$s9ShuftiPro30VerificationSupportedTypesCellC11proceedViewSo6UIViewCSgvs",
+                "moduleName": "ShuftiPro",
+                "implicit": true,
+                "isOpen": true,
+                "declAttributes": [
+                  "ObjC"
+                ],
+                "accessorKind": "set"
+              },
+              {
+                "kind": "Accessor",
+                "name": "Modify",
+                "printedName": "Modify()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:9ShuftiPro30VerificationSupportedTypesCellC11proceedViewSo6UIViewCSgvM",
+                "mangledName": "$s9ShuftiPro30VerificationSupportedTypesCellC11proceedViewSo6UIViewCSgvM",
+                "moduleName": "ShuftiPro",
+                "implicit": true,
+                "isOpen": true,
+                "accessorKind": "_modify"
+              }
+            ]
+          },
+          {
+            "kind": "Var",
+            "name": "leftBorderView",
+            "printedName": "leftBorderView",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "WeakStorage",
+                "printedName": "UIKit.UIView?"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "c:@M@ShuftiPro@objc(cs)VerificationSupportedTypesCell(py)leftBorderView",
+            "mangledName": "$s9ShuftiPro30VerificationSupportedTypesCellC14leftBorderViewSo6UIViewCSgvp",
+            "moduleName": "ShuftiPro",
+            "isOpen": true,
+            "declAttributes": [
+              "HasInitialValue",
+              "Custom",
+              "HasStorage",
+              "ReferenceOwnership",
+              "IBOutlet",
+              "ObjC"
+            ],
+            "fixedbinaryorder": 5,
+            "ownership": 1,
+            "hasStorage": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "ImplicitlyUnwrappedOptional",
+                    "printedName": "UIKit.UIView?",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "UIView",
+                        "printedName": "UIKit.UIView",
+                        "usr": "c:objc(cs)UIView"
+                      }
+                    ],
+                    "usr": "s:Sq"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "c:@M@ShuftiPro@objc(cs)VerificationSupportedTypesCell(im)leftBorderView",
+                "mangledName": "$s9ShuftiPro30VerificationSupportedTypesCellC14leftBorderViewSo6UIViewCSgvg",
+                "moduleName": "ShuftiPro",
+                "implicit": true,
+                "isOpen": true,
+                "declAttributes": [
+                  "ObjC"
+                ],
+                "accessorKind": "get"
+              },
+              {
+                "kind": "Accessor",
+                "name": "Set",
+                "printedName": "Set()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "ImplicitlyUnwrappedOptional",
+                    "printedName": "UIKit.UIView?",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "UIView",
+                        "printedName": "UIKit.UIView",
+                        "usr": "c:objc(cs)UIView"
+                      }
+                    ],
+                    "usr": "s:Sq"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "c:@M@ShuftiPro@objc(cs)VerificationSupportedTypesCell(im)setLeftBorderView:",
+                "mangledName": "$s9ShuftiPro30VerificationSupportedTypesCellC14leftBorderViewSo6UIViewCSgvs",
+                "moduleName": "ShuftiPro",
+                "implicit": true,
+                "isOpen": true,
+                "declAttributes": [
+                  "ObjC"
+                ],
+                "accessorKind": "set"
+              },
+              {
+                "kind": "Accessor",
+                "name": "Modify",
+                "printedName": "Modify()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:9ShuftiPro30VerificationSupportedTypesCellC14leftBorderViewSo6UIViewCSgvM",
+                "mangledName": "$s9ShuftiPro30VerificationSupportedTypesCellC14leftBorderViewSo6UIViewCSgvM",
+                "moduleName": "ShuftiPro",
+                "implicit": true,
+                "isOpen": true,
+                "accessorKind": "_modify"
+              }
+            ]
+          },
+          {
+            "kind": "Var",
+            "name": "rightBorderView",
+            "printedName": "rightBorderView",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "WeakStorage",
+                "printedName": "UIKit.UIView?"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "c:@M@ShuftiPro@objc(cs)VerificationSupportedTypesCell(py)rightBorderView",
+            "mangledName": "$s9ShuftiPro30VerificationSupportedTypesCellC15rightBorderViewSo6UIViewCSgvp",
+            "moduleName": "ShuftiPro",
+            "isOpen": true,
+            "declAttributes": [
+              "HasInitialValue",
+              "Custom",
+              "HasStorage",
+              "ReferenceOwnership",
+              "IBOutlet",
+              "ObjC"
+            ],
+            "fixedbinaryorder": 6,
+            "ownership": 1,
+            "hasStorage": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "ImplicitlyUnwrappedOptional",
+                    "printedName": "UIKit.UIView?",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "UIView",
+                        "printedName": "UIKit.UIView",
+                        "usr": "c:objc(cs)UIView"
+                      }
+                    ],
+                    "usr": "s:Sq"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "c:@M@ShuftiPro@objc(cs)VerificationSupportedTypesCell(im)rightBorderView",
+                "mangledName": "$s9ShuftiPro30VerificationSupportedTypesCellC15rightBorderViewSo6UIViewCSgvg",
+                "moduleName": "ShuftiPro",
+                "implicit": true,
+                "isOpen": true,
+                "declAttributes": [
+                  "ObjC"
+                ],
+                "accessorKind": "get"
+              },
+              {
+                "kind": "Accessor",
+                "name": "Set",
+                "printedName": "Set()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "ImplicitlyUnwrappedOptional",
+                    "printedName": "UIKit.UIView?",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "UIView",
+                        "printedName": "UIKit.UIView",
+                        "usr": "c:objc(cs)UIView"
+                      }
+                    ],
+                    "usr": "s:Sq"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "c:@M@ShuftiPro@objc(cs)VerificationSupportedTypesCell(im)setRightBorderView:",
+                "mangledName": "$s9ShuftiPro30VerificationSupportedTypesCellC15rightBorderViewSo6UIViewCSgvs",
+                "moduleName": "ShuftiPro",
+                "implicit": true,
+                "isOpen": true,
+                "declAttributes": [
+                  "ObjC"
+                ],
+                "accessorKind": "set"
+              },
+              {
+                "kind": "Accessor",
+                "name": "Modify",
+                "printedName": "Modify()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:9ShuftiPro30VerificationSupportedTypesCellC15rightBorderViewSo6UIViewCSgvM",
+                "mangledName": "$s9ShuftiPro30VerificationSupportedTypesCellC15rightBorderViewSo6UIViewCSgvM",
+                "moduleName": "ShuftiPro",
+                "implicit": true,
+                "isOpen": true,
+                "accessorKind": "_modify"
+              }
+            ]
+          },
+          {
+            "kind": "Var",
+            "name": "topBorderView",
+            "printedName": "topBorderView",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "WeakStorage",
+                "printedName": "UIKit.UIView?"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "c:@M@ShuftiPro@objc(cs)VerificationSupportedTypesCell(py)topBorderView",
+            "mangledName": "$s9ShuftiPro30VerificationSupportedTypesCellC13topBorderViewSo6UIViewCSgvp",
+            "moduleName": "ShuftiPro",
+            "isOpen": true,
+            "declAttributes": [
+              "HasInitialValue",
+              "Custom",
+              "HasStorage",
+              "ReferenceOwnership",
+              "IBOutlet",
+              "ObjC"
+            ],
+            "fixedbinaryorder": 7,
+            "ownership": 1,
+            "hasStorage": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "ImplicitlyUnwrappedOptional",
+                    "printedName": "UIKit.UIView?",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "UIView",
+                        "printedName": "UIKit.UIView",
+                        "usr": "c:objc(cs)UIView"
+                      }
+                    ],
+                    "usr": "s:Sq"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "c:@M@ShuftiPro@objc(cs)VerificationSupportedTypesCell(im)topBorderView",
+                "mangledName": "$s9ShuftiPro30VerificationSupportedTypesCellC13topBorderViewSo6UIViewCSgvg",
+                "moduleName": "ShuftiPro",
+                "implicit": true,
+                "isOpen": true,
+                "declAttributes": [
+                  "ObjC"
+                ],
+                "accessorKind": "get"
+              },
+              {
+                "kind": "Accessor",
+                "name": "Set",
+                "printedName": "Set()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "ImplicitlyUnwrappedOptional",
+                    "printedName": "UIKit.UIView?",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "UIView",
+                        "printedName": "UIKit.UIView",
+                        "usr": "c:objc(cs)UIView"
+                      }
+                    ],
+                    "usr": "s:Sq"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "c:@M@ShuftiPro@objc(cs)VerificationSupportedTypesCell(im)setTopBorderView:",
+                "mangledName": "$s9ShuftiPro30VerificationSupportedTypesCellC13topBorderViewSo6UIViewCSgvs",
+                "moduleName": "ShuftiPro",
+                "implicit": true,
+                "isOpen": true,
+                "declAttributes": [
+                  "ObjC"
+                ],
+                "accessorKind": "set"
+              },
+              {
+                "kind": "Accessor",
+                "name": "Modify",
+                "printedName": "Modify()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:9ShuftiPro30VerificationSupportedTypesCellC13topBorderViewSo6UIViewCSgvM",
+                "mangledName": "$s9ShuftiPro30VerificationSupportedTypesCellC13topBorderViewSo6UIViewCSgvM",
+                "moduleName": "ShuftiPro",
+                "implicit": true,
+                "isOpen": true,
+                "accessorKind": "_modify"
+              }
+            ]
+          },
+          {
+            "kind": "Var",
+            "name": "bottomBorderView",
+            "printedName": "bottomBorderView",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "WeakStorage",
+                "printedName": "UIKit.UIView?"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "c:@M@ShuftiPro@objc(cs)VerificationSupportedTypesCell(py)bottomBorderView",
+            "mangledName": "$s9ShuftiPro30VerificationSupportedTypesCellC16bottomBorderViewSo6UIViewCSgvp",
+            "moduleName": "ShuftiPro",
+            "isOpen": true,
+            "declAttributes": [
+              "HasInitialValue",
+              "Custom",
+              "HasStorage",
+              "ReferenceOwnership",
+              "IBOutlet",
+              "ObjC"
+            ],
+            "fixedbinaryorder": 8,
+            "ownership": 1,
+            "hasStorage": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "ImplicitlyUnwrappedOptional",
+                    "printedName": "UIKit.UIView?",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "UIView",
+                        "printedName": "UIKit.UIView",
+                        "usr": "c:objc(cs)UIView"
+                      }
+                    ],
+                    "usr": "s:Sq"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "c:@M@ShuftiPro@objc(cs)VerificationSupportedTypesCell(im)bottomBorderView",
+                "mangledName": "$s9ShuftiPro30VerificationSupportedTypesCellC16bottomBorderViewSo6UIViewCSgvg",
+                "moduleName": "ShuftiPro",
+                "implicit": true,
+                "isOpen": true,
+                "declAttributes": [
+                  "ObjC"
+                ],
+                "accessorKind": "get"
+              },
+              {
+                "kind": "Accessor",
+                "name": "Set",
+                "printedName": "Set()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "ImplicitlyUnwrappedOptional",
+                    "printedName": "UIKit.UIView?",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "UIView",
+                        "printedName": "UIKit.UIView",
+                        "usr": "c:objc(cs)UIView"
+                      }
+                    ],
+                    "usr": "s:Sq"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "c:@M@ShuftiPro@objc(cs)VerificationSupportedTypesCell(im)setBottomBorderView:",
+                "mangledName": "$s9ShuftiPro30VerificationSupportedTypesCellC16bottomBorderViewSo6UIViewCSgvs",
+                "moduleName": "ShuftiPro",
+                "implicit": true,
+                "isOpen": true,
+                "declAttributes": [
+                  "ObjC"
+                ],
+                "accessorKind": "set"
+              },
+              {
+                "kind": "Accessor",
+                "name": "Modify",
+                "printedName": "Modify()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:9ShuftiPro30VerificationSupportedTypesCellC16bottomBorderViewSo6UIViewCSgvM",
+                "mangledName": "$s9ShuftiPro30VerificationSupportedTypesCellC16bottomBorderViewSo6UIViewCSgvM",
+                "moduleName": "ShuftiPro",
+                "implicit": true,
+                "isOpen": true,
+                "accessorKind": "_modify"
+              }
+            ]
+          },
+          {
+            "kind": "Function",
+            "name": "awakeFromNib",
+            "printedName": "awakeFromNib()",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "c:@M@ShuftiPro@objc(cs)VerificationSupportedTypesCell(im)awakeFromNib",
+            "mangledName": "$s9ShuftiPro30VerificationSupportedTypesCellC12awakeFromNibyyF",
+            "moduleName": "ShuftiPro",
+            "overriding": true,
+            "isOpen": true,
+            "objc_name": "awakeFromNib",
+            "declAttributes": [
+              "Dynamic",
+              "ObjC",
+              "Custom",
+              "Override"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "setSelected",
+            "printedName": "setSelected(_:animated:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Bool",
+                "printedName": "Swift.Bool",
+                "usr": "s:Sb"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Bool",
+                "printedName": "Swift.Bool",
+                "usr": "s:Sb"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "c:@M@ShuftiPro@objc(cs)VerificationSupportedTypesCell(im)setSelected:animated:",
+            "mangledName": "$s9ShuftiPro30VerificationSupportedTypesCellC11setSelected_8animatedySb_SbtF",
+            "moduleName": "ShuftiPro",
+            "overriding": true,
+            "isOpen": true,
+            "objc_name": "setSelected:animated:",
+            "declAttributes": [
+              "Dynamic",
+              "ObjC",
+              "Custom",
+              "Override"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "prepareForReuse",
+            "printedName": "prepareForReuse()",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "c:@M@ShuftiPro@objc(cs)VerificationSupportedTypesCell(im)prepareForReuse",
+            "mangledName": "$s9ShuftiPro30VerificationSupportedTypesCellC15prepareForReuseyyF",
+            "moduleName": "ShuftiPro",
+            "overriding": true,
+            "isOpen": true,
+            "objc_name": "prepareForReuse",
+            "declAttributes": [
+              "Dynamic",
+              "ObjC",
+              "Custom",
+              "Override"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Constructor",
+            "name": "init",
+            "printedName": "init(style:reuseIdentifier:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "VerificationSupportedTypesCell",
+                "printedName": "ShuftiPro.VerificationSupportedTypesCell",
+                "usr": "c:@M@ShuftiPro@objc(cs)VerificationSupportedTypesCell"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "CellStyle",
+                "printedName": "UIKit.UITableViewCell.CellStyle",
+                "usr": "c:@E@UITableViewCellStyle"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "Swift.String?",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "String",
+                    "printedName": "Swift.String",
+                    "usr": "s:SS"
+                  }
+                ],
+                "usr": "s:Sq"
+              }
+            ],
+            "declKind": "Constructor",
+            "usr": "c:@M@ShuftiPro@objc(cs)VerificationSupportedTypesCell(im)initWithStyle:reuseIdentifier:",
+            "mangledName": "$s9ShuftiPro30VerificationSupportedTypesCellC5style15reuseIdentifierACSo011UITableViewF5StyleV_SSSgtcfc",
+            "moduleName": "ShuftiPro",
+            "overriding": true,
+            "implicit": true,
+            "intro_iOS": "3.0",
+            "objc_name": "initWithStyle:reuseIdentifier:",
+            "declAttributes": [
+              "Dynamic",
+              "ObjC",
+              "Custom",
+              "Override",
+              "Available"
+            ],
+            "init_kind": "Designated"
+          },
+          {
+            "kind": "Constructor",
+            "name": "init",
+            "printedName": "init(coder:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "ShuftiPro.VerificationSupportedTypesCell?",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "VerificationSupportedTypesCell",
+                    "printedName": "ShuftiPro.VerificationSupportedTypesCell",
+                    "usr": "c:@M@ShuftiPro@objc(cs)VerificationSupportedTypesCell"
+                  }
+                ],
+                "usr": "s:Sq"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "NSCoder",
+                "printedName": "Foundation.NSCoder",
+                "usr": "c:objc(cs)NSCoder"
+              }
+            ],
+            "declKind": "Constructor",
+            "usr": "c:@M@ShuftiPro@objc(cs)VerificationSupportedTypesCell(im)initWithCoder:",
+            "mangledName": "$s9ShuftiPro30VerificationSupportedTypesCellC5coderACSgSo7NSCoderC_tcfc",
+            "moduleName": "ShuftiPro",
+            "overriding": true,
+            "implicit": true,
+            "objc_name": "initWithCoder:",
+            "declAttributes": [
+              "Dynamic",
+              "ObjC",
+              "Custom",
+              "Required"
+            ],
+            "init_kind": "Designated"
+          }
+        ],
+        "declKind": "Class",
+        "usr": "c:@M@ShuftiPro@objc(cs)VerificationSupportedTypesCell",
+        "mangledName": "$s9ShuftiPro30VerificationSupportedTypesCellC",
+        "moduleName": "ShuftiPro",
+        "isOpen": true,
+        "declAttributes": [
+          "Custom",
+          "ObjC"
+        ],
+        "superclassUsr": "c:objc(cs)UITableViewCell",
+        "inheritsConvenienceInitializers": true,
+        "superclassNames": [
+          "UIKit.UITableViewCell",
+          "UIKit.UIView",
+          "UIKit.UIResponder",
+          "ObjectiveC.NSObject"
+        ],
+        "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Equatable",
+            "printedName": "Equatable",
+            "usr": "s:SQ",
+            "mangledName": "$sSQ"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Hashable",
+            "printedName": "Hashable",
+            "usr": "s:SH",
+            "mangledName": "$sSH"
+          },
+          {
+            "kind": "Conformance",
+            "name": "CVarArg",
+            "printedName": "CVarArg",
+            "usr": "s:s7CVarArgP",
+            "mangledName": "$ss7CVarArgP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "_KeyValueCodingAndObservingPublishing",
+            "printedName": "_KeyValueCodingAndObservingPublishing",
+            "usr": "s:10Foundation37_KeyValueCodingAndObservingPublishingP",
+            "mangledName": "$s10Foundation37_KeyValueCodingAndObservingPublishingP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "_KeyValueCodingAndObserving",
+            "printedName": "_KeyValueCodingAndObserving",
+            "usr": "s:10Foundation27_KeyValueCodingAndObservingP",
+            "mangledName": "$s10Foundation27_KeyValueCodingAndObservingP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "CustomStringConvertible",
+            "printedName": "CustomStringConvertible",
+            "usr": "s:s23CustomStringConvertibleP",
+            "mangledName": "$ss23CustomStringConvertibleP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "CustomDebugStringConvertible",
+            "printedName": "CustomDebugStringConvertible",
+            "usr": "s:s28CustomDebugStringConvertibleP",
+            "mangledName": "$ss28CustomDebugStringConvertibleP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "__DefaultCustomPlaygroundQuickLookable",
+            "printedName": "__DefaultCustomPlaygroundQuickLookable",
+            "usr": "s:s38__DefaultCustomPlaygroundQuickLookableP",
+            "mangledName": "$ss38__DefaultCustomPlaygroundQuickLookableP"
+          },
           {
             "kind": "Conformance",
             "name": "Sendable",
@@ -69125,6 +70422,98 @@
           },
           {
             "kind": "Var",
+            "name": "currentCroppedFrame",
+            "printedName": "currentCroppedFrame",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "UIImage",
+                "printedName": "UIKit.UIImage",
+                "usr": "c:objc(cs)UIImage"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:9ShuftiPro9CameraVc2C19currentCroppedFrameSo7UIImageCvp",
+            "mangledName": "$s9ShuftiPro9CameraVc2C19currentCroppedFrameSo7UIImageCvp",
+            "moduleName": "ShuftiPro",
+            "isOpen": true,
+            "declAttributes": [
+              "Custom",
+              "HasInitialValue",
+              "HasStorage",
+              "RawDocComment"
+            ],
+            "fixedbinaryorder": 67,
+            "hasStorage": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "UIImage",
+                    "printedName": "UIKit.UIImage",
+                    "usr": "c:objc(cs)UIImage"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:9ShuftiPro9CameraVc2C19currentCroppedFrameSo7UIImageCvg",
+                "mangledName": "$s9ShuftiPro9CameraVc2C19currentCroppedFrameSo7UIImageCvg",
+                "moduleName": "ShuftiPro",
+                "implicit": true,
+                "isOpen": true,
+                "accessorKind": "get"
+              },
+              {
+                "kind": "Accessor",
+                "name": "Set",
+                "printedName": "Set()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "UIImage",
+                    "printedName": "UIKit.UIImage",
+                    "usr": "c:objc(cs)UIImage"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:9ShuftiPro9CameraVc2C19currentCroppedFrameSo7UIImageCvs",
+                "mangledName": "$s9ShuftiPro9CameraVc2C19currentCroppedFrameSo7UIImageCvs",
+                "moduleName": "ShuftiPro",
+                "implicit": true,
+                "isOpen": true,
+                "accessorKind": "set"
+              },
+              {
+                "kind": "Accessor",
+                "name": "Modify",
+                "printedName": "Modify()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:9ShuftiPro9CameraVc2C19currentCroppedFrameSo7UIImageCvM",
+                "mangledName": "$s9ShuftiPro9CameraVc2C19currentCroppedFrameSo7UIImageCvM",
+                "moduleName": "ShuftiPro",
+                "implicit": true,
+                "isOpen": true,
+                "accessorKind": "_modify"
+              }
+            ]
+          },
+          {
+            "kind": "Var",
             "name": "isErrorViewHidden",
             "printedName": "isErrorViewHidden",
             "children": [
@@ -69146,7 +70535,7 @@
               "HasStorage",
               "RawDocComment"
             ],
-            "fixedbinaryorder": 67,
+            "fixedbinaryorder": 68,
             "hasStorage": true,
             "accessors": [
               {
@@ -69237,7 +70626,7 @@
               "HasInitialValue",
               "HasStorage"
             ],
-            "fixedbinaryorder": 68,
+            "fixedbinaryorder": 69,
             "hasStorage": true,
             "accessors": [
               {
@@ -69328,7 +70717,7 @@
               "HasInitialValue",
               "HasStorage"
             ],
-            "fixedbinaryorder": 69,
+            "fixedbinaryorder": 70,
             "hasStorage": true,
             "accessors": [
               {
@@ -69419,7 +70808,7 @@
               "HasInitialValue",
               "HasStorage"
             ],
-            "fixedbinaryorder": 70,
+            "fixedbinaryorder": 71,
             "hasStorage": true,
             "accessors": [
               {
@@ -69510,7 +70899,7 @@
               "HasInitialValue",
               "HasStorage"
             ],
-            "fixedbinaryorder": 71,
+            "fixedbinaryorder": 72,
             "hasStorage": true,
             "accessors": [
               {
@@ -69601,7 +70990,7 @@
               "Final",
               "HasStorage"
             ],
-            "fixedbinaryorder": 72,
+            "fixedbinaryorder": 73,
             "isLet": true,
             "hasStorage": true,
             "accessors": [
@@ -69651,7 +71040,7 @@
               "HasInitialValue",
               "HasStorage"
             ],
-            "fixedbinaryorder": 73,
+            "fixedbinaryorder": 74,
             "hasStorage": true,
             "accessors": [
               {
@@ -69742,7 +71131,7 @@
               "HasInitialValue",
               "HasStorage"
             ],
-            "fixedbinaryorder": 74,
+            "fixedbinaryorder": 75,
             "hasStorage": true,
             "accessors": [
               {
@@ -69833,7 +71222,7 @@
               "HasInitialValue",
               "HasStorage"
             ],
-            "fixedbinaryorder": 75,
+            "fixedbinaryorder": 76,
             "hasStorage": true,
             "accessors": [
               {
@@ -69924,7 +71313,7 @@
               "HasInitialValue",
               "HasStorage"
             ],
-            "fixedbinaryorder": 76,
+            "fixedbinaryorder": 77,
             "hasStorage": true,
             "accessors": [
               {
@@ -70015,7 +71404,7 @@
               "HasInitialValue",
               "HasStorage"
             ],
-            "fixedbinaryorder": 77,
+            "fixedbinaryorder": 78,
             "hasStorage": true,
             "accessors": [
               {
@@ -70107,7 +71496,7 @@
               "HasStorage",
               "RawDocComment"
             ],
-            "fixedbinaryorder": 78,
+            "fixedbinaryorder": 79,
             "hasStorage": true,
             "accessors": [
               {
@@ -70198,7 +71587,7 @@
               "Final",
               "HasStorage"
             ],
-            "fixedbinaryorder": 79,
+            "fixedbinaryorder": 80,
             "isLet": true,
             "hasStorage": true,
             "accessors": [
@@ -70256,7 +71645,7 @@
               "HasInitialValue",
               "HasStorage"
             ],
-            "fixedbinaryorder": 80,
+            "fixedbinaryorder": 81,
             "hasStorage": true,
             "accessors": [
               {
@@ -70371,7 +71760,7 @@
               "HasInitialValue",
               "HasStorage"
             ],
-            "fixedbinaryorder": 81,
+            "fixedbinaryorder": 82,
             "hasStorage": true,
             "accessors": [
               {
@@ -70486,7 +71875,7 @@
               "HasInitialValue",
               "HasStorage"
             ],
-            "fixedbinaryorder": 82,
+            "fixedbinaryorder": 83,
             "hasStorage": true,
             "accessors": [
               {
@@ -70601,7 +71990,7 @@
               "HasInitialValue",
               "HasStorage"
             ],
-            "fixedbinaryorder": 83,
+            "fixedbinaryorder": 84,
             "hasStorage": true,
             "accessors": [
               {
@@ -70708,7 +72097,7 @@
               "HasInitialValue",
               "HasStorage"
             ],
-            "fixedbinaryorder": 84,
+            "fixedbinaryorder": 85,
             "hasStorage": true,
             "accessors": [
               {
@@ -70799,7 +72188,7 @@
               "HasInitialValue",
               "HasStorage"
             ],
-            "fixedbinaryorder": 85,
+            "fixedbinaryorder": 86,
             "hasStorage": true,
             "accessors": [
               {
@@ -70890,7 +72279,7 @@
               "HasInitialValue",
               "HasStorage"
             ],
-            "fixedbinaryorder": 86,
+            "fixedbinaryorder": 87,
             "hasStorage": true,
             "accessors": [
               {
@@ -70981,7 +72370,7 @@
               "HasInitialValue",
               "HasStorage"
             ],
-            "fixedbinaryorder": 87,
+            "fixedbinaryorder": 88,
             "hasStorage": true,
             "accessors": [
               {
@@ -71072,7 +72461,7 @@
               "HasInitialValue",
               "HasStorage"
             ],
-            "fixedbinaryorder": 88,
+            "fixedbinaryorder": 89,
             "hasStorage": true,
             "accessors": [
               {
@@ -71163,7 +72552,7 @@
               "HasInitialValue",
               "HasStorage"
             ],
-            "fixedbinaryorder": 89,
+            "fixedbinaryorder": 90,
             "hasStorage": true,
             "accessors": [
               {
@@ -71254,7 +72643,7 @@
               "HasInitialValue",
               "HasStorage"
             ],
-            "fixedbinaryorder": 90,
+            "fixedbinaryorder": 91,
             "hasStorage": true,
             "accessors": [
               {
@@ -71354,7 +72743,7 @@
               "HasStorage",
               "RawDocComment"
             ],
-            "fixedbinaryorder": 91,
+            "fixedbinaryorder": 92,
             "hasStorage": true,
             "accessors": [
               {
@@ -71461,7 +72850,7 @@
               "Custom",
               "HasStorage"
             ],
-            "fixedbinaryorder": 92,
+            "fixedbinaryorder": 93,
             "hasStorage": true,
             "accessors": [
               {
@@ -71552,7 +72941,7 @@
               "HasInitialValue",
               "HasStorage"
             ],
-            "fixedbinaryorder": 93,
+            "fixedbinaryorder": 94,
             "hasStorage": true,
             "accessors": [
               {
@@ -71741,7 +73130,7 @@
               "HasStorage",
               "Final"
             ],
-            "fixedbinaryorder": 94,
+            "fixedbinaryorder": 95,
             "hasStorage": true
           },
           {
@@ -71766,7 +73155,7 @@
               "HasInitialValue",
               "HasStorage"
             ],
-            "fixedbinaryorder": 95,
+            "fixedbinaryorder": 96,
             "hasStorage": true,
             "accessors": [
               {
@@ -71857,7 +73246,7 @@
               "HasInitialValue",
               "HasStorage"
             ],
-            "fixedbinaryorder": 96,
+            "fixedbinaryorder": 97,
             "hasStorage": true,
             "accessors": [
               {
@@ -71948,7 +73337,7 @@
               "Custom",
               "HasStorage"
             ],
-            "fixedbinaryorder": 97,
+            "fixedbinaryorder": 98,
             "hasStorage": true,
             "accessors": [
               {
@@ -72047,7 +73436,7 @@
               "HasInitialValue",
               "HasStorage"
             ],
-            "fixedbinaryorder": 98,
+            "fixedbinaryorder": 99,
             "hasStorage": true,
             "accessors": [
               {
@@ -72154,7 +73543,7 @@
               "HasInitialValue",
               "HasStorage"
             ],
-            "fixedbinaryorder": 99,
+            "fixedbinaryorder": 100,
             "hasStorage": true,
             "accessors": [
               {
@@ -72245,7 +73634,7 @@
               "HasInitialValue",
               "HasStorage"
             ],
-            "fixedbinaryorder": 100,
+            "fixedbinaryorder": 101,
             "hasStorage": true,
             "accessors": [
               {
@@ -112684,7 +114073,7 @@
       "kind": "StringLiteral",
       "offset": 2631,
       "length": 7,
-      "value": "\"3.5.9\""
+      "value": "\"3.6.0\""
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/PreviewScreen\/ConfirmPhotoVc.swift",
@@ -113634,44 +115023,30 @@
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/CameraScreen\/CameraVc2.swift",
       "kind": "BooleanLiteral",
-      "offset": 3930,
+      "offset": 3995,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/CameraScreen\/CameraVc2.swift",
       "kind": "StringLiteral",
-      "offset": 4140,
+      "offset": 4205,
       "length": 2,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/CameraScreen\/CameraVc2.swift",
       "kind": "BooleanLiteral",
-      "offset": 4205,
+      "offset": 4270,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/CameraScreen\/CameraVc2.swift",
       "kind": "StringLiteral",
-      "offset": 4235,
+      "offset": 4300,
       "length": 2,
       "value": "\"\""
-    },
-    {
-      "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/CameraScreen\/CameraVc2.swift",
-      "kind": "BooleanLiteral",
-      "offset": 4262,
-      "length": 5,
-      "value": "false"
-    },
-    {
-      "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/CameraScreen\/CameraVc2.swift",
-      "kind": "BooleanLiteral",
-      "offset": 4291,
-      "length": 5,
-      "value": "false"
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/CameraScreen\/CameraVc2.swift",
@@ -113682,99 +115057,113 @@
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/CameraScreen\/CameraVc2.swift",
+      "kind": "BooleanLiteral",
+      "offset": 4356,
+      "length": 5,
+      "value": "false"
+    },
+    {
+      "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/CameraScreen\/CameraVc2.swift",
+      "kind": "BooleanLiteral",
+      "offset": 4392,
+      "length": 5,
+      "value": "false"
+    },
+    {
+      "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/CameraScreen\/CameraVc2.swift",
       "kind": "IntegerLiteral",
-      "offset": 4590,
+      "offset": 4655,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/CameraScreen\/CameraVc2.swift",
       "kind": "IntegerLiteral",
-      "offset": 4878,
+      "offset": 4943,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/CameraScreen\/CameraVc2.swift",
       "kind": "FloatLiteral",
-      "offset": 4902,
+      "offset": 4967,
       "length": 3,
       "value": "0.0"
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/CameraScreen\/CameraVc2.swift",
       "kind": "BooleanLiteral",
-      "offset": 4941,
+      "offset": 5006,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/CameraScreen\/CameraVc2.swift",
       "kind": "BooleanLiteral",
-      "offset": 4977,
+      "offset": 5042,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/CameraScreen\/CameraVc2.swift",
       "kind": "StringLiteral",
-      "offset": 5019,
+      "offset": 5084,
       "length": 2,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/CameraScreen\/CameraVc2.swift",
       "kind": "StringLiteral",
-      "offset": 5052,
+      "offset": 5117,
       "length": 2,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/CameraScreen\/CameraVc2.swift",
       "kind": "StringLiteral",
-      "offset": 5458,
+      "offset": 5523,
       "length": 2,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/CameraScreen\/CameraVc2.swift",
       "kind": "BooleanLiteral",
-      "offset": 5626,
+      "offset": 5691,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/CameraScreen\/CameraVc2.swift",
       "kind": "BooleanLiteral",
-      "offset": 5656,
+      "offset": 5721,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/CameraScreen\/CameraVc2.swift",
       "kind": "BooleanLiteral",
-      "offset": 5748,
+      "offset": 5813,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/CameraScreen\/CameraVc2.swift",
       "kind": "StringLiteral",
-      "offset": 5694,
+      "offset": 5759,
       "length": 2,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/CameraScreen\/CameraVc2.swift",
       "kind": "StringLiteral",
-      "offset": 6411,
+      "offset": 6476,
       "length": 2,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/programmersforce\/Documents\/ShuftiPro\/iOS\/ios-sdk\/ShuftiPro\/CameraScreen\/CameraVc2.swift",
       "kind": "BooleanLiteral",
-      "offset": 6446,
+      "offset": 6511,
       "length": 4,
       "value": "true"
     },

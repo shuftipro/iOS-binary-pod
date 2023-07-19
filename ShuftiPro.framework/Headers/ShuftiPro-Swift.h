@@ -400,18 +400,18 @@ SWIFT_CLASS("_TtC9ShuftiPro9CameraVc2")
 - (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder OBJC_DESIGNATED_INITIALIZER;
 @end
 
-@class AVCaptureOutput;
-@class AVCaptureConnection;
-
-@interface CameraVc2 (SWIFT_EXTENSION(ShuftiPro)) <AVCaptureVideoDataOutputSampleBufferDelegate>
-- (void)captureOutput:(AVCaptureOutput * _Nonnull)output didOutputSampleBuffer:(CMSampleBufferRef _Nonnull)sampleBuffer fromConnection:(AVCaptureConnection * _Nonnull)connection;
-@end
-
 @class AVCapturePhotoOutput;
 @class AVCapturePhoto;
 
 @interface CameraVc2 (SWIFT_EXTENSION(ShuftiPro)) <AVCapturePhotoCaptureDelegate>
 - (void)captureOutput:(AVCapturePhotoOutput * _Nonnull)output didFinishProcessingPhoto:(AVCapturePhoto * _Nonnull)photo error:(NSError * _Nullable)error;
+@end
+
+@class AVCaptureOutput;
+@class AVCaptureConnection;
+
+@interface CameraVc2 (SWIFT_EXTENSION(ShuftiPro)) <AVCaptureVideoDataOutputSampleBufferDelegate>
+- (void)captureOutput:(AVCaptureOutput * _Nonnull)output didOutputSampleBuffer:(CMSampleBufferRef _Nonnull)sampleBuffer fromConnection:(AVCaptureConnection * _Nonnull)connection;
 @end
 
 
@@ -861,7 +861,6 @@ SWIFT_CLASS("_TtC9ShuftiPro18SupportedTypesCell")
 @property (nonatomic, weak) IBOutlet UIView * _Null_unspecified bottomBorderView;
 - (void)awakeFromNib;
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated;
-- (void)prepareForReuse;
 - (nonnull instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString * _Nullable)reuseIdentifier OBJC_DESIGNATED_INITIALIZER SWIFT_AVAILABILITY(ios,introduced=3.0);
 - (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder OBJC_DESIGNATED_INITIALIZER;
 @end
@@ -1038,13 +1037,13 @@ SWIFT_CLASS("_TtC9ShuftiPro13UploadVideoVc")
 - (void)imagePickerController:(UIImagePickerController * _Nonnull)picker didFinishPickingMediaWithInfo:(NSDictionary<UIImagePickerControllerInfoKey, id> * _Nonnull)info;
 @end
 
-
 @class UIDocumentPickerViewController;
 
 @interface UploadVideoVc (SWIFT_EXTENSION(ShuftiPro))
 - (void)documentPicker:(UIDocumentPickerViewController * _Nonnull)controller didPickDocumentsAtURLs:(NSArray<NSURL *> * _Nonnull)urls;
 - (void)documentPickerWasCancelled:(UIDocumentPickerViewController * _Nonnull)controller;
 @end
+
 
 
 @interface UploadVideoVc (SWIFT_EXTENSION(ShuftiPro))
@@ -1081,6 +1080,25 @@ SWIFT_CLASS("_TtC9ShuftiPro38VerificationRequirementsViewController")
 - (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder OBJC_DESIGNATED_INITIALIZER;
 @end
 
+
+
+SWIFT_CLASS("_TtC9ShuftiPro30VerificationSupportedTypesCell")
+@interface VerificationSupportedTypesCell : UITableViewCell
+@property (nonatomic, weak) IBOutlet UILabel * _Null_unspecified supportedTypes;
+@property (nonatomic, weak) IBOutlet UIImageView * _Null_unspecified supportedTypesImage;
+@property (nonatomic, weak) IBOutlet UIImageView * _Null_unspecified proceedImg;
+@property (nonatomic, weak) IBOutlet UIView * _Null_unspecified containerView;
+@property (nonatomic, weak) IBOutlet UIView * _Null_unspecified proceedView;
+@property (nonatomic, weak) IBOutlet UIView * _Null_unspecified leftBorderView;
+@property (nonatomic, weak) IBOutlet UIView * _Null_unspecified rightBorderView;
+@property (nonatomic, weak) IBOutlet UIView * _Null_unspecified topBorderView;
+@property (nonatomic, weak) IBOutlet UIView * _Null_unspecified bottomBorderView;
+- (void)awakeFromNib;
+- (void)setSelected:(BOOL)selected animated:(BOOL)animated;
+- (void)prepareForReuse;
+- (nonnull instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString * _Nullable)reuseIdentifier OBJC_DESIGNATED_INITIALIZER SWIFT_AVAILABILITY(ios,introduced=3.0);
+- (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder OBJC_DESIGNATED_INITIALIZER;
+@end
 
 @class UINavigationBar;
 @class UIBarButtonItem;
