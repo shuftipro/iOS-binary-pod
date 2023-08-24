@@ -2,7 +2,7 @@
 Pod::Spec.new do |spec|
 
 spec.name         = "ShuftiPro"
-spec.version      = "3.6.1"
+spec.version      = "3.6.2"
 spec.summary      = "Shufti Pro is designed to verify documents in realtime."
 
 spec.description  = <<-DESC
@@ -22,7 +22,6 @@ spec.source       = { :git => "https://github.com/shuftipro/iOS-binary-pod.git",
 
   spec.ios.vendored_frameworks = 'ShuftiPro.framework'
   spec.dependency 'Socket.IO-Client-Swift'
-  spec.dependency 'lottie-ios'
   spec.swift_version = "5"
 
 spec.exclude_files = "Classes/Exclude"
