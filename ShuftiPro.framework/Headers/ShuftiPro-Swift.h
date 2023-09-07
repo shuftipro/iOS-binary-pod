@@ -859,6 +859,12 @@ SWIFT_CLASS("_TtC9ShuftiPro8ResultVc")
 @end
 
 
+@class MFMailComposeViewController;
+
+@interface ResultVc (SWIFT_EXTENSION(ShuftiPro))
+- (void)mailComposeController:(MFMailComposeViewController * _Nonnull)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError * _Nullable)error;
+@end
+
 @class NSURLSessionTask;
 @class NSURLSessionDownloadTask;
 
@@ -866,13 +872,6 @@ SWIFT_CLASS("_TtC9ShuftiPro8ResultVc")
 - (void)URLSession:(NSURLSession * _Nonnull)session task:(NSURLSessionTask * _Nonnull)task didCompleteWithError:(NSError * _Nullable)error;
 - (void)URLSession:(NSURLSession * _Nonnull)session downloadTask:(NSURLSessionDownloadTask * _Nonnull)downloadTask didFinishDownloadingToURL:(NSURL * _Nonnull)location;
 - (void)URLSession:(NSURLSession * _Nonnull)session task:(NSURLSessionTask * _Nonnull)task didSendBodyData:(int64_t)bytesSent totalBytesSent:(int64_t)totalBytesSent totalBytesExpectedToSend:(int64_t)totalBytesExpectedToSend;
-@end
-
-@class MFMailComposeViewController;
-
-@interface ResultVc (SWIFT_EXTENSION(ShuftiPro))
-- (void)tappedOnLabel:(UITapGestureRecognizer * _Nonnull)gesture;
-- (void)mailComposeController:(MFMailComposeViewController * _Nonnull)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError * _Nullable)error;
 @end
 
 
