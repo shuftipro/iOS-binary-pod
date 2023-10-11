@@ -578,7 +578,6 @@ SWIFT_CLASS("_TtC9ShuftiPro17CustomAppDelegate")
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
 
-@class UITextView;
 @class NSNotification;
 
 SWIFT_CLASS("_TtC9ShuftiPro22DeclarationOfConsentVc")
@@ -593,7 +592,7 @@ SWIFT_CLASS("_TtC9ShuftiPro22DeclarationOfConsentVc")
 @property (nonatomic, weak) IBOutlet UIButton * _Null_unspecified continueBtn;
 @property (nonatomic, weak) IBOutlet UIButton * _Null_unspecified cancelBtn;
 @property (nonatomic, weak) IBOutlet UIImageView * _Null_unspecified aggreeToPrivacyPolicyImageview;
-@property (nonatomic, weak) IBOutlet UITextView * _Null_unspecified lblTermsAndConditions;
+@property (nonatomic, weak) IBOutlet UILabel * _Null_unspecified lblTermsAndConditions;
 @property (nonatomic, weak) IBOutlet UILabel * _Null_unspecified consentTitleLbl;
 @property (nonatomic, weak) IBOutlet UILabel * _Null_unspecified consentHeadingLbl;
 @property (nonatomic, weak) IBOutlet UILabel * _Null_unspecified consentLowerHeadingLbl;
@@ -611,13 +610,10 @@ SWIFT_CLASS("_TtC9ShuftiPro22DeclarationOfConsentVc")
 - (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder OBJC_DESIGNATED_INITIALIZER;
 @end
 
-@class UIGestureRecognizer;
 @class UITapGestureRecognizer;
 
 @interface DeclarationOfConsentVc (SWIFT_EXTENSION(ShuftiPro))
-- (BOOL)gestureRecognizer:(UIGestureRecognizer * _Nonnull)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer * _Nonnull)otherGestureRecognizer SWIFT_WARN_UNUSED_RESULT;
-- (BOOL)textView:(UITextView * _Nonnull)textView shouldInteractWithURL:(NSURL * _Nonnull)URL inRange:(NSRange)characterRange interaction:(UITextItemInteraction)interaction SWIFT_WARN_UNUSED_RESULT;
-- (void)tapTextViewWithSender:(UITapGestureRecognizer * _Nonnull)sender;
+- (void)labelTappedWithGesture:(UITapGestureRecognizer * _Nonnull)gesture;
 - (IBAction)continueBtnPressed:(id _Nonnull)sender;
 - (IBAction)cancelBtnPressed:(id _Nonnull)sender;
 - (IBAction)agreeToPrivacyPressed:(id _Nonnull)sender;
@@ -651,6 +647,7 @@ SWIFT_CLASS("_TtC9ShuftiPro20ExpandableHeaderView")
 - (void)selectHeaderViewWithGesture:(UITapGestureRecognizer * _Nonnull)gesture;
 @end
 
+@class UITextView;
 @class NSLayoutConstraint;
 
 SWIFT_CLASS("_TtC9ShuftiPro27FeedbackPopupViewController")
@@ -1027,6 +1024,7 @@ SWIFT_CLASS("_TtC9ShuftiPro12TriangleView")
 - (nonnull instancetype)initWithFrame:(CGRect)frame OBJC_DESIGNATED_INITIALIZER;
 - (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder OBJC_DESIGNATED_INITIALIZER;
 @end
+
 
 
 
