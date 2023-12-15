@@ -453,15 +453,15 @@ SWIFT_CLASS("_TtC9ShuftiPro9CameraVc2")
 - (void)captureOutput:(AVCapturePhotoOutput * _Nonnull)output didFinishProcessingPhoto:(AVCapturePhoto * _Nonnull)photo error:(NSError * _Nullable)error;
 @end
 
+
+
+
 @class AVCaptureOutput;
 @class AVCaptureConnection;
 
 @interface CameraVc2 (SWIFT_EXTENSION(ShuftiPro)) <AVCaptureVideoDataOutputSampleBufferDelegate>
 - (void)captureOutput:(AVCaptureOutput * _Nonnull)output didOutputSampleBuffer:(CMSampleBufferRef _Nonnull)sampleBuffer fromConnection:(AVCaptureConnection * _Nonnull)connection;
 @end
-
-
-
 
 @class AVCaptureFileOutput;
 @class NSURL;
@@ -872,12 +872,12 @@ SWIFT_CLASS("_TtC9ShuftiPro8ResultVc")
 - (BOOL)textView:(UITextView * _Nonnull)textView shouldInteractWithURL:(NSURL * _Nonnull)URL inRange:(NSRange)characterRange interaction:(UITextItemInteraction)interaction SWIFT_WARN_UNUSED_RESULT;
 @end
 
+
 @class MFMailComposeViewController;
 
 @interface ResultVc (SWIFT_EXTENSION(ShuftiPro))
 - (void)mailComposeController:(MFMailComposeViewController * _Nonnull)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError * _Nullable)error;
 @end
-
 
 @class NSURLSessionTask;
 @class NSURLSessionDownloadTask;
@@ -1024,6 +1024,7 @@ SWIFT_CLASS("_TtC9ShuftiPro12TriangleView")
 - (nonnull instancetype)initWithFrame:(CGRect)frame OBJC_DESIGNATED_INITIALIZER;
 - (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder OBJC_DESIGNATED_INITIALIZER;
 @end
+
 
 
 
