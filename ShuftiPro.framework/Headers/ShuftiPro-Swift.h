@@ -597,6 +597,7 @@ SWIFT_CLASS("_TtC9ShuftiPro22DeclarationOfConsentVc")
 @property (nonatomic, weak) IBOutlet UILabel * _Null_unspecified consentHeadingLbl;
 @property (nonatomic, weak) IBOutlet UILabel * _Null_unspecified consentLowerHeadingLbl;
 @property (nonatomic, weak) IBOutlet UILabel * _Null_unspecified consentLbl;
+@property (nonatomic, weak) IBOutlet UIView * _Null_unspecified topView;
 - (void)viewDidLoad;
 - (void)viewWillAppear:(BOOL)animated;
 - (void)viewDidAppear:(BOOL)animated;
