@@ -801,6 +801,15 @@ SWIFT_CLASS("_TtC9ShuftiPro17NFCImageTableCell")
 @end
 
 
+@class NSURLSession;
+@class NSURLSessionTask;
+
+SWIFT_CLASS("_TtC9ShuftiPro14NetworkManager")
+@interface NetworkManager : NSObject <NSURLSessionDataDelegate>
+- (void)URLSession:(NSURLSession * _Nonnull)session task:(NSURLSessionTask * _Nonnull)task didSendBodyData:(int64_t)bytesSent totalBytesSent:(int64_t)totalBytesSent totalBytesExpectedToSend:(int64_t)totalBytesExpectedToSend;
+- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
+@end
+
 @class UIActivityIndicatorView;
 @class WKNavigation;
 
@@ -866,7 +875,6 @@ SWIFT_CLASS("_TtC9ShuftiPro8ResultVc")
 - (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder OBJC_DESIGNATED_INITIALIZER;
 @end
 
-@class NSURLSession;
 
 @interface ResultVc (SWIFT_EXTENSION(ShuftiPro)) <NSURLSessionDelegate>
 - (void)URLSessionDidFinishEventsForBackgroundURLSession:(NSURLSession * _Nonnull)session;
@@ -884,7 +892,6 @@ SWIFT_CLASS("_TtC9ShuftiPro8ResultVc")
 - (void)mailComposeController:(MFMailComposeViewController * _Nonnull)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError * _Nullable)error;
 @end
 
-@class NSURLSessionTask;
 @class NSURLSessionDownloadTask;
 
 @interface ResultVc (SWIFT_EXTENSION(ShuftiPro)) <NSURLSessionDownloadDelegate>
